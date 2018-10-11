@@ -1,0 +1,22 @@
+:host{
+    position: fixed;
+    z-index: 100;
+    top: 70%;
+    right: 5%;
+    transform: translateY(-50%);
+    background: #eaeaea;
+    border: 1px solid #fff;
+    padding: 25px;
+    border-radius: 5px;
+}
+.registerForm{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+.hintErr{
+    background: #ffe4e4;
+    padding: 5px;
+    z-index: 1;
+    border-radius: 3px;
+}

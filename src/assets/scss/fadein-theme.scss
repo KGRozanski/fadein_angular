@@ -1,0 +1,12 @@
+@import '../scss/palette.scss';
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$fade-in-theme-primary: mat-palette($f-color1);
+$fade-in-theme-accent: mat-palette($f-color4);
+$fade-in-theme-warn: mat-palette($f-color5);
+
+$fade-in-theme: mat-light-theme($fade-in-theme-primary, $fade-in-theme-accent, $fade-in-theme-warn);
+
+@include angular-material-theme($fade-in-theme);

@@ -1,0 +1,23 @@
+<form class="loginForm" [formGroup]="logForm" (ngSubmit)="login()">
+	<mat-form-field>
+		<input matInput placeholder="Login or Email" formControlName="login" [errorStateMatcher]="matcher">
+		<mat-error *ngIf="logForm.controls['login'].errors?.pattern">
+			Please enter a valid login or email address
+		</mat-error>
+		<mat-error *ngIf="logForm.controls['login'].errors?.required">
+			Login or Email is <strong>required</strong>
+		</mat-error>
+	</mat-form-field>
+	<br>
+	<mat-form-field>
+		<input matInput placeholder="Password" type="password" formControlName="pass" [errorStateMatcher]="matcher">
+		<mat-error *ngIf="logForm.controls['pass'].errors?.required">
+			Password is <strong>required</strong>
+		</mat-error>
+	</mat-form-field>
+	<mat-error [hidden]="!errorMsg">
+		{{errorMsg}}
+	</mat-error>
+	<br>
+	<button mat-flat-button color="primary" [disabled]="!logForm.valid == true">Sign In</button>
+</form>

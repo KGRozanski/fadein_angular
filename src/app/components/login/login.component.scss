@@ -1,0 +1,12 @@
+:host{
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #eaeaea;
+    min-width: 240px;
+    padding: 15px;
+}
+.loginForm{
+    display: flex;
+    flex-direction: column;
+}

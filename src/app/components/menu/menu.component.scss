@@ -1,0 +1,62 @@
+@import '../../../assets/scss/palette.scss';
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+
+.logotype{
+    font-family: 'Abril Fatface', cursive;
+    color: #fff;
+    text-shadow: 1px 1px 3px #000;
+    font-size: 2rem;
+    display: block;
+    width: 150px;
+    margin: 14px;
+}
+
+.topbar{
+    position: relative;
+    display: flex;
+    z-index: 10000;
+    justify-content: space-between;
+    width: 100vw;
+    height: 60px;
+    background: $color1;
+    .rightSection{
+        display: flex;
+        .username{
+            color: #fff;
+            width: 100%;
+            display: block;
+            text-align: right;
+            padding: 6px 5px;
+        }
+        .profileBtn{
+            color: #fff;
+            border: 1px solid #fff;
+            min-height: 50px;
+            min-width: 50px;
+            max-height: 65px;
+            max-width: 50px;
+            margin: 5px;
+            padding: 0;
+        }
+        .signInBtn{
+            border: 1px solid #fff;
+            height: 50px;
+            top: -23px;
+        }
+        /deep/.signOutBtn{
+            border: 1px solid #fff;
+            position: absolute;
+            bottom: 5px;
+            right: 60px;
+            height: 25px;
+            > span{
+                line-height: 22px;
+                text-align: center;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+        }
+    }
+}

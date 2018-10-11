@@ -1,0 +1,17 @@
+<div class="topbar shadow-lg">
+	<app-login [hidden]="signMeIn" class="shadow" (visibilityState)="reciveState($event)"></app-login>
+	<div class="logotype">Fade In:</div>
+	<div class="rightSection">
+		<div class="userInfo">
+			<span class="username"><strong>{{this.user.username}}</strong></span><br>
+			<button mat-flat-button color="warn" class="signInBtn" (click)="signMeIn = !signMeIn" *ngIf="this.user.username == null">Sign In</button>
+			<button mat-flat-button color="warn" class="signOutBtn" (click)="logOut()" *ngIf="this.user.username != ' ' && this.user.username != null">Log out</button>
+		</div>
+		<div class="userPhoto">
+			<button mat-flat-button color="primary" class="profileBtn">
+				<i class="fas fa-user fa-2x"></i>
+			</button>
+		</div>
+	</div>
+	</div>
+</div>
