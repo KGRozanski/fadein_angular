@@ -1,10 +1,12 @@
+@import '../../../assets/scss/palette.scss';
 :host{
     position: absolute;
     top: 60px;
-    right: 0;
-    background: #eaeaea;
-    min-width: 240px;
+    left: 0;
+    background: #e0e0e0;
+    width: 240px;
     padding: 15px;
+    border: 2px ridge $color1;
 }
 .loginForm{
     display: flex;

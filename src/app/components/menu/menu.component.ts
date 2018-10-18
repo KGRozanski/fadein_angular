@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../../shared/user.interface';
-import { UserDataService } from '../../shared/userdata.service';
+import { environment } from '../../../environments/environment';
+import { Component, AfterViewInit } from '@angular/core';
+import { User } from '../../shared/interfaces/user.interface';
+import { UserDataService } from '../../shared/services/userdata.service';
+import { CookieService } from '../../shared/services/cookie.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,18 +10,20 @@ import { Router } from '@angular/router';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements AfterViewInit {
 
+  public version: string = environment.VERSION;
   private signMeIn = true;
   private user: User = {
     mail: null,
     username: null
   }
 
-  constructor(private us: UserDataService, private router: Router ) {}
-
-  ngOnInit() {
+  constructor(private us: UserDataService, private router: Router, private cs: CookieService ) {
     this.us.currentUserData.subscribe((data) => this.user = data);
+  }
+
+  ngAfterViewInit() {
   }
 
   reciveState($event){
@@ -29,8 +33,7 @@ export class MenuComponent implements OnInit {
   logOut() {
     this.user.username = null;
     this.user.mail = null;
-
-    localStorage.clear();
+    this.cs.deleteCookie('token');
     this.us.updateUserData(this.user);
     this.router.navigate(['/about']);
   }

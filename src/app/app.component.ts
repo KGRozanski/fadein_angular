@@ -1,25 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDataService } from './shared/userdata.service';
-import { User } from './shared/user.interface';
-
+import { UserDataService } from './shared/services/userdata.service';
+import { CookieService } from './shared/services/cookie.service';
+import { User } from './shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent implements OnInit {
   title = 'Fade In:';
-
+  myCookie = this.cs.getCookie('token');
   public user: User = {
     username: null,
     mail: null
   };
 
-  constructor(private us: UserDataService) {}
+  constructor(private us: UserDataService, private cs: CookieService) {}
 
   ngOnInit() {
-    if (localStorage.getItem('token') != null) {
+    if (this.myCookie !== null) {
       this.us.getUserInfo().subscribe((res) => {
         const response = res['body'];
         if (response) {

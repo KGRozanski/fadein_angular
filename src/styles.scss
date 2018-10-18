@@ -1,6 +1,8 @@
 @import './assets/scss/palette.scss';
 @import './assets/scss/reset.scss';
 @import './assets/scss/shadows.scss';
+@import url('https://fonts.googleapis.com/css?family=Bai+Jamjuree:400,700&subset=latin-ext');
 *{
     box-sizing: border-box;
+    font-family: 'Bai Jamjuree', sans-serif;
 }

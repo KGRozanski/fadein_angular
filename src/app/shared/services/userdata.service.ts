@@ -1,10 +1,11 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { User } from './user.interface';
+import { User } from '../interfaces/user.interface';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 
+const ORIGIN = 'http://127.0.0.1:4200';
 const HOSTNAME = '127.0.0.1';
 const PROTOCOL = 'http';
 const PORT = 3000;
@@ -25,27 +26,28 @@ export class UserDataService implements OnInit {
     private APIurl = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/`;
 
     private httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            })
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': ORIGIN
+        }),
+        withCredentials: true
     };
 
-    ngOnInit(){}
+    ngOnInit() {}
 
     updateUserData(user: User) {
         this.repoUser.next(user);
     }
 
     makeLogin() {
-        this.getUserInfo().subscribe((res) => {
-            const response = res['body'];
-            if (response) {
-              this.user.username = response['user']['username'];
-              this.user.mail = response['user']['mail'];
+        this.getUserInfo().toPromise()
+        .then((res) => {
+              this.user.username = res['body']['user']['username'];
+              this.user.mail = res['body']['user']['mail'];
               this.updateUserData(this.user);
-            }
-          });
+        }).catch((err) => {
+            console.log('User data fetching error!');
+        });
     }
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -60,18 +62,10 @@ export class UserDataService implements OnInit {
     }
 
     getUserInfo(): Observable<any> {
-        const secureHeaders = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                'Access-Control-Allow-Origin': '*'
-            })
-        };
-        return this.sendRequest('GET', this.APIurl + 'profile', null, secureHeaders);
+        return this.sendRequest('GET', this.APIurl + 'profile', null, this.httpOptions);
     }
 
     registerNewUser(data): Observable<any> {
         return this.sendRequest('POST', this.APIurl + 'register', data, this.httpOptions);
     }
-
 }
