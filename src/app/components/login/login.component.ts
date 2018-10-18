@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserDataService } from '../../shared/userdata.service';
+import { UserDataService } from '../../shared/services/userdata.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
         this.visibilityState.emit(this.isShown);
     }
 
-
     constructor(private fb: FormBuilder, private us: UserDataService, private router: Router) {
         this.logForm = fb.group({
             'login':[null,
@@ -31,12 +30,16 @@ export class LoginComponent implements OnInit {
                     Validators.pattern('^[a-zA-Z0-9ąęśćłóźżń@.]+$')
                 ]
             ],
-            'pass': [null, [Validators.required, Validators.minLength(8), Validators.maxLength(32)]]
+            'pass': [null,
+                [
+                    Validators.required,
+                    Validators.minLength(8),
+                    Validators.maxLength(32)
+                ]
+            ]
         });
     }
-
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     login() {
         this.errorMsg = null;
@@ -46,11 +49,9 @@ export class LoginComponent implements OnInit {
             }];
         this.us.authenticate(validatedData).toPromise()
         .then( (res) => {
-            const token = res['body'][0]['token'];
-            localStorage.setItem('token', token);
             this.us.makeLogin();
-            this.sendState();
             this.router.navigate(['']);
+            this.sendState();
         })
         .catch( (err) => {
             this.errorMsg = err['error']['error'];

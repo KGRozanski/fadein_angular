@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MaterialsImportsModule } from '../../modules/materials-imports.module';
+import { MaterialsImportsModule } from '../../../modules/materials-imports.module';
 import { MatButtonModule } from '@angular/material';
 
 @Component({

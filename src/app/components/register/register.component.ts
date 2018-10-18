@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PasswordValidation } from '../../shared/validators';
-import { UserDataService } from '../../shared/userdata.service';
+import { UserDataService } from '../../shared/services/userdata.service';
 
 @Component({
   selector: 'app-register',

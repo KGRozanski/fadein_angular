@@ -8,16 +8,17 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialsImportsModule } from './modules/materials-imports.module';
+import { MaterialsImportsModule } from '../modules/materials-imports.module';
 import { MenuComponent } from './components/menu/menu.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
-import { AuthGuard } from './shared/auth.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
 import { AboutComponent } from './components/about/about.component';
 
-import { UserResolver } from './shared/user.resolver';
+import { UserResolver } from './shared/resolvers/user.resolver';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { UserResolver } from './shared/user.resolver';
     RegisterComponent,
     LoginComponent,
     DashboardComponent,
-    AboutComponent
+    AboutComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

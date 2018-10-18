@@ -3,10 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from '../app/components/home/home.component';
 import { DashboardComponent } from '../app/components/dashboard/dashboard.component';
 import { AboutComponent } from '../app/components/about/about.component';
-import { MenuComponent } from '../app/components/menu/menu.component';
-import { AuthGuard } from './shared/auth.guard';
-import { RegGuard } from './shared/reg.guard';
-import { UserResolver } from './shared/user.resolver';
+import { ProfileComponent } from '../app/components/profile/profile.component';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { RegGuard } from './shared/guards/reg.guard';
+import { UserResolver } from './shared/resolvers/user.resolver';
 
 const routes: Routes = [
   {
@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'about',
     canActivate: [RegGuard],
     component: AboutComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   }
 ];
 
@@ -30,4 +34,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { enableTracing: false})],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
