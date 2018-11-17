@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDataService } from './shared/services/userdata.service';
-import { CookieService } from './shared/services/cookie.service';
-import { User } from './shared/models/user.model';
+import { UserDataService } from './core/services/userdata.service';
+import { CookieService } from './core/services/cookie.service';
+import { User } from './core/models/user.model';
 
 @Component({
   selector: 'app-root',

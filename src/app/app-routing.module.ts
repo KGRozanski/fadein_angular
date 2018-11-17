@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from '../app/components/home/home.component';
-import { DashboardComponent } from '../app/components/dashboard/dashboard.component';
-import { AboutComponent } from '../app/components/about/about.component';
-import { ProfileComponent } from '../app/components/profile/profile.component';
-import { AuthGuard } from './shared/guards/auth.guard';
-import { RegGuard } from './shared/guards/reg.guard';
+import { WelcomeComponent } from '../app/components/welcome/welcome.component';
+import { ProfileComponent } from '../app/modules/user/components/profile/profile.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { RegGuard } from './core/guards/reg.guard';
 // import { UserResolver } from './shared/resolvers/user.resolver';
 
 const routes: Routes = [
@@ -16,13 +15,9 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent
-  },
-  {
-    path: 'about',
+    path: 'welcome',
     canActivate: [RegGuard],
-    component: AboutComponent
+    component: WelcomeComponent
   },
   {
     path: 'profile',

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserDataService } from '../../shared/services/userdata.service';
+import { UserDataService } from '../../../../core/services/userdata.service';
 import { Router } from '@angular/router';
 
 @Component({
