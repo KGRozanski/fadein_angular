@@ -1,9 +1,10 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { User } from '../interfaces/user.interface';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { User } from '../models/user.model';
 
 const ORIGIN = 'http://127.0.0.1:4200';
 const HOSTNAME = '127.0.0.1';
@@ -15,11 +16,7 @@ const PORT = 3000;
 })
 export class UserDataService implements OnInit {
 
-    public user: User = {
-        username: null,
-        mail: null
-    };
-
+    private user = new User();
     private repoUser = new BehaviorSubject<User>(this.user);
     currentUserData = this.repoUser.asObservable();
 
@@ -33,6 +30,10 @@ export class UserDataService implements OnInit {
         withCredentials: true
     };
 
+    constructor(private http: HttpClient, private router: Router) {
+        this.user.username = null;
+    }
+
     ngOnInit() {}
 
     updateUserData(user: User) {
@@ -40,17 +41,11 @@ export class UserDataService implements OnInit {
     }
 
     makeLogin() {
-        this.getUserInfo().toPromise()
-        .then((res) => {
-              this.user.username = res['body']['user']['username'];
-              this.user.mail = res['body']['user']['mail'];
-              this.updateUserData(this.user);
-        }).catch((err) => {
-            console.log('User data fetching error!');
-        });
+        this.getUserProfile().pipe(map((res) => {
+            this.user = new User().deserialize(res.body);
+            this.updateUserData(this.user);
+        })).subscribe();
     }
-
-  constructor(private http: HttpClient, private router: Router) { }
 
     private sendRequest(method: any, url: string, body: any, headers: object) {
         const req = new  HttpRequest(method, url, body, headers);
@@ -61,7 +56,7 @@ export class UserDataService implements OnInit {
         return this.sendRequest('POST', this.APIurl + 'login', data, this.httpOptions);
     }
 
-    getUserInfo(): Observable<any> {
+    getUserProfile(): Observable<any> {
         return this.sendRequest('GET', this.APIurl + 'profile', null, this.httpOptions);
     }
 

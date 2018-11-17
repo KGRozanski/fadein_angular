@@ -1,35 +1,35 @@
-<div class="menuContainer">
+<div class="menu-container">
 	<mat-drawer-container class="container" autosize>
-			<mat-drawer #snav class="example-sidenav shadow-lg" mode="side">
-				<ul class="sideList">
-					<li><button mat-flat-button color="primary">📫&nbsp;Messages</button></li>
-					<li><button mat-flat-button color="primary">📅&nbsp;Callendar</button></li>
-					<li><button mat-flat-button color="primary">📢&nbsp;Forum</button></li>
-					<li><button mat-flat-button color="primary">📚&nbsp;Education</button></li>
-					<li><button mat-flat-button color="primary">🎬&nbsp;Projects</button></li>
-					<li><button mat-flat-button color="primary">📜&nbsp;Script Editor</button></li>
-					<li><button mat-flat-button color="primary">🛒&nbsp;Market Place</button></li>
-					<li><button mat-flat-button color="primary">📉&nbsp;Stats</button></li>
-					<li><button mat-flat-button color="primary">🙂&nbsp;My profile</button></li>
-				</ul>
-				<span class="version">v. {{version}}∝</span>
-			</mat-drawer>
-		</mat-drawer-container>
-		<div class="topbar shadow">
-				<div class="rightSection">
-					<div class="userPhoto">
-						<button mat-flat-button color="primary" class="profileBtn" (click)="snav.toggle()">
-							<i class="fas fa-user fa-2x"></i>
-						</button>
-					</div>
-					<div class="userInfo">
-							<span class="username"><strong>{{this.user.username}}</strong></span><br>
-							<button mat-flat-button color="warn" class="signInBtn" (click)="signMeIn = !signMeIn" *ngIf="this.user.username == null">Sign In</button>
-							<button mat-flat-button color="warn" class="signInBtn" (click)="logOut()" *ngIf="this.user.username != ' ' && this.user.username != null">Log out</button>
-						</div>
+		<mat-drawer #snav class="example-sidenav shadow-lg" mode="side">
+			<ul class="side-list">
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📫&nbsp;Messages</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📅&nbsp;Callendar</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📢&nbsp;Forum</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📚&nbsp;Education</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">🎬&nbsp;Projects</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📜&nbsp;Script Editor</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">🛒&nbsp;Market Place</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📉&nbsp;Stats</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()" [routerLink]="['/profile']" routerLinkActive="router-link-active" >🙂&nbsp;My profile</button></li>
+			</ul>
+			<span class="version">v. {{version}}∝</span>
+		</mat-drawer>
+	</mat-drawer-container>
+	<div class="top-bar shadow">
+			<div class="right-section">
+				<div class="userPhoto">
+					<button mat-flat-button color="primary" class="profile-btn" (click)="snav.toggle()">
+						<i class="fas fa-user fa-2x"></i>
+					</button>
 				</div>
-			<app-login [hidden]="signMeIn" class="shadow" (visibilityState)="reciveState($event)"></app-login>
-			<div class="logotype">Fade In:</div>
-		</div>
+				<div class="userInfo">
+						<span class="username"><strong>{{this.user.username}}</strong></span><br>
+						<button mat-flat-button color="warn" class="sign-in-btn" (click)="signMeIn = !signMeIn" *ngIf="this.user.username == null">Sign In</button>
+						<button mat-flat-button color="warn" class="sign-in-btn" (click)="logOut()" *ngIf="this.user.username != ' ' && this.user.username != null">Log out</button>
+					</div>
+			</div>
+		<app-login [hidden]="signMeIn" class="shadow" (visibilityState)="reciveState($event)"></app-login>
+		<div class="logotype">Fade In:</div>
+	</div>
 </div>
 

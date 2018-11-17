@@ -6,13 +6,13 @@ import { AboutComponent } from '../app/components/about/about.component';
 import { ProfileComponent } from '../app/components/profile/profile.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { RegGuard } from './shared/guards/reg.guard';
-import { UserResolver } from './shared/resolvers/user.resolver';
+// import { UserResolver } from './shared/resolvers/user.resolver';
 
 const routes: Routes = [
   {
     path: '',
     canActivate: [AuthGuard],
-    resolve: { user : UserResolver },
+    // resolve: { user : UserResolver },
     component: HomeComponent
   },
   {

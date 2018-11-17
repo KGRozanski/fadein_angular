@@ -1,6 +1,6 @@
 @import '../../../assets/scss/palette.scss';
 @import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
-.menuContainer{
+.menu-container{
     position: relative;
 }
 .logotype{
@@ -13,7 +13,7 @@
     margin: 14px;
 }
 
-.topbar{
+.top-bar{
     position: relative;
     display: flex;
     z-index: 10000;
@@ -21,7 +21,7 @@
     width: 100vw;
     height: 60px;
     background: $color1;
-    .rightSection{
+    .right-section{
         display: flex;
         .username{
             color: #fff;
@@ -30,7 +30,7 @@
             text-align: right;
             padding: 6px 5px;
         }
-        .profileBtn{
+        .profile-btn{
             color: #fff;
             border: 1px solid #fff;
             min-height: 50px;
@@ -40,7 +40,7 @@
             margin: 5px;
             padding: 0;
         }
-        .signInBtn{
+        .sign-in-btn{
             line-height: 22px;
             border: 1px solid #fff;
             height: 25px;
@@ -72,7 +72,7 @@
         height: calc(100vh - 60px);
     }
 }
-.sideList{
+.side-list{
     display: flex;
     flex-direction: column;
     li{
