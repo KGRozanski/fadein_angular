@@ -17,8 +17,11 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { AboutComponent } from './components/about/about.component';
 
-import { UserResolver } from './shared/resolvers/user.resolver';
+// import { UserResolver } from './shared/resolvers/user.resolver';
 import { ProfileComponent } from './components/profile/profile.component';
+import { CropComponent } from './components/tools/crop/crop.component';
+import { ImageCropperComponent } from 'ng2-img-cropper';
+
 
 
 @NgModule({
@@ -30,7 +33,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     LoginComponent,
     DashboardComponent,
     AboutComponent,
-    ProfileComponent
+    ProfileComponent,
+    CropComponent,
+    ImageCropperComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,7 @@ import { ProfileComponent } from './components/profile/profile.component';
   ],
   providers: [
     AuthGuard,
-    UserResolver
+    // UserResolver
   ],
   bootstrap: [AppComponent]
 })

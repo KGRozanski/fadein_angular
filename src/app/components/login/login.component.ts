@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-    isShown: boolean = true;
+    isShown = true;
     errorMsg: string = null;
     logForm: FormGroup;
 
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
     constructor(private fb: FormBuilder, private us: UserDataService, private router: Router) {
         this.logForm = fb.group({
-            'login':[null,
+            'login': [null,
                 [
                     Validators.required,
                     Validators.minLength(3),
@@ -44,9 +44,9 @@ export class LoginComponent implements OnInit {
     login() {
         this.errorMsg = null;
         const validatedData = [{
-                login: this.logForm.get('login').value,
-                pass: this.logForm.get('pass').value
-            }];
+            login: this.logForm.get('login').value,
+            pass: this.logForm.get('pass').value
+        }];
         this.us.authenticate(validatedData).toPromise()
         .then( (res) => {
             this.us.makeLogin();

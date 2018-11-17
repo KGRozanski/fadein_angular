@@ -1,3 +1,18 @@
-<p>
-  profile works!
-</p>
+<div class="wrapper">
+  <div class="container">
+    <div class="avatar">
+      <div class="hover-layer">
+        <span>ZMIEŃ</span>
+      </div>
+      <i id="avatarPlaceholder" class="fas fa-user fa-2x"></i>
+      <img [src]="imgData.image" alt="">
+    </div>
+    <div class="major-user-info">
+      USERNAME: {{user.username}}
+      EMAIL: {{user.mail}}
+    </div>
+    <app-crop></app-crop>
+  </div>
+</div>
+
+

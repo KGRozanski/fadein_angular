@@ -1,6 +1,6 @@
 import { environment } from '../../../environments/environment';
 import { Component, AfterViewInit } from '@angular/core';
-import { User } from '../../shared/interfaces/user.interface';
+import { User } from '../../shared/models/user.model';
 import { UserDataService } from '../../shared/services/userdata.service';
 import { CookieService } from '../../shared/services/cookie.service';
 import { Router } from '@angular/router';
@@ -14,13 +14,10 @@ export class MenuComponent implements AfterViewInit {
 
   public version: string = environment.VERSION;
   private signMeIn = true;
-  private user: User = {
-    mail: null,
-    username: null
-  }
+  private user: User;
 
   constructor(private us: UserDataService, private router: Router, private cs: CookieService ) {
-    this.us.currentUserData.subscribe((data) => this.user = data);
+    this.us.currentUserData.subscribe((data: User) => this.user = data);
   }
 
   ngAfterViewInit() {
