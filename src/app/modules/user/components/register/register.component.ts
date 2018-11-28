@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PasswordValidation } from '../../shared/validators';
-import { UserDataService } from '../../shared/services/userdata.service';
+import { PasswordValidation } from '../../../../core/validators/validators';
+import { UserDataService } from '../../../../core/services/userdata.service';
 
 @Component({
   selector: 'app-register',
@@ -67,10 +67,11 @@ export class RegisterComponent implements OnInit {
       passconfirm: this.regForm.get('passconfirm').value,
       username: this.regForm.get('username').value
     }];
-    this.us.registerNewUser(validatedData).toPromise().then((res)=>{
+
+    this.us.registerNewUser(validatedData).toPromise().then((res) => {
       this.successMsg = res['body']['msg'];
 
-    }).catch((err) =>{
+    }).catch((err) => {
       this.errorMsg = err['error']['error'];
     });
   }

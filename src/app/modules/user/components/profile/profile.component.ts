@@ -1,6 +1,6 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { User } from '../../shared/models/user.model';
-import { UserDataService } from '../../shared/services/userdata.service';
+import { User } from '../../../../core/models/user.model';
+import { UserDataService } from '../../../../core/services/userdata.service';
 import { CropComponent } from '../tools/crop/crop.component';
 
 @Component({

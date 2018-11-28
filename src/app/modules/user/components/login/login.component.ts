@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserDataService } from '../../shared/services/userdata.service';
+import { UserDataService } from '../../../../core/services/userdata.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -47,14 +47,16 @@ export class LoginComponent implements OnInit {
             login: this.logForm.get('login').value,
             pass: this.logForm.get('pass').value
         }];
-        this.us.authenticate(validatedData).toPromise()
-        .then( (res) => {
-            this.us.makeLogin();
-            this.router.navigate(['']);
-            this.sendState();
-        })
-        .catch( (err) => {
-            this.errorMsg = err['error']['error'];
+
+        this.us.authenticate(validatedData)
+        .subscribe({
+            next: event => console.log(event),
+            error: err => this.errorMsg = err['error']['error'],
+            complete: () => {
+                this.us.makeLogin();
+                this.router.navigate(['']);
+                this.sendState();
+            }
         });
     }
 }
