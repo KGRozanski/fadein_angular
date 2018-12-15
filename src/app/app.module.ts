@@ -15,9 +15,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { UserModule } from './modules/user/user.module';
 // import { UserResolver } from './shared/resolvers/user.resolver';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,

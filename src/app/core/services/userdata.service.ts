@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
@@ -16,12 +16,15 @@ const PORT = 3000;
 })
 export class UserDataService implements OnInit {
 
+    constructor(private http: HttpClient, private router: Router) {
+        this.user.username = null;
+        this.user.avatar = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/getAvatar`;
+    }
+
     private user = new User();
     private repoUser = new BehaviorSubject<User>(this.user);
     currentUserData = this.repoUser.asObservable();
-
     private APIurl = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/`;
-
     private httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
@@ -29,21 +32,24 @@ export class UserDataService implements OnInit {
         }),
         withCredentials: true
     };
-
-    constructor(private http: HttpClient, private router: Router) {
-        this.user.username = null;
-    }
+    private httpOptionsMultipart = {
+        headers: new HttpHeaders({
+            'Access-Control-Allow-Origin': ORIGIN
+        }),
+        withCredentials: true
+    };
 
     ngOnInit() {}
 
     updateUserData(user: User) {
         this.repoUser.next(user);
-    }
+    }   
 
     makeLogin() {
         this.getUserProfile().pipe(map((res) => {
-            this.user = new User().deserialize(res.body);
+            this.user.deserialize(res.body);
             this.updateUserData(this.user);
+            this.router.navigate(['']);
         })).subscribe();
     }
 
@@ -62,5 +68,9 @@ export class UserDataService implements OnInit {
 
     registerNewUser(data): Observable<any> {
         return this.sendRequest('POST', this.APIurl + 'register', data, this.httpOptions);
+    }
+
+    putUserAvatar(data): Observable<any> {
+        return this.sendRequest('PUT', this.APIurl + 'uploadAvatar', data, this.httpOptionsMultipart);
     }
 }

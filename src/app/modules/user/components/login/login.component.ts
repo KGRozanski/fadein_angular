@@ -50,11 +50,9 @@ export class LoginComponent implements OnInit {
 
         this.us.authenticate(validatedData)
         .subscribe({
-            next: event => console.log(event),
             error: err => this.errorMsg = err['error']['error'],
             complete: () => {
                 this.us.makeLogin();
-                this.router.navigate(['']);
                 this.sendState();
             }
         });

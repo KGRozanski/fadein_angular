@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import 'hammerjs';
 
 import {
@@ -13,14 +14,17 @@ import {
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSnackBarModule
   ],
   exports: [
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSnackBarModule
   ]
 })
 
 export class MaterialsImportsModule { }
+

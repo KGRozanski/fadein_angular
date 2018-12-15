@@ -1,4 +1,8 @@
-<div>
-    <img-cropper [image]="data" [settings]="cropperSettings"></img-cropper><br>
-    <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+<div class="img-croper-wrapper shadow-inset">
+    <input class="custom-input" type="file" (change)="fileChangeListener($event)">
+    <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper><br>
+    <div>
+        <button mat-flat-button color="primary" (click)="saveImg()">Save</button>&nbsp;&nbsp;&nbsp;
+        <button mat-flat-button color="warn" (click)="cancelEmit()">Cancel</button>
+    </div>
 </div>

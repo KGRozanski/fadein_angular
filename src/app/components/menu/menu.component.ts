@@ -14,9 +14,9 @@ export class MenuComponent implements AfterViewInit {
 
   public version: string = environment.VERSION;
   private signMeIn = true;
-  private user: User;
+  private user;
 
-  constructor(private us: UserDataService, private router: Router, private cs: CookieService ) {
+  constructor(private us: UserDataService, private router: Router, private cs: CookieService) {
     this.us.currentUserData.subscribe((data: User) => this.user = data);
   }
 
@@ -28,8 +28,7 @@ export class MenuComponent implements AfterViewInit {
   }
 
   logOut() {
-    this.user.username = null;
-    this.user.mail = null;
+    this.user = new User();
     this.cs.deleteCookie('token');
     this.us.updateUserData(this.user);
     this.router.navigate(['/welcome']);
