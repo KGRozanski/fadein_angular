@@ -57,14 +57,6 @@ export class CropComponent {
     this.cancel.emit(true);
   }
 
-  private myObeserver = {
-    next: value => console.log(value.body),
-    error: err => console.log(err),
-    complete() {
-      res => console.log(res)
-    }
-  }
-
   saveImg() {
     let user;
     //Fetch user data with userService
@@ -83,12 +75,16 @@ export class CropComponent {
 
     this.us.putUserAvatar(fd).subscribe({
       next: data => response = data,
-      error: err => console.log(err),
+      error: err => {
+        this.snackBar.open('Error uploading an image!', 'Close', {
+          duration: 3000
+        });
+      },
       complete: () => {
         this.cancelEmit();
         this.snackBar.open(response.body['msg'], 'Close', {
           duration: 3000
-        } );
+        });
       }
     })
 
