@@ -1,7 +1,8 @@
-import { Component, ViewEncapsulation, ViewChild, Output, EventEmitter, } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, Output, EventEmitter, ElementRef, Renderer2, OnInit } from '@angular/core';
 import {MatSnackBar} from '@angular/material';  
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { UserDataService } from '../../../../../core/services/userdata.service';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-crop',
@@ -9,17 +10,20 @@ import { UserDataService } from '../../../../../core/services/userdata.service';
   styleUrls: ['./crop.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CropComponent {
+export class CropComponent implements OnInit{
 
-  @ViewChild('cropper', undefined)
-  cropper:ImageCropperComponent;
+  @ViewChild('cropper', undefined) cropper: ImageCropperComponent;
+  @ViewChild('cropper') cropperCompRef: ElementRef;
+  @ViewChild('cropWraper') cropWraper: ElementRef;
+
   @Output() cancel = new EventEmitter<boolean>();
   @Output() imageUploaded = new EventEmitter<string>();
 
   data: any;
   cropperSettings: CropperSettings;
+  private crop = this;
 
-  constructor(private us: UserDataService, public snackBar: MatSnackBar) {
+  constructor(private us: UserDataService, public snackBar: MatSnackBar, private renderer: Renderer2, elRef: ElementRef) {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.noFileInput = true;
     this.cropperSettings.width = 100;
@@ -29,31 +33,42 @@ export class CropComponent {
     this.cropperSettings.canvasWidth = 300;
     this.cropperSettings.canvasHeight = 300;
     this.data = {};
+    this.renderer.setProperty(this.imgInput, 'type', 'file');
+    this.renderer.addClass(this.imgInput, 'custom-input');
+  }
+  private imgInput = this.renderer.createElement('input');
+  
+
+  ngOnInit() {
+    this.renderer.listen(this.imgInput, 'change', ($event) => {
+      this.fileChangeListener($event);
+    })
+    this.renderer.insertBefore(this.cropWraper.nativeElement, this.imgInput, this.cropWraper.nativeElement.firstChild);
   }
 
   fileChangeListener($event) {
-    var image:any = new Image();
-    var file:File = $event.target.files[0];
-    var myReader:FileReader = new FileReader();
+    var image: any = new Image();
+    var file: File = $event.target.files[0];
+    var myReader: FileReader = new FileReader();
+    let emitter = this.crop;
+    
     var that = this;
     myReader.onloadend = function (loadEvent:any) {
       image.src = loadEvent.target.result;
       that.cropper.setImage(image);
-      
     };
     myReader.readAsDataURL(file);
-    setTimeout(function() {
-      that.emit();
-    }, 500)
-    
-  }
-
-  emit() {
-    this.imageUploaded.emit(this.data.image['msg']);
+    setTimeout(() => { emitter.emit() }, 500);
   }
   
-  cancelEmit() {
+
+  emit() {
+    this.imageUploaded.emit(this.data.image['msg']); 
+  }
+  
+  closeCropper() {
     this.cropper.reset();
+    this.renderer.setProperty(this.imgInput, 'value', '');
     this.cancel.emit(true);
   }
 
@@ -71,7 +86,7 @@ export class CropComponent {
     const fd = new FormData();
     fd.append('image', file, 'avatar.jpg');
 
-    let response;
+    let response: any;
 
     this.us.putUserAvatar(fd).subscribe({
       next: data => response = data,
@@ -81,12 +96,11 @@ export class CropComponent {
         });
       },
       complete: () => {
-        this.cancelEmit();
+        this.closeCropper();
         this.snackBar.open(response.body['msg'], 'Close', {
           duration: 3000
         });
       }
     })
-
   }
 }
