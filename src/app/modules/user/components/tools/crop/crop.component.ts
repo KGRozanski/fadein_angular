@@ -1,8 +1,23 @@
-import { Component, ViewEncapsulation, ViewChild, Output, EventEmitter, ElementRef, Renderer2, OnInit } from '@angular/core';
-import {MatSnackBar} from '@angular/material';  
-import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
-import { UserDataService } from '../../../../../core/services/userdata.service';
-import { TouchSequence } from 'selenium-webdriver';
+import {
+  Component,
+  ViewEncapsulation,
+  ViewChild,
+  Output,
+  EventEmitter,
+  ElementRef,
+  Renderer2,
+  OnInit
+} from '@angular/core';
+import {
+  MatSnackBar
+} from '@angular/material';
+import {
+  ImageCropperComponent,
+  CropperSettings
+} from 'ng2-img-cropper';
+import {
+  UserDataService
+} from '../../../../../core/services/userdata.service';
 
 @Component({
   selector: 'app-crop',
@@ -10,14 +25,14 @@ import { TouchSequence } from 'selenium-webdriver';
   styleUrls: ['./crop.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CropComponent implements OnInit{
+export class CropComponent implements OnInit {
 
   @ViewChild('cropper', undefined) cropper: ImageCropperComponent;
   @ViewChild('cropper') cropperCompRef: ElementRef;
   @ViewChild('cropWraper') cropWraper: ElementRef;
 
-  @Output() cancel = new EventEmitter<boolean>();
-  @Output() imageUploaded = new EventEmitter<string>();
+  @Output() cancel = new EventEmitter < boolean > ();
+  @Output() imageUploaded = new EventEmitter < string > ();
 
   data: any;
   cropperSettings: CropperSettings;
@@ -37,7 +52,7 @@ export class CropComponent implements OnInit{
     this.renderer.addClass(this.imgInput, 'custom-input');
   }
   private imgInput = this.renderer.createElement('input');
-  
+
 
   ngOnInit() {
     this.renderer.listen(this.imgInput, 'change', ($event) => {
@@ -51,21 +66,23 @@ export class CropComponent implements OnInit{
     var file: File = $event.target.files[0];
     var myReader: FileReader = new FileReader();
     let emitter = this.crop;
-    
+
     var that = this;
-    myReader.onloadend = function (loadEvent:any) {
+    myReader.onloadend = function (loadEvent: any) {
       image.src = loadEvent.target.result;
       that.cropper.setImage(image);
     };
     myReader.readAsDataURL(file);
-    setTimeout(() => { emitter.emit() }, 500);
+    setTimeout(() => {
+      emitter.emit()
+    }, 500);
   }
-  
+
 
   emit() {
-    this.imageUploaded.emit(this.data.image['msg']); 
+    this.imageUploaded.emit(this.data.image['msg']);
   }
-  
+
   closeCropper() {
     this.cropper.reset();
     this.renderer.setProperty(this.imgInput, 'value', '');
@@ -81,8 +98,13 @@ export class CropComponent implements OnInit{
     //Return object to userService
     this.us.updateUserData(user);
     //Construct file from blob & send it to db
-    const imgBlob = new Blob([this.data.image], {type: "image/jpeg"});
-    let file: File = new File([imgBlob], 'avatar.jpg', {type: "image/jpeg", lastModified: Date.now()});
+    const imgBlob = new Blob([this.data.image], {
+      type: "image/jpeg"
+    });
+    let file: File = new File([imgBlob], 'avatar.jpg', {
+      type: "image/jpeg",
+      lastModified: Date.now()
+    });
     const fd = new FormData();
     fd.append('image', file, 'avatar.jpg');
 

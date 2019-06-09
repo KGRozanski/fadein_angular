@@ -36,11 +36,11 @@
 				</div>
 				<div class="userInfo">
 					<span class="username"><strong>{{this.user.username}}</strong></span><br>
-					<button mat-flat-button color="warn" class="sign-in-btn" (click)="signMeIn = !signMeIn" *ngIf="this.user.username == null">Sign In</button>
+					<button mat-flat-button color="warn" class="sign-in-btn" (click)="loginFormVisible = !loginFormVisible" *ngIf="this.user.username == null">Sign In</button>
 					<button mat-flat-button color="warn" class="sign-in-btn" (click)="logOut()" *ngIf="this.user.username != ' ' && this.user.username != null">Log out</button>
 				</div>
 			</div>
-		<app-login [hidden]="signMeIn" class="shadow" (visibilityState)="reciveState($event)"></app-login>
+		<app-login *ngIf="this.loginFormVisible" class="shadow" (visibilityState)="reciveState($event)"></app-login>
 		<div class="logotype">Fade In:</div>
 	</div>
 </div>

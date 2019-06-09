@@ -1,9 +1,9 @@
 {
   "name": "fadein",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 8080 --open",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

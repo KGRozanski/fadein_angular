@@ -7,8 +7,9 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class RegGuard implements CanActivate {
-      constructor(private router: Router, private cs: CookieService) {}
-      tokenCookie = this.cs.getCookie('token');
+
+  constructor(private router: Router, private cs: CookieService) {}
+  tokenCookie = this.cs.getCookie('token');
 
       canActivate(
         next: ActivatedRouteSnapshot,
