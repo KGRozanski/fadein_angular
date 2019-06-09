@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserDataService } from '../../../../core/services/userdata.service';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -9,16 +9,9 @@ import { Router } from '@angular/router';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-    isShown = true;
-    errorMsg: string = null;
-    logForm: FormGroup;
-
+    private errorMsg: string = null; //Error msg string to indicate wrong login or pass
+    private logForm: FormGroup; //Instance of FormGroup to handle reactive login form
     @Output() visibilityState = new EventEmitter<boolean>();
-
-    sendState() {
-        this.visibilityState.emit(this.isShown);
-    }
 
     constructor(private fb: FormBuilder, private us: UserDataService, private router: Router) {
         this.logForm = fb.group({
@@ -39,7 +32,9 @@ export class LoginComponent implements OnInit {
             ]
         });
     }
+
     ngOnInit() {}
+
 
     login() {
         this.errorMsg = null;
@@ -52,8 +47,9 @@ export class LoginComponent implements OnInit {
         .subscribe({
             error: err => this.errorMsg = err['error']['error'],
             complete: () => {
+                this.router.navigate(['/']);
                 this.us.makeLogin();
-                this.sendState();
+                this.visibilityState.emit(false);
             }
         });
     }

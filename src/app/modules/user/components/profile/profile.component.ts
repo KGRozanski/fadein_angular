@@ -29,7 +29,7 @@ export class ProfileComponent implements AfterViewInit {
   private imgData = {
     image: null
   };
-  private isShown = false;
+  private isCropperShown = false;
 
   constructor(private us: UserDataService) {
     this.us.currentUserData.subscribe((data) => {
@@ -50,7 +50,7 @@ export class ProfileComponent implements AfterViewInit {
         this.imgData.image = data.avatar;
       });
     }
-    this.isShown = !this.isShown;
+    this.isCropperShown = !this.isCropperShown;
   }
 
   ngAfterViewInit() {}

@@ -49,7 +49,6 @@ export class UserDataService implements OnInit {
         this.getUserProfile().pipe(map((res) => {
             this.user.deserialize(res.body);
             this.updateUserData(this.user);
-            this.router.navigate(['']);
         })).subscribe();
     }
 
