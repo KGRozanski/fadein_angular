@@ -22,9 +22,17 @@ export class UserDataService implements OnInit {
     }
 
     private user = new User();
+
+    
     private repoUser = new BehaviorSubject<User>(this.user);
+
+
+
     currentUserData = this.repoUser.asObservable();
+
+
     private APIurl = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/`;
+
     private httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
@@ -66,6 +74,7 @@ export class UserDataService implements OnInit {
     }
 
     registerNewUser(data): Observable<any> {
+        this.httpOptions.withCredentials = false;
         return this.sendRequest('POST', this.APIurl + 'register', data, this.httpOptions);
     }
 
