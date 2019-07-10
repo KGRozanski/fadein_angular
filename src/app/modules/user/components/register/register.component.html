@@ -1,4 +1,6 @@
+
 <form class="registerForm" [formGroup]="regForm" (ngSubmit)="register()">
+	<h1>Register</h1>
 	<mat-form-field>
 		<input matInput placeholder="Email" formControlName="mail" [errorStateMatcher]="matcher">
 		<mat-error *ngIf="regForm.controls['mail'].errors?.email">

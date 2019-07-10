@@ -1,18 +1,25 @@
-<div class="wrapper">
-  <div class="container">
-    <div class="avatar">
+<div class="main-column">
+  <div class="container shadow">
+    <div class="avatar" (click)="toggleCrop(false)">
       <div class="hover-layer">
-        <span>ZMIEŃ</span>
+        <span>CHANGE</span>
       </div>
       <i id="avatarPlaceholder" class="fas fa-user fa-2x"></i>
-      <img [src]="imgData.image" alt="">
+      <img class="profile-img" [src]="this.imgData.image" alt="">
     </div>
     <div class="major-user-info">
       USERNAME: {{user.username}}
       EMAIL: {{user.mail}}
     </div>
-    <app-crop></app-crop>
+      <app-crop 
+      [@toggle]="isCropperShown" 
+      style="height: 0; grid-column-start: 1; overflow: hidden; grid-column-end: 3;" 
+      (imageUploaded)="reciveImage($event)" 
+      (cancel)="toggleCrop($event)"
+      ></app-crop>
   </div>
 </div>
+  
+
 
 

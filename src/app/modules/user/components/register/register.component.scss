@@ -1,18 +1,18 @@
+@import '../../../../../assets/scss/palette.scss';
+
 :host{
-    position: fixed;
-    z-index: 100;
-    top: 70%;
-    right: 5%;
-    transform: translateY(-50%);
-    background: #eaeaea;
-    border: 1px solid #fff;
-    padding: 25px;
-    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    background: $gray-1;
 }
 .registerForm{
     display: flex;
     flex-direction: column;
     width: 300px;
+    h1{
+        font-size: 2rem;
+        margin-bottom: 26px;
+    }
 }
 .hintErr{
     background: #ffe4e4;

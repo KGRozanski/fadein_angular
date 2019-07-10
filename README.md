@@ -1,4 +1,17 @@
-# Fadein
+# 📽 FadeIn: 
+### FadeIn: is filmmaker project manager 
+
+FadeIn: project has been invented with filmmakers needs in mind, specially for passionates and small companies. For peoples who wants to tell a stories but got no equipment or cannot find other film interested people. And here we are with an idea to combine distracted artists, their experiences and equipment to make something really great! 🎬
+
+#### Features:
+* Film professions
+* Project management panel (project sections = [idea, production, postproduction, premiere], including: callendar, storyboard maker )
+* Film educational materials
+* Messages
+* Marketplace for stuff and job offers
+* Script Editor
+* Forum
+* Stats & gamification
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
 

@@ -1,8 +1,10 @@
 import { Deserializable } from '../interfaces/deserializable.interface';
 
 export class User implements Deserializable {
-    username: any;
-    mail: any;
+    username: String;
+    mail: String;
+    isAvatarSet: Boolean;
+    avatar: String;
 
     constructor() {}
 

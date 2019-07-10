@@ -1,6 +1,6 @@
 <div class="menu-container">
 	<mat-drawer-container class="container" autosize>
-		<mat-drawer #snav class="example-sidenav shadow-lg" mode="side">
+		<mat-drawer #snav class="sidenav shadow-lg" mode="side">
 			<ul class="side-list">
 				<li><button
 					mat-flat-button color="primary"
@@ -30,16 +30,17 @@
 			<div class="right-section">
 				<div class="userPhoto">
 					<button mat-flat-button color="primary" class="profile-btn" (click)="snav.toggle()">
-						<i class="fas fa-user fa-2x"></i>
+						<i *ngIf="!this.user.isAvatarSet" class="fas fa-user fa-2x"></i>
+						<img *ngIf="this.user.isAvatarSet" [src]="this.user.avatar" alt="">
 					</button>
 				</div>
 				<div class="userInfo">
 					<span class="username"><strong>{{this.user.username}}</strong></span><br>
-					<button mat-flat-button color="warn" class="sign-in-btn" (click)="signMeIn = !signMeIn" *ngIf="this.user.username == null">Sign In</button>
+					<button mat-flat-button color="warn" class="sign-in-btn" (click)="loginFormVisible = !loginFormVisible" *ngIf="this.user.username == null">Sign In</button>
 					<button mat-flat-button color="warn" class="sign-in-btn" (click)="logOut()" *ngIf="this.user.username != ' ' && this.user.username != null">Log out</button>
 				</div>
 			</div>
-		<app-login [hidden]="signMeIn" class="shadow" (visibilityState)="reciveState($event)"></app-login>
+		<app-login *ngIf="this.loginFormVisible" class="shadow" (visibilityState)="reciveState($event)"></app-login>
 		<div class="logotype">Fade In:</div>
 	</div>
 </div>

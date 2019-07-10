@@ -1,5 +1,5 @@
 import { environment } from '../../../environments/environment';
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from '../../core/models/user.model';
 import { UserDataService } from '../../core/services/userdata.service';
 import { CookieService } from '../../core/services/cookie.service';
@@ -10,29 +10,24 @@ import { Router } from '@angular/router';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements AfterViewInit {
+export class MenuComponent {
 
   public version: string = environment.VERSION;
-  private signMeIn = true;
-  private user: User;
+  private loginFormVisible = false;
+  private user;
 
-  constructor(private us: UserDataService, private router: Router, private cs: CookieService ) {
+  constructor(private us: UserDataService, private router: Router, private cs: CookieService) {
     this.us.currentUserData.subscribe((data: User) => this.user = data);
   }
 
-  ngAfterViewInit() {
-  }
-
-  reciveState($event){
-    this.signMeIn = $event;
-  }
-
   logOut() {
-    this.user.username = null;
-    this.user.mail = null;
+    this.user = new User();
     this.cs.deleteCookie('token');
     this.us.updateUserData(this.user);
     this.router.navigate(['/welcome']);
   }
 
+  reciveState(value: boolean) {
+    this.loginFormVisible = value;
+  }
 }

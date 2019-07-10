@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Bai+Jamjuree:400,700&subset=latin-ext');
 @import './assets/scss/palette.scss';
 @import './assets/scss/reset.scss';
 @import './assets/scss/shadows.scss';
-@import url('https://fonts.googleapis.com/css?family=Bai+Jamjuree:400,700&subset=latin-ext');
+
 *{
   box-sizing: border-box;
   font-family: 'Bai Jamjuree', sans-serif;
@@ -10,11 +11,12 @@ body{
   overflow-x: hidden;
   background-color: #d6d6d6;
 }
-.wrapper{
+.main-column{
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
   width: 100vw;
-  height: calc(100vh - 60px);
 }
 @media (min-width: 768px) {
   .container {
