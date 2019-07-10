@@ -65,7 +65,6 @@ export class CropComponent implements OnInit {
     var image: any = new Image();
     var file: File = $event.target.files[0];
     var myReader: FileReader = new FileReader();
-    let emitter = this.crop;
 
     var that = this;
     myReader.onloadend = function (loadEvent: any) {
@@ -73,8 +72,11 @@ export class CropComponent implements OnInit {
       that.cropper.setImage(image);
     };
     myReader.readAsDataURL(file);
+
+
+
     setTimeout(() => {
-      emitter.emit()
+      this.emit()
     }, 500);
   }
 
