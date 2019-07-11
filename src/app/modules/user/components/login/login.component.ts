@@ -25,9 +25,7 @@ export class LoginComponent implements OnInit {
             ],
             'pass': [null,
                 [
-                    Validators.required,
-                    Validators.minLength(8),
-                    Validators.maxLength(32)
+                    Validators.required
                 ]
             ]
         });

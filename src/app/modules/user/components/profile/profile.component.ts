@@ -1,7 +1,7 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { User } from '../../../../core/models/user.model';
 import { UserDataService } from '../../../../core/services/userdata.service';
-import { CropComponent } from '../tools/crop/crop.component';
+import { CropComponent } from '../../../../shared/tools/components/crop/crop.component';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({

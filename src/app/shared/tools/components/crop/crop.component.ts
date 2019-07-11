@@ -17,7 +17,7 @@ import {
 } from 'ng2-img-cropper';
 import {
   UserDataService
-} from '../../../../../core/services/userdata.service';
+} from '../../../../core/services/userdata.service';
 
 @Component({
   selector: 'app-crop',
