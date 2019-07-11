@@ -5,7 +5,7 @@ import { MaterialsImportsModule } from '../../shared/materials-imports.module';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { CropComponent } from './components/tools/crop/crop.component';
+import { CropComponent } from '../../shared/tools/components/crop/crop.component';
 
 import { ImageCropperComponent } from 'ng2-img-cropper';
 

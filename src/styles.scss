@@ -1,15 +1,19 @@
-@import url('https://fonts.googleapis.com/css?family=Bai+Jamjuree:400,700&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Hind:400,700&display=swap&subset=latin-ext');
 @import './assets/scss/palette.scss';
 @import './assets/scss/reset.scss';
 @import './assets/scss/shadows.scss';
 
 *{
   box-sizing: border-box;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: 'Hind', sans-serif;
 }
 body{
   overflow-x: hidden;
   background-color: #d6d6d6;
+}
+h1{
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
 .main-column{
   display: flex;
