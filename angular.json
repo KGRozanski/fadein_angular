@@ -32,10 +32,7 @@
               },
               "src/styles.scss"
             ],
-            "scripts": [
-              "./node_modules/pouchdb/dist/pouchdb.min.js",
-              "https://kit.fontawesome.com/ec5e650a68.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {

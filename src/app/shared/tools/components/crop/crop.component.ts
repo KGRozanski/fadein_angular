@@ -18,6 +18,7 @@ import {
 import {
   UserDataService
 } from '../../../../core/services/userdata.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-crop',
@@ -66,18 +67,18 @@ export class CropComponent implements OnInit {
     var file: File = $event.target.files[0];
     var myReader: FileReader = new FileReader();
 
-    var that = this;
-    myReader.onloadend = function (loadEvent: any) {
+
+    myReader.onloadend = (loadEvent: any) => {
       image.src = loadEvent.target.result;
-      that.cropper.setImage(image);
+      this.cropper.setImage(image);
     };
     myReader.readAsDataURL(file);
 
-
-
-    setTimeout(() => {
-      this.emit()
-    }, 500);
+    of(this.cropper.image).subscribe((val) => {
+      if(val.image != undefined) {
+        this.emit()
+      }
+    }).unsubscribe();
   }
 
 
