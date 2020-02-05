@@ -16,10 +16,10 @@ export class RegGuard implements CanActivate {
         state: RouterStateSnapshot): boolean {
         // check if token is set
         if ( this.tokenCookie == null) {
-            return true;
+          return true;
         } else {
-            this.router.navigate(['']);
-            return false;
+          this.router.navigate(['']);
+          return false;
         }
     }
 }

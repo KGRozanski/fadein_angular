@@ -11,9 +11,39 @@
         </div>
         <div class="major-user-info">
             <h1>{{user.username}}</h1>
-            <i class="fas fa-envelope"></i>&nbsp;{{user.mail}}
+            <i class="fas fa-envelope"></i>&nbsp;{{user.mail}}<br>
+            <i class="fas fa-calendar"></i>&nbsp;Data dołączenia: {{user.dateOfRegistration}}
 
         </div>
         <app-crop [@toggle]="isCropperShown" style="height: 0; grid-column-start: 1; overflow: hidden; grid-column-end: 3;" (imageUploaded)="reciveImage($event)" (cancel)="toggleCrop($event)"></app-crop>
+        <div class="user-info">
+            <h2>Profesje:</h2>
+            <mat-form-field class="example-chip-list">
+                <mat-chip-list #chipList>
+                  <mat-chip
+                    *ngFor="let profession of professions"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(profession)">
+                    {{profession}}
+                    <mat-icon matChipRemove *ngIf="removable">Anuluj</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="Nowa profesja..."
+                    #professionInput
+                    [formControl]="professionCtrl"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let profession of filteredprofessions | async" [value]="profession">
+                    {{profession}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+        </div>
     </div>
 </div>

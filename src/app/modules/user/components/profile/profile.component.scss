@@ -1,8 +1,15 @@
 @import '../../../../../assets/scss/palette.scss';
+.main-column > .container{
+    background-color: #ededed;
+}
 .container{
     display: grid;
     grid: 150px auto / 150px 1fr;
     margin: 10px;
+    
+    .user-info{
+        padding: 20px;
+    }
 }
 app-crop{
     background: #edf2fa;
@@ -10,7 +17,6 @@ app-crop{
     overflow: hidden;
 }
 .major-user-info{
-    background: #ededed;
     padding: 10px;
 }
 .avatar{

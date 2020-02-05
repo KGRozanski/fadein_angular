@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 import 'hammerjs';
 
 import {
   MatButtonModule,
   MatInputModule,
   MatCheckboxModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatChipsModule
 } from '@angular/material';
 
 @NgModule({
@@ -15,14 +19,20 @@ import {
     MatInputModule,
     MatCheckboxModule,
     MatSidenavModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
     MatSidenavModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule
   ]
 })
 
