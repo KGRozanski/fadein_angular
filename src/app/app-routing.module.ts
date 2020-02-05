@@ -9,12 +9,6 @@ import { RegGuard } from './core/guards/reg.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    canActivate: [AuthGuard],
-    // resolve: { user : AuthGuard },
-    component: HomeComponent
-  },
-  {
     path: 'welcome',
     canActivate: [RegGuard],
     component: WelcomeComponent
@@ -22,7 +16,13 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent
-  }
+  },
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    // resolve: { user : AuthGuard },
+    component: HomeComponent
+  },
 ];
 
 @NgModule({

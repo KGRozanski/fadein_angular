@@ -6,21 +6,21 @@
 					mat-flat-button color="primary"
 					(click)="snav.toggle()"
 					[routerLink]="['']"
-					routerLinkActive="router-link-active">🏡&nbsp;Home</button>
+					routerLinkActive="router-link-active">🏡&nbsp;Główna</button>
 				</li>
-				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📫&nbsp;Messages</button></li>
-				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📅&nbsp;Callendar</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📫&nbsp;Wiadomości</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📅&nbsp;Kalendarz</button></li>
 				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📢&nbsp;Forum</button></li>
-				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📚&nbsp;Education</button></li>
-				<li><button mat-flat-button color="primary" (click)="snav.toggle()">🎬&nbsp;Projects</button></li>
-				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📜&nbsp;Script Editor</button></li>
-				<li><button mat-flat-button color="primary" (click)="snav.toggle()">🛒&nbsp;Market Place</button></li>
-				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📉&nbsp;Stats</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📚&nbsp;Edukacja</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">🎬&nbsp;Projekty</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📜&nbsp;Edytor</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">🛒&nbsp;Targowisko</button></li>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📉&nbsp;Statystyki</button></li>
 				<li><button
 					mat-flat-button color="primary"
 					(click)="snav.toggle()"
 					[routerLink]="['/profile']"
-					routerLinkActive="router-link-active" >🙂&nbsp;My profile</button>
+					routerLinkActive="router-link-active" >🙂&nbsp;Mój profil</button>
 				</li>
 			</ul>
 			<span class="version">v. {{version}}∝</span>
@@ -36,8 +36,8 @@
 				</div>
 				<div class="userInfo">
 					<span class="username"><strong>{{this.user.username}}</strong></span><br>
-					<button mat-flat-button color="warn" class="sign-in-btn" (click)="loginFormVisible = !loginFormVisible" *ngIf="this.user.username == null">Sign In</button>
-					<button mat-flat-button color="warn" class="sign-in-btn" (click)="logOut()" *ngIf="this.user.username != ' ' && this.user.username != null">Log out</button>
+					<button mat-flat-button color="warn" class="sign-in-btn" (click)="loginFormVisible = !loginFormVisible" *ngIf="this.user.username == null">Zaloguj</button>
+					<button mat-flat-button color="warn" class="sign-in-btn" (click)="logOut()" *ngIf="this.user.username != ' ' && this.user.username != null">Wyloguj</button>
 				</div>
 			</div>
 		<app-login *ngIf="this.loginFormVisible" class="shadow" (visibilityState)="reciveState($event)"></app-login>

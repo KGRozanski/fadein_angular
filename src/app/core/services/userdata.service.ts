@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -14,23 +14,16 @@ const PORT = 3000;
 @Injectable({
   providedIn: 'root'
 })
-export class UserDataService implements OnInit {
+export class UserDataService {
 
     constructor(private http: HttpClient, private router: Router) {
         this.user.username = null;
-        this.user.avatar = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/getAvatar`;
+        this.user.avatar = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/avatar`;
     }
 
     private user = new User();
-
-    
     private repoUser = new BehaviorSubject<User>(this.user);
-
-
-
     currentUserData = this.repoUser.asObservable();
-
-
     private APIurl = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/`;
 
     private httpOptions = {
@@ -47,7 +40,6 @@ export class UserDataService implements OnInit {
         withCredentials: true
     };
 
-    ngOnInit() {}
 
     updateUserData(user: User) {
         this.repoUser.next(user);
@@ -71,6 +63,10 @@ export class UserDataService implements OnInit {
 
     getUserProfile(): Observable<any> {
         return this.sendRequest('GET', this.APIurl + 'profile', null, this.httpOptions);
+    }
+
+    getProfessions() {
+        return this.sendRequest('GET', this.APIurl + 'professions', null, this.httpOptions);
     }
 
     registerNewUser(data): Observable<any> {
