@@ -25,21 +25,21 @@
                         *ngFor="let profession of professions"
                         [selectable]="selectable"
                         [removable]="removable"
-                        (removed)="remove(profession)">
+                        (removed)="removeProfession(profession)">
                         {{profession}}
                         <mat-icon matChipRemove *ngIf="removable">close</mat-icon>
                       </mat-chip>
                       <input
-                        placeholder="Nowa profesja..."
+                        placeholder="Dodaj swoje profesje..."
                         #professionInput
                         [formControl]="professionCtrl"
                         [matAutocomplete]="auto"
                         [matChipInputFor]="chipList"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                         [matChipInputAddOnBlur]="addOnBlur"
-                        (matChipInputTokenEnd)="add($event)">
+                        (matChipInputTokenEnd)="addProfession($event)">
                     </mat-chip-list>
-                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addSelectedProfession($event)">
                       <mat-option *ngFor="let profession of filteredprofessions | async" [value]="profession">
                         {{profession}}
                       </mat-option>
