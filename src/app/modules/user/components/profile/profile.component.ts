@@ -6,7 +6,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { COMMA,ENTER } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete } from '@angular/material';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map,startWith } from 'rxjs/operators';
 
 @Component({
@@ -27,6 +27,10 @@ import { map,startWith } from 'rxjs/operators';
 	]
 })
 export class ProfileComponent implements OnInit {
+	private user: User;
+	private imgData = {
+		image: null
+	};
 	private visible = true;
 	private selectable = true;
 	private removable = true;
@@ -37,6 +41,8 @@ export class ProfileComponent implements OnInit {
 	private professions: string[] = [];
 	private allProfessions: string[] = [];
 	private allProfestionsForRemoving: string[] = [];
+	public selectedProfessions = new Subject<any>();
+	public selectedProfessions$ = this.selectedProfessions.asObservable();
 
 	@ViewChild('professionInput') professionInput: ElementRef < HTMLInputElement > ;
 	@ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -51,19 +57,22 @@ export class ProfileComponent implements OnInit {
 					this.allProfestionsForRemoving.push(element.name);
 				});
 			}
-		})
+		});
+		this.selectedProfessions$.subscribe(data => {
+			this.us.updateProfessions(data).subscribe();
+		});
 	}
 
-	private user: User;
-	private imgData = {
-		image: null
-	};
 	private isCropperShown = false;
 
 	constructor(private us: UserDataService) {
 		this.us.currentUserData.subscribe((data) => {
 			this.user = data;
 			this.imgData.image = data.avatar;
+			this.professions = this.user['professions'];
+			if(this.professions != undefined) {
+				this.clearUsedProfs()
+			}
 		});
 		this.filteredprofessions = this.professionCtrl.valueChanges.pipe(
 			startWith(null),
@@ -86,6 +95,20 @@ export class ProfileComponent implements OnInit {
 		this.isCropperShown = !this.isCropperShown;
 	}
 
+	//Mat chips for professions
+
+	clearUsedProfs() {
+		this.professions.forEach((el) => {
+			console.log(el)
+			let indexOfProf = this.allProfestionsForRemoving.indexOf("aktor");
+			console.log(this.allProfestionsForRemoving)
+			this.allProfessions.splice(indexOfProf, 1);
+			console.log(this.allProfessions)
+		});
+	}
+
+
+
 	addProfession(event: MatChipInputEvent): void {
 		// Add profession only when MatAutocomplete is not open
 		// To make sure this does not conflict with OptionSelected Event
@@ -100,6 +123,7 @@ export class ProfileComponent implements OnInit {
 				// Add our profession
 				if ((value || '').trim()) {
 					this.professions.push(value.trim());
+					this.selectedProfessions.next(this.professions);
 				}
 				// Reset the input value
 				if (input) {
@@ -116,6 +140,7 @@ export class ProfileComponent implements OnInit {
 			this.professions.splice(index, 1);
 			let indexOfProf = this.allProfestionsForRemoving.indexOf(profession);
 			this.allProfessions.splice(indexOfProf, 0, profession);
+			this.selectedProfessions.next(this.professions);
 			this.filteredprofessions = this.professionCtrl.valueChanges.pipe(
 				startWith(null),
 				map((profession: string | null) => profession ? this._filter(profession) : this.allProfessions.slice()));
@@ -129,6 +154,7 @@ export class ProfileComponent implements OnInit {
 		this.professionCtrl.setValue(null);
 		let indexOfProf = this.allProfessions.indexOf(event.option.viewValue);
 		this.allProfessions.splice(indexOfProf, 1);
+		this.selectedProfessions.next(this.professions);
 	}
 
 
