@@ -1,10 +1,10 @@
 @import '../../../assets/scss/palette.scss';
-@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata&display=swap');
 .menu-container{
     position: relative;
 }
 .logotype{
-    font-family: 'Abril Fatface', cursive;
+    font-family: 'Inconsolata', monospace;
     color: #fff;
     text-shadow: 1px 1px 3px #000;
     text-align: right;
@@ -29,7 +29,7 @@
             width: 100%;
             display: block;
             text-align: right;
-            padding: 6px 5px;
+            padding: 6px 0;
         }
         .profile-btn{
             color: #fff;

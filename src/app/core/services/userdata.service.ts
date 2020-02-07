@@ -43,6 +43,7 @@ export class UserDataService {
 
     updateUserData(user: User) {
         this.repoUser.next(user);
+        console.log(user)
     }   
 
     makeLogin() {
@@ -80,5 +81,8 @@ export class UserDataService {
 
     updateProfessions(data): Observable<any> {
         return this.sendRequest('POST', this.APIurl + 'updateProfessions', data, this.httpOptions);
+    }
+    addProduction(data): Promise<any> {
+        return this.sendRequest('POST', this.APIurl + 'addProduction', data, this.httpOptions).toPromise();
     }
 }

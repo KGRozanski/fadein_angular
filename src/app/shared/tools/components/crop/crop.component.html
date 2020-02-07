@@ -1,5 +1,4 @@
 <div class="img-croper-wrapper shadow-inset" #cropWraper>
-    <!-- <input  class="custom-input" type="file" (change)="fileChangeListener($event)"> -->
     <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper><br>
     <div>
         <button mat-flat-button color="primary" (click)="saveImg()">Save</button>&nbsp;&nbsp;&nbsp;
