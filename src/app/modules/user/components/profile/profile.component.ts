@@ -117,7 +117,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 				[
 					Validators.minLength(0),
 					Validators.maxLength(1024),
-					Validators.pattern('^[a-zA-Z0-9ąęśćłóźżń @.]+$')
+					Validators.pattern('^[a-zA-Z0-9ąęśćłóźżń ,@.]+$')
 				]
 			]
 		})
