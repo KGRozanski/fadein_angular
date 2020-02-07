@@ -1,49 +1,91 @@
 <div class="main-column">
-    <div class="container shadow">
-        <div class="avatar" (click)="toggleCrop(false)">
-            <div class="hover-layer">
-                <span>
-                    <i class="fas fa-edit fa-2x"></i>
-                </span>
-            </div>
-            <i id="avatarPlaceholder" class="fas fa-user fa-2x"></i>
-            <img class="profile-img" [src]="this.imgData.image" alt="">
-        </div>
-        <div class="major-user-info">
-            <h1>{{user.username}}</h1>
-            <i class="fas fa-envelope"></i>&nbsp;{{user.mail}}<br>
-            <i class="fas fa-calendar"></i>&nbsp;Data dołączenia: {{user.dateOfRegistration}}
+	<div class="container shadow">
+		<div class="avatar" (click)="toggleCrop(false)">
+			<div class="hover-layer">
+				<span>
+					<i class="fas fa-edit fa-2x"></i>
+				</span>
+			</div>
 
-        </div>
-        <app-crop [@toggle]="isCropperShown" style="height: 0; grid-column-start: 1; overflow: hidden; grid-column-end: 3;" (imageUploaded)="reciveImage($event)" (cancel)="toggleCrop($event)"></app-crop>
-        <div class="user-info">
-            <h2>Profesje:</h2>
-            <mat-form-field class="example-chip-list">
-                <mat-chip-list #chipList>
-                  <mat-chip
-                    *ngFor="let profession of professions"
-                    [selectable]="selectable"
-                    [removable]="removable"
-                    (removed)="remove(profession)">
-                    {{profession}}
-                    <mat-icon matChipRemove *ngIf="removable">Anuluj</mat-icon>
-                  </mat-chip>
-                  <input
-                    placeholder="Nowa profesja..."
-                    #professionInput
-                    [formControl]="professionCtrl"
-                    [matAutocomplete]="auto"
-                    [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="add($event)">
-                </mat-chip-list>
-                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                  <mat-option *ngFor="let profession of filteredprofessions | async" [value]="profession">
-                    {{profession}}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-        </div>
-    </div>
+			<i id="avatarPlaceholder" *ngIf="!this.user.isAvatarSet" class="fas fa-user fa-2x"></i>
+			<img class="profile-img" *ngIf="this.user.isAvatarSet" [src]="this.user.avatar" alt="">
+		</div>
+		<div class="major-user-info">
+			<h1>{{user.username}}</h1>
+			<i class="fas fa-envelope"></i>&nbsp;{{user.mail}}<br>
+			<i class="fas fa-calendar"></i>&nbsp;Data dołączenia: {{user.dateOfRegistration}}
+
+		</div>
+		<app-crop [@toggle]="isCropperShown" style="grid-column-start: 1; overflow: hidden; grid-column-end: 3;"
+			(imageUploaded)="reciveImage($event)" (cancel)="toggleCrop($event)"></app-crop>
+		<div class="user-info">
+			<div class="professions">
+				<h2>Profesje:</h2>
+				<mat-form-field class="example-chip-list">
+					<mat-chip-list #chipList>
+						<mat-chip *ngFor="let profession of professions" [selectable]="selectable"
+							[removable]="removable" (removed)="removeProfession(profession)">
+							{{profession}}
+							<mat-icon matChipRemove *ngIf="removable">close</mat-icon>
+						</mat-chip>
+						<input placeholder="Dodaj swoje profesje..." #professionInput [formControl]="professionCtrl"
+							[matAutocomplete]="auto" [matChipInputFor]="chipList"
+							[matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+							(matChipInputTokenEnd)="addProfession($event)">
+					</mat-chip-list>
+					<mat-autocomplete #auto="matAutocomplete" (optionSelected)="addSelectedProfession($event)">
+						<mat-option *ngFor="let profession of filteredprofessions | async" [value]="profession">
+							{{profession}}
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field>
+			</div>
+			<div class="filmography">
+				<h2>Filmografia:</h2>
+				<br>
+				<ul>
+					<li *ngFor="let production of this.user.filmography">
+						<h3>{{production.title}} <i style="font-weight: 500;">({{production.date}})</i></h3>
+						<p>{{production.description}}</p>
+					</li>
+					<br>
+					<!-- Film adder -->
+					<div *ngIf="this.filmAdderVisibilty" class="film-adder">
+						<i class="fas fa-times-circle" (click)="this.filmAdderVisibilty = !this.filmAdderVisibilty"></i>
+						<h3 class="film-adder__title">Dodaj produkcję w której brałeś udział:</h3>
+						<form action="" [formGroup]="productionForm" (ngSubmit)="addProduction()">
+							<div class="film-adder__title-section">
+								<mat-form-field class="film-adder__title">
+									<input matInput formControlName="title" placeholder="Tytuł produkcji" [errorStateMatcher]="matcher" value="">
+									<mat-error *ngIf="productionForm.controls['title'].errors?.pattern">
+										Tytuł filmu maksymalnie 64 znaki
+									</mat-error>
+								</mat-form-field>
+
+								<mat-form-field class="">
+									<input matInput formControlName="date" placeholder="Data premiery" value="" [errorStateMatcher]="matcher">
+									<mat-error *ngIf="productionForm.controls['date'].errors?.pattern">
+										Rok produkji
+									</mat-error>
+								</mat-form-field>
+							</div>
+							<mat-form-field class="film-adder__description">
+								<textarea matInput formControlName="description" placeholder="Opis" [errorStateMatcher]="matcher"></textarea>
+								<mat-error *ngIf="productionForm.controls['description'].errors?.pattern">
+									Opis filmu maksymalnie 1024 znaki
+								</mat-error>
+							</mat-form-field>
+							<button type="submit" mat-flat-button color="primary" class="profile-btn">
+								<i class="fas fa-plus"></i>&nbsp;Dodaj
+							</button>
+						</form>
+					</div>
+					<button *ngIf="!this.filmAdderVisibilty" mat-flat-button color="primary" class="profile-btn"
+						(click)="this.filmAdderVisibilty = !this.filmAdderVisibilty">
+						<i class="fas fa-plus"></i>&nbsp;Dodaj film
+					</button>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>

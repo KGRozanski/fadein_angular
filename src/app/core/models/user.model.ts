@@ -5,6 +5,7 @@ export class User implements Deserializable {
     mail: String;
     isAvatarSet: Boolean;
     avatar: String;
+    filmography: Array<Object>;
 
     constructor() {}
 

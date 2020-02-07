@@ -42,10 +42,10 @@ export class CropComponent implements OnInit {
   constructor(private us: UserDataService, public snackBar: MatSnackBar, private renderer: Renderer2, elRef: ElementRef) {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.noFileInput = true;
-    this.cropperSettings.width = 100;
-    this.cropperSettings.height = 100;
-    this.cropperSettings.croppedWidth = 100;
-    this.cropperSettings.croppedHeight = 100;
+    this.cropperSettings.width = 200;
+    this.cropperSettings.height = 200;
+    this.cropperSettings.croppedWidth = 200;
+    this.cropperSettings.croppedHeight = 200;
     this.cropperSettings.canvasWidth = 300;
     this.cropperSettings.canvasHeight = 300;
     this.data = {};
@@ -98,6 +98,7 @@ export class CropComponent implements OnInit {
     this.us.currentUserData.subscribe((data) => user = data)
     //Update value
     user.avatar = this.data.image;
+    user.isAvatarSet = true;
     //Return object to userService
     this.us.updateUserData(user);
     //Construct file from blob & send it to db
