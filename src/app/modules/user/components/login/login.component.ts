@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
         .subscribe({
             error: err => this.errorMsg = err['error']['error'],
             complete: () => {
-                this.router.navigate(['']);
                 this.us.makeLogin();
                 this.visibilityState.emit(false);
             }

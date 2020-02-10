@@ -65,15 +65,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
 		this.us.getProfessions().subscribe((profs) => {
 			let professions = profs['body'];
 			if (professions) {
+				//Fill professions array with fetched data
 				professions.forEach(element => {
 					this.allProfessions.push(element.name);
 					this.allProfestionsForRemoving.push(element.name);
+				});
+				//Remove professions that was previously used
+				this.professions.forEach((el) => {
+					let indexOfProf = this.allProfessions.indexOf(el);
+					this.allProfessions.splice(indexOfProf, 1);
 				});
 			}
 		});
 		this.selectedProfessions$.subscribe(data => {
 			this.us.updateProfessions(data).subscribe();
 		});
+
 	}
 	ngOnDestroy() {
 		this.selectedProfessions.unsubscribe();

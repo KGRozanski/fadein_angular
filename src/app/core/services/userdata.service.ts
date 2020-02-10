@@ -50,7 +50,11 @@ export class UserDataService {
         this.getUserProfile().pipe(map((res) => {
             this.user.deserialize(res.body);
             this.updateUserData(this.user);
-        })).subscribe();
+        })).subscribe(
+            () => {
+                this.router.navigate(['']);
+            }
+        );
     }
 
     private sendRequest(method: any, url: string, body: any, headers: object) {
