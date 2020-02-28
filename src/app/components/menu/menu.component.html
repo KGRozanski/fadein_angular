@@ -40,8 +40,7 @@
 					<button mat-flat-button color="warn" class="sign-in-btn" (click)="logOut()" *ngIf="this.user.username != ' ' && this.user.username != null">Wyloguj</button>
 				</div>
 			</div>
-		<app-login *ngIf="this.loginFormVisible" class="shadow" (visibilityState)="reciveState($event)"></app-login>
+		<app-login *ngIf="this.loginFormVisible" class="shadow" (visibilityState)="loginVisibilityState($event)"></app-login>
 		<div class="logotype">Fade In:</div>
 	</div>
 </div>
-

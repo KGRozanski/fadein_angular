@@ -13,6 +13,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { HeaderComponent } from './components/header/header.component';
 import { UserModule } from './modules/user/user.module';
+import { UserDataService } from './core/services/userdata.service';
+import { RegGuard } from './core/guards/reg.guard';
 // import { UserResolver } from './shared/resolvers/user.resolver';
 
 @NgModule({
@@ -32,6 +34,8 @@ import { UserModule } from './modules/user/user.module';
     UserModule
   ],
   providers: [
+    UserDataService,
+    RegGuard,
     AuthGuard,
     // UserResolver
   ],
