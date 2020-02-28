@@ -13,11 +13,6 @@ export class AuthGuard implements CanActivate {
       canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean {
-
-
-          console.log("token is: " + Cookies.get('token'))
-
-
         // check if token is set
         if ( Cookies.get('token') !== undefined) {
             return true;

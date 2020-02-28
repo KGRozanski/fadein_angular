@@ -35,38 +35,45 @@
                     transform: translate(-50%);
                 }
             }
-            .film-adder{
-                position: relative;
-                padding: 10px;
-                background: $gray-2;
-                display: flex;
-                margin-bottom: 20px;
-                flex-direction: column;
-                .film-adder__description{
-                    width: 100%;
-                }
-                .fa-times-circle{
-                    position: absolute;
-                    right: -6px;
-                    top: -6px;
-                    color: $color1;
-                    &:hover{
-                        cursor: pointer;
-                        color: map-get($f-color5, 500)
+            .film-adder-wrapper{
+                height: 0;
+                overflow: hidden;
+                transition: height 1s;
+
+                .film-adder{
+                    position: relative;
+                    padding: 10px;
+                    background: $gray-2;
+                    display: flex;
+                    margin-bottom: 20px;
+                    flex-direction: column;
+                    .film-adder__description{
+                        width: 100%;
+                    }
+                    .fa-times-circle{
+                        position: absolute;
+                        right: 4px;
+                        top: 4px;
+                        color: $color1;
+                        &:hover{
+                            cursor: pointer;
+                            color: map-get($f-color5, 500)
+                        }
+                    }
+                    .film-adder__title{
+                        color: $gray-4;
+                    }
+                    .film-adder__title-section{
+                        display: grid;
+                        grid-template-columns: 10fr 3fr;
+                        grid-gap: 20px;
+                    }
+                    button{
+                        width: 20%;
                     }
                 }
-                .film-adder__title{
-                    color: $gray-4;
-                }
-                .film-adder__title-section{
-                    display: grid;
-                    grid-template-columns: 10fr 3fr;
-                    grid-gap: 20px;
-                }
-                button{
-                    width: 20%;
-                }
             }
+            
         }
     }
 }

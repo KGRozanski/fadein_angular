@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { User } from '../../../../core/interfaces/user.interface';
 import { UserDataService } from '../../../../core/services/userdata.service';
 import { CropComponent } from '../../../../shared/tools/components/crop/crop.component';
@@ -30,14 +30,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	//User data object and image object
 	private user: User;
 	private imgData = {image: null};
-	private productions = [
-		{
-			"id": 0,
-			"title": "Mad max",
-			"description": "In at eros urna. Maecenas dignissim massa erat, eu sagittis ligula suscipit et. Nam commodo augue sed tincidunt lacinia. Proin ornare tortor erat. Donec eu augue et turpis luctus faucibus. Aliquam semper nunc tincidunt elit sollicitudin posuere. Praesent ac mauris vel nisi posuere efficitur. Curabitur blandit sapien ut sapien posuere accumsan. Phasellus faucibus augue vel urna blandit, in euismod felis facilisis.",
-			"date": "2014"
-		}
-	]
 	//Mat chip variables
 	private visible = true;
 	private selectable = true;
@@ -55,11 +47,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	private filmAdderVisibilty = false;
 	//Production form variables
 	private productionForm: FormGroup;
-	
+	//Cropper flag
+	private isCropperShown = false;
+	//Film wrapper flag
+	private filmAdderFlag = false;
 
 	@ViewChild('professionInput') professionInput: ElementRef < HTMLInputElement > ;
 	@ViewChild('auto') matAutocomplete: MatAutocomplete;
 	@ViewChild(CropComponent) crop;
+	@ViewChild('filmAdder') filmAdder: ElementRef;
 
 	ngOnInit() {
 		//Profession stuff
@@ -86,12 +82,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	
 	ngOnDestroy() {
 		this.selectedProfessions.unsubscribe();
-		
 	}
 
-	private isCropperShown = false;
-
-	constructor(private us: UserDataService, private fb: FormBuilder) {
+	constructor(private us: UserDataService, private fb: FormBuilder, private renderer: Renderer2,) {
 		this.us.USER_STATE.subscribe((data) => {
 			this.user = data;
 			this.imgData.image = data.avatar;
@@ -141,7 +134,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	toggleCrop(isCanceled) {
 		if (isCanceled == true) {
 			this.us.USER_STATE.subscribe((data) => {
-				this.user = data;
 				this.imgData.image = data.avatar;
 			});
 		}
@@ -230,6 +222,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
 			})
 			this.user.filmography.push(newProduction);
 		}
+	}
+
+	filmAdderVisibilityState() {
+		let filmWrapper = this.filmAdder.nativeElement;
+		if(!this.filmAdderFlag) {
+			this.renderer.setStyle(filmWrapper, 'height', '250px');
+			this.filmAdderFlag = true;
+		} else {
+			this.renderer.setStyle(filmWrapper, 'height', '0');
+			this.filmAdderFlag = false;
+		}
+		
 	}
 
 }

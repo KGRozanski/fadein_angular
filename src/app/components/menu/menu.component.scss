@@ -1,10 +1,10 @@
 @import '../../../assets/scss/palette.scss';
-@import url('https://fonts.googleapis.com/css?family=Inconsolata&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Caveat+Brush&display=swap&subset=latin-ext');
 .menu-container{
     position: relative;
 }
 .logotype{
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Caveat Brush';
     color: #fff;
     text-shadow: 1px 1px 3px #000;
     text-align: right;
