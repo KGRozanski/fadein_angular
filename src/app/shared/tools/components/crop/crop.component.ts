@@ -95,12 +95,12 @@ export class CropComponent implements OnInit {
   saveImg() {
     let user;
     //Fetch user data with userService
-    this.us.currentUserData.subscribe((data) => user = data)
+    this.us.USER_STATE.subscribe((data) => user = data)
     //Update value
     user.avatar = this.data.image;
     user.isAvatarSet = true;
     //Return object to userService
-    this.us.updateUserData(user);
+    this.us.userSubject.next(user);
     //Construct file from blob & send it to db
     const imgBlob = new Blob([this.data.image], {
       type: "image/jpeg"

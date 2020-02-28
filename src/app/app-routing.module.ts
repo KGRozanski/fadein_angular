@@ -15,14 +15,14 @@ const routes: Routes = [
   },
   {
     path: 'profile',
+    canActivate: [AuthGuard],
     component: ProfileComponent
   },
   {
     path: '',
     canActivate: [AuthGuard],
-    // resolve: { user : AuthGuard },
     component: HomeComponent
-  },
+  }
 ];
 
 @NgModule({

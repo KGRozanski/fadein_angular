@@ -61,7 +61,6 @@
 										Tytuł filmu maksymalnie 64 znaki
 									</mat-error>
 								</mat-form-field>
-
 								<mat-form-field class="">
 									<input matInput formControlName="date" placeholder="Data premiery" value="" [errorStateMatcher]="matcher">
 									<mat-error *ngIf="productionForm.controls['date'].errors?.pattern">

@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
-import { User } from '../../../../core/models/user.model';
+import { User } from '../../../../core/interfaces/user.interface';
 import { UserDataService } from '../../../../core/services/userdata.service';
 import { CropComponent } from '../../../../shared/tools/components/crop/crop.component';
 import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -62,6 +62,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	@ViewChild(CropComponent) crop;
 
 	ngOnInit() {
+		//Profession stuff
 		this.us.getProfessions().subscribe((profs) => {
 			let professions = profs['body'];
 			if (professions) {
@@ -82,6 +83,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 		});
 
 	}
+	
 	ngOnDestroy() {
 		this.selectedProfessions.unsubscribe();
 		
@@ -90,7 +92,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	private isCropperShown = false;
 
 	constructor(private us: UserDataService, private fb: FormBuilder) {
-		this.us.currentUserData.subscribe((data) => {
+		this.us.USER_STATE.subscribe((data) => {
 			this.user = data;
 			this.imgData.image = data.avatar;
 			this.professions = this.user['professions'];
@@ -103,7 +105,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 			map((profession: string | null) => profession ? this._filter(profession) : this.allProfessions.slice()));
 				//Production form
 	 	this.productionForm = fb.group({
-			'title': [null,     
+			'title': [null,
 				[
 					Validators.required,
 					Validators.minLength(3),
@@ -138,7 +140,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
 	toggleCrop(isCanceled) {
 		if (isCanceled == true) {
-			this.us.currentUserData.subscribe((data) => {
+			this.us.USER_STATE.subscribe((data) => {
 				this.user = data;
 				this.imgData.image = data.avatar;
 			});

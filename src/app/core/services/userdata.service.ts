@@ -1,10 +1,10 @@
+import { User } from '../interfaces/user.interface';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { User } from '../models/user.model';
+
 
 const ORIGIN = 'http://127.0.0.1:4200';
 const HOSTNAME = '127.0.0.1';
@@ -16,16 +16,14 @@ const PORT = 3000;
 })
 export class UserDataService {
 
-    constructor(private http: HttpClient, private router: Router) {
-        this.user.username = null;
-        this.user.avatar = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/avatar`;
-    }
+    constructor(private http: HttpClient, private router: Router) {}
 
-    private user = new User();
-    private repoUser = new BehaviorSubject<User>(this.user);
-    currentUserData = this.repoUser.asObservable();
+    private user: User = <User> {};
+    public userSubject = new BehaviorSubject<User>(this.user);
+    public USER_STATE = this.userSubject.asObservable();
+
+
     private APIurl = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/`;
-
     private httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
@@ -39,54 +37,45 @@ export class UserDataService {
         }),
         withCredentials: true
     };
-
-
-    updateUserData(user: User) {
-        this.repoUser.next(user);
-        console.log(user)
-    }   
+   
 
     makeLogin() {
-        this.getUserProfile().pipe(map((res) => {
-            this.user.deserialize(res.body);
-            this.updateUserData(this.user);
-        })).subscribe(
-            () => {
-                this.router.navigate(['']);
+        this.getUserProfile().subscribe((data) => {
+            if(data.body) {
+                this.user = data.body;
+                this.user.avatar = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/avatar`;
+                this.userSubject.next(this.user);
+                this.router.navigate(['/']);
+                console.log(this.user)
             }
-        );
+        })
     }
 
-    private sendRequest(method: any, url: string, body: any, headers: object) {
+    private _sendRequest(method: any, url: string, body: any, headers: object) {
         const req = new  HttpRequest(method, url, body, headers);
         return this.http.request(req);
     }
 
     authenticate(data): Observable<any> {
-        return this.sendRequest('POST', this.APIurl + 'login', data, this.httpOptions);
+        return this._sendRequest('POST', this.APIurl + 'login', data, this.httpOptions);
     }
-
     getUserProfile(): Observable<any> {
-        return this.sendRequest('GET', this.APIurl + 'profile', null, this.httpOptions);
+        return this._sendRequest('GET', this.APIurl + 'profile', null, this.httpOptions);
     }
-
     getProfessions() {
-        return this.sendRequest('GET', this.APIurl + 'professions', null, this.httpOptions);
+        return this._sendRequest('GET', this.APIurl + 'professions', null, this.httpOptions);
     }
-
     registerNewUser(data): Observable<any> {
         this.httpOptions.withCredentials = false;
-        return this.sendRequest('POST', this.APIurl + 'register', data, this.httpOptions);
+        return this._sendRequest('POST', this.APIurl + 'register', data, this.httpOptions);
     }
-
     putUserAvatar(data): Observable<any> {
-        return this.sendRequest('PUT', this.APIurl + 'uploadAvatar', data, this.httpOptionsMultipart);
+        return this._sendRequest('PUT', this.APIurl + 'uploadAvatar', data, this.httpOptionsMultipart);
     }
-
     updateProfessions(data): Observable<any> {
-        return this.sendRequest('POST', this.APIurl + 'updateProfessions', data, this.httpOptions);
+        return this._sendRequest('POST', this.APIurl + 'updateProfessions', data, this.httpOptions);
     }
     addProduction(data): Promise<any> {
-        return this.sendRequest('POST', this.APIurl + 'addProduction', data, this.httpOptions).toPromise();
+        return this._sendRequest('POST', this.APIurl + 'addProduction', data, this.httpOptions).toPromise();
     }
 }
