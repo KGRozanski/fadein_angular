@@ -7,7 +7,6 @@ import { MaterialsImportsModule } from './shared/materials-imports.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { MenuComponent } from './components/menu/menu.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 
 import { AuthGuard } from './core/guards/auth.guard';
@@ -19,7 +18,6 @@ import { UserModule } from './modules/user/user.module';
   declarations: [
     AppComponent,
     HomeComponent,
-    MenuComponent,
     WelcomeComponent,
     HeaderComponent
   ],

@@ -1,8 +1,8 @@
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 import { Component } from '@angular/core';
-import { User } from '../../core/models/user.model';
-import { UserDataService } from '../../core/services/userdata.service';
-import { CookieService } from '../../core/services/cookie.service';
+import { User } from '../../../../core/models/user.model';
+import { UserDataService } from '../../../../core/services/userdata.service';
+import { CookieService } from '../../../../core/services/cookie.service';
 import { Router } from '@angular/router';
 
 @Component({

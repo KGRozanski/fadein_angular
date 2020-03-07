@@ -30,14 +30,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	//User data object and image object
 	private user: User;
 	private imgData = {image: null};
-	private productions = [
-		{
-			"id": 0,
-			"title": "Mad max",
-			"description": "In at eros urna. Maecenas dignissim massa erat, eu sagittis ligula suscipit et. Nam commodo augue sed tincidunt lacinia. Proin ornare tortor erat. Donec eu augue et turpis luctus faucibus. Aliquam semper nunc tincidunt elit sollicitudin posuere. Praesent ac mauris vel nisi posuere efficitur. Curabitur blandit sapien ut sapien posuere accumsan. Phasellus faucibus augue vel urna blandit, in euismod felis facilisis.",
-			"date": "2014"
-		}
-	]
+	private productions = []
 	//Mat chip variables
 	private visible = true;
 	private selectable = true;
@@ -194,6 +187,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	}
 
 	addSelectedProfession(event: MatAutocompleteSelectedEvent): void {
+		console.log(this.professions)
 		this.professions.push(event.option.viewValue);
 		this.professionInput.nativeElement.value = '';
 		this.professionCtrl.setValue(null);
