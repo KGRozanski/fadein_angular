@@ -44,8 +44,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	private allProfestionsForRemoving: string[] = [];
 	public selectedProfessions = new Subject<any>();
 	public selectedProfessions$ = this.selectedProfessions.asObservable();
-	//Film adder vars
-	private filmAdderVisibilty = false;
+
 	//Production form variables
 	private productionForm: FormGroup;
 	//Cropper flag
@@ -125,13 +124,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
 			]
 		})
 	}
-
-
 	reciveImage($event) {
 		this.imgData.image = $event;
 		this.imgData = this.crop.data;
 	}
-
 	toggleCrop(isCanceled) {
 		if (isCanceled == true) {
 			this.us.USER_STATE.subscribe((data) => {
@@ -140,7 +136,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 		}
 		this.isCropperShown = !this.isCropperShown;
 	}
-
 	//Mat chips for professions
 	clearUsedProfs() {
 		this.professions.forEach((el) => {
@@ -148,7 +143,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 			this.allProfessions.splice(indexOfProf, 1);
 		});
 	}
-
 	addProfession(event: MatChipInputEvent): void {
 		// Add profession only when MatAutocomplete is not open
 		// To make sure this does not conflict with OptionSelected Event
@@ -173,7 +167,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 			}
 		}
 	}
-
 	removeProfession(profession: string): void {
 		const index = this.professions.indexOf(profession);
 		if (index >= 0) {
@@ -185,9 +178,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 				startWith(null),
 				map((profession: string | null) => profession ? this._filter(profession) : this.allProfessions.slice()));
 		}
-		
 	}
-
 	addSelectedProfession(event: MatAutocompleteSelectedEvent): void {
 		console.log(this.professions)
 		this.professions.push(event.option.viewValue);
@@ -197,18 +188,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
 		this.allProfessions.splice(indexOfProf, 1);
 		this.selectedProfessions.next(this.professions);
 	}
-
-
 	private _filter(value: string): string[] {
 		const filterValue = value.toLowerCase();
 		return this.allProfessions.filter(profession => profession.toLowerCase().indexOf(filterValue) === 0);
 	}
-
 	//Adding production to filmography
 	private _productionsReq(newProduction): Promise<any> {
 		return this.us.addProduction(newProduction);
 	}
-
 	addProduction() {
 		if(this.productionForm.controls['title'].errors == null 
 		&& this.productionForm.controls['date'].errors == null 
@@ -225,7 +212,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 			this.user.filmography.push(newProduction);
 		}
 	}
-
 	filmAdderVisibilityState() {
 		let filmWrapper = this.filmAdder.nativeElement;
 		if(!this.filmAdderFlag) {
@@ -235,7 +221,5 @@ export class ProfileComponent implements OnInit, OnDestroy {
 			this.renderer.setStyle(filmWrapper, 'height', '0');
 			this.filmAdderFlag = false;
 		}
-		
 	}
-
 }
