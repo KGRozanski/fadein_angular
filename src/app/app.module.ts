@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialsImportsModule } from './shared/materials-imports.module';
+import { CommonModule } from '@angular/common';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +16,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { UserModule } from './modules/user/user.module';
 import { UserDataService } from './core/services/userdata.service';
 import { RegGuard } from './core/guards/reg.guard';
+import { ReactiveFormsModule } from '@angular/forms';
+
 // import { UserResolver } from './shared/resolvers/user.resolver';
 
 @NgModule({
@@ -24,12 +28,17 @@ import { RegGuard } from './core/guards/reg.guard';
     HeaderComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialsImportsModule,
     HttpClientModule,
-    UserModule
+    UserModule,
+    CommonModule
+  ],
+  exports: [
+    ReactiveFormsModule
   ],
   providers: [
     UserDataService,
