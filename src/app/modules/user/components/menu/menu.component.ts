@@ -1,13 +1,8 @@
 import { environment } from '../../../../../environments/environment';
 import { Component } from '@angular/core';
-<<<<<<< HEAD:src/app/modules/user/components/menu/menu.component.ts
-import { User } from '../../../../core/models/user.model';
+import { User } from '../../../../core/interfaces/user.interface';
 import { UserDataService } from '../../../../core/services/userdata.service';
-import { CookieService } from '../../../../core/services/cookie.service';
-=======
-import { User } from '../../core/interfaces/user.interface';
-import { UserDataService } from '../../core/services/userdata.service';
->>>>>>> master:src/app/components/menu/menu.component.ts
+
 import { Router } from '@angular/router';
 import Cookies from 'js-cookie'
 
