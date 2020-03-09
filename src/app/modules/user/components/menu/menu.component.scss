@@ -1,0 +1,198 @@
+<<<<<<< HEAD:src/app/modules/user/components/menu/menu.component.scss
+@import '../../../../../assets/scss/palette.scss';
+@import url('https://fonts.googleapis.com/css?family=Inconsolata&display=swap');
+.menu-container{
+    position: relative;
+}
+.logotype{
+    font-family: 'Inconsolata', monospace;
+    color: #fff;
+    text-shadow: 1px 1px 3px #000;
+    text-align: right;
+    font-size: 2rem;
+    display: block;
+    width: 150px;
+    margin: 14px;
+}
+
+.top-bar{
+    position: relative;
+    display: flex;
+    z-index: 10000;
+    justify-content: space-between;
+    width: 100vw;
+    height: 60px;
+    background: $color1;
+    .right-section{
+        display: flex;
+        .username{
+            color: #fff;
+            width: 100%;
+            display: block;
+            text-align: right;
+            padding: 6px 0;
+        }
+        .profile-btn{
+            color: #fff;
+            border: 1px solid #fff;
+            min-height: 50px;
+            min-width: 50px;
+            max-height: 65px;
+            max-width: 50px;
+            margin: 5px;
+            padding: 0;
+
+            img{
+                top: 0;
+                width: 100%;
+            }
+        }
+        .sign-in-btn{
+            line-height: 22px;
+            border: 1px solid #fff;
+            height: 25px;
+            top: 30px;
+            position: absolute;
+            bottom: 5px;
+            left: 60px;
+            > span{
+                line-height: 22px;
+                text-align: center;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.container{
+    display: block;
+    overflow: visible;
+    .sidenav{
+        position: absolute;
+        margin-top: 60px;
+        overflow: hidden;
+        background: $color1;
+        visibility: visible;
+        height: calc(100vh - 60px);
+    }
+}
+.side-list{
+    display: flex;
+    flex-direction: column;
+    li{
+        display: inline-grid;
+        border: 1px solid rgb(65, 172, 218);
+        margin: 3px;
+        border-radius: 2px;
+        background: rgb(27, 100, 131);
+        padding: 2px;
+    }
+}
+.version{
+    display: block;
+    width: 100%;
+    text-align:center;
+    color: #fff;
+=======
+@import '../../../assets/scss/palette.scss';
+@import url('https://fonts.googleapis.com/css?family=Caveat+Brush&display=swap&subset=latin-ext');
+.menu-container{
+    position: relative;
+}
+.logotype{
+    font-family: 'Caveat Brush';
+    color: #fff;
+    text-shadow: 1px 1px 3px #000;
+    text-align: right;
+    font-size: 2rem;
+    display: block;
+    width: 150px;
+    margin: 14px;
+}
+
+.top-bar{
+    position: relative;
+    display: flex;
+    z-index: 10000;
+    justify-content: space-between;
+    width: 100vw;
+    height: 60px;
+    background: $color1;
+    .right-section{
+        display: flex;
+        .username{
+            color: #fff;
+            width: 100%;
+            display: block;
+            text-align: right;
+            padding: 6px 0;
+        }
+        .profile-btn{
+            color: #fff;
+            border: 1px solid #fff;
+            min-height: 50px;
+            min-width: 50px;
+            max-height: 65px;
+            max-width: 50px;
+            margin: 5px;
+            padding: 0;
+
+            img{
+                top: 0;
+                width: 100%;
+            }
+        }
+        .sign-in-btn{
+            line-height: 22px;
+            border: 1px solid #fff;
+            height: 25px;
+            top: 30px;
+            position: absolute;
+            bottom: 5px;
+            left: 60px;
+            > span{
+                line-height: 22px;
+                text-align: center;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.container{
+    display: block;
+    overflow: visible;
+    .sidenav{
+        position: absolute;
+        margin-top: 60px;
+        overflow: hidden;
+        background: $color1;
+        visibility: visible;
+        height: calc(100vh - 60px);
+    }
+}
+.side-list{
+    display: flex;
+    flex-direction: column;
+    li{
+        display: inline-grid;
+        border: 1px solid rgb(65, 172, 218);
+        margin: 3px;
+        border-radius: 2px;
+        background: rgb(27, 100, 131);
+        padding: 2px;
+    }
+}
+.version{
+    display: block;
+    width: 100%;
+    text-align:center;
+    color: #fff;
+>>>>>>> master:src/app/components/menu/menu.component.scss
+}

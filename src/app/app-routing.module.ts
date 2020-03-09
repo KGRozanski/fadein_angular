@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+
 import { HomeComponent } from '../app/components/home/home.component';
 import { WelcomeComponent } from '../app/components/welcome/welcome.component';
 import { ProfileComponent } from '../app/modules/user/components/profile/profile.component';
+
+
 import { AuthGuard } from './core/guards/auth.guard';
 import { RegGuard } from './core/guards/reg.guard';
 // import { UserResolver } from './shared/resolvers/user.resolver';
@@ -10,8 +14,8 @@ import { RegGuard } from './core/guards/reg.guard';
 const routes: Routes = [
   {
     path: 'welcome',
-    canActivate: [RegGuard],
-    component: WelcomeComponent
+    component: WelcomeComponent,
+    canActivate: [RegGuard]
   },
   {
     path: 'profile',
@@ -20,8 +24,10 @@ const routes: Routes = [
   },
   {
     path: '',
+    // component: HomeComponent
+    redirectTo: '/profile',
     canActivate: [AuthGuard],
-    component: HomeComponent
+    pathMatch: 'prefix'
   }
 ];
 

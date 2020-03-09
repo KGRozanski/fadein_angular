@@ -1,6 +1,8 @@
 <div class="main-column">
 	<div class="container shadow">
+
 		<div class="avatar" (click)="toggleCrop(false)">
+
 			<div class="hover-layer">
 				<span>
 					<i class="fas fa-edit fa-2x"></i>
@@ -9,18 +11,24 @@
 
 			<i id="avatarPlaceholder" *ngIf="!this.user.isAvatarSet" class="fas fa-user fa-2x"></i>
 			<img class="profile-img" *ngIf="this.user.isAvatarSet" [src]="this.user.avatar" alt="">
+			
 		</div>
+
 		<div class="major-user-info">
+
 			<h1>{{user.username}}</h1>
 			<i class="fas fa-envelope"></i>&nbsp;{{user.mail}}<br>
 			<i class="fas fa-calendar"></i>&nbsp;Data dołączenia: {{user.dateOfRegistration}}
 
 		</div>
+
 		<app-crop [@toggle]="isCropperShown" style="grid-column-start: 1; overflow: hidden; grid-column-end: 3;"
 			(imageUploaded)="reciveImage($event)" (cancel)="toggleCrop($event)"></app-crop>
 		<div class="user-info">
 			<div class="professions">
+
 				<h2>Profesje:</h2>
+
 				<mat-form-field class="example-chip-list">
 					<mat-chip-list #chipList>
 						<mat-chip *ngFor="let profession of professions" [selectable]="selectable"
@@ -38,11 +46,12 @@
 							{{profession}}
 						</mat-option>
 					</mat-autocomplete>
+
 				</mat-form-field>
 			</div>
+			
 			<div class="filmography">
 				<h2>Filmografia:</h2>
-				<br>
 				<ul>
 					<li *ngFor="let production of this.user.filmography">
 						<h3>{{production.title}} <i style="font-weight: 500;">({{production.date}})</i></h3>
