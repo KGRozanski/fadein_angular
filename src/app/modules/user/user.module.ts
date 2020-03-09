@@ -33,4 +33,5 @@ import { ImageCropperComponent } from 'ng2-img-cropper';
     MenuComponent
   ]
 })
+
 export class UserModule { }
