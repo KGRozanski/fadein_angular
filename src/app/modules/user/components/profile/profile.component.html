@@ -59,38 +59,40 @@
 					</li>
 					<br>
 					<!-- Film adder -->
-					<div *ngIf="this.filmAdderVisibilty" class="film-adder">
-						<i class="fas fa-times-circle" (click)="this.filmAdderVisibilty = !this.filmAdderVisibilty"></i>
-						<h3 class="film-adder__title">Dodaj produkcję w której brałeś udział:</h3>
-						<form action="" [formGroup]="productionForm" (ngSubmit)="addProduction()">
-							<div class="film-adder__title-section">
-								<mat-form-field class="film-adder__title">
-									<input matInput formControlName="title" placeholder="Tytuł produkcji" [errorStateMatcher]="matcher" value="">
-									<mat-error *ngIf="productionForm.controls['title'].errors?.pattern">
-										Tytuł filmu maksymalnie 64 znaki
+					<div class="film-adder-wrapper" #filmAdder>
+						<div class="film-adder">
+							<i class="fas fa-times-circle" (click)="filmAdderVisibilityState()"></i>
+							<h3 class="film-adder__title">Dodaj produkcję w której brałeś udział:</h3>
+							<form action="" [formGroup]="productionForm" (ngSubmit)="addProduction()">
+								<div class="film-adder__title-section">
+									<mat-form-field class="film-adder__title">
+										<input matInput formControlName="title" placeholder="Tytuł produkcji" [errorStateMatcher]="matcher" value="">
+										<mat-error *ngIf="productionForm.controls['title'].errors?.pattern">
+											Tytuł filmu maksymalnie 64 znaki
+										</mat-error>
+									</mat-form-field>
+									<mat-form-field class="">
+										<input matInput formControlName="date" placeholder="Data premiery" value="" [errorStateMatcher]="matcher">
+										<mat-error *ngIf="productionForm.controls['date'].errors?.pattern">
+											Rok produkji
+										</mat-error>
+									</mat-form-field>
+								</div>
+								<mat-form-field class="film-adder__description">
+									<textarea matInput formControlName="description" placeholder="Opis" [errorStateMatcher]="matcher"></textarea>
+									<mat-error *ngIf="productionForm.controls['description'].errors?.pattern">
+										Opis filmu maksymalnie 1024 znaki
 									</mat-error>
 								</mat-form-field>
-
-								<mat-form-field class="">
-									<input matInput formControlName="date" placeholder="Data premiery" value="" [errorStateMatcher]="matcher">
-									<mat-error *ngIf="productionForm.controls['date'].errors?.pattern">
-										Rok produkji
-									</mat-error>
-								</mat-form-field>
-							</div>
-							<mat-form-field class="film-adder__description">
-								<textarea matInput formControlName="description" placeholder="Opis" [errorStateMatcher]="matcher"></textarea>
-								<mat-error *ngIf="productionForm.controls['description'].errors?.pattern">
-									Opis filmu maksymalnie 1024 znaki
-								</mat-error>
-							</mat-form-field>
-							<button type="submit" mat-flat-button color="primary" class="profile-btn">
-								<i class="fas fa-plus"></i>&nbsp;Dodaj
-							</button>
-						</form>
+								<button type="submit" mat-flat-button color="primary" class="profile-btn">
+									<i class="fas fa-plus"></i>&nbsp;Dodaj
+								</button>
+							</form>
+						</div>
 					</div>
+					
 					<button *ngIf="!this.filmAdderVisibilty" mat-flat-button color="primary" class="profile-btn"
-						(click)="this.filmAdderVisibilty = !this.filmAdderVisibilty">
+						(click)="filmAdderVisibilityState()">
 						<i class="fas fa-plus"></i>&nbsp;Dodaj film
 					</button>
 				</ul>

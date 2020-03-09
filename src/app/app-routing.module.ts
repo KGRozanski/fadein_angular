@@ -19,6 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'profile',
+    canActivate: [AuthGuard],
     component: ProfileComponent
   },
   {
@@ -26,10 +27,8 @@ const routes: Routes = [
     // component: HomeComponent
     redirectTo: '/profile',
     canActivate: [AuthGuard],
-    pathMatch: 'prefix',
-    // resolve: { user : AuthGuard },
-    
-  },
+    pathMatch: 'prefix'
+  }
 ];
 
 @NgModule({
