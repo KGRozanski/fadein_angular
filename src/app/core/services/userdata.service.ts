@@ -72,6 +72,9 @@ export class UserDataService {
     putUserAvatar(data): Observable<any> {
         return this._sendRequest('PUT', this.APIurl + 'uploadAvatar', data, this.httpOptionsMultipart);
     }
+    putPhoto(data): Observable<any> {
+        return this._sendRequest('PUT', this.APIurl + 'uploadPhoto', data, this.httpOptionsMultipart);
+    }
     updateProfessions(data): Observable<any> {
         return this._sendRequest('POST', this.APIurl + 'updateProfessions', data, this.httpOptions);
     }

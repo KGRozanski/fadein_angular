@@ -24,10 +24,14 @@
 
 		<app-crop [@toggle]="isCropperShown" style="grid-column-start: 1; overflow: hidden; grid-column-end: 3;"
 			(imageUploaded)="reciveImage($event)" (cancel)="toggleCrop($event)"></app-crop>
+			
 		<div class="user-info">
+
 			<div class="professions">
 
 				<h2>Profesje:</h2>
+				<mat-divider></mat-divider>
+				<br>
 
 				<mat-form-field class="example-chip-list">
 					<mat-chip-list #chipList>
@@ -49,13 +53,18 @@
 
 				</mat-form-field>
 			</div>
+
+
 			
 			<div class="filmography">
 				<h2>Filmografia:</h2>
+				<mat-divider></mat-divider>
+				<br>
 				<ul>
 					<li *ngFor="let production of this.user.filmography">
 						<h3>{{production.title}} <i style="font-weight: 500;">({{production.date}})</i></h3>
 						<p>{{production.description}}</p>
+						<mat-divider></mat-divider>
 					</li>
 					<br>
 					<!-- Film adder -->
@@ -97,6 +106,23 @@
 					</button>
 				</ul>
 			</div>
+
+
+			<div class="photos">
+				<h2>Zdjęcia:</h2>
+				<button mat-flat-button color="primary" (click)="addPhoto()">+ Dodaj</button>
+				<mat-divider></mat-divider>
+				<br>
+				<div class="photo-thumbs">
+					<div class="image-item">
+						<div class="color-cap"></div>
+						<img src="http://127.0.0.1:3000/api/avatar" alt="">
+					</div>
+				</div>
+				<input #newPhoto id="newPhoto" type="file" (change)="handleNewPhoto($event)">
+			</div>
+
+
 		</div>
 	</div>
 </div>

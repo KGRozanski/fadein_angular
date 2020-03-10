@@ -9,7 +9,7 @@ import { CropComponent } from '../../shared/tools/components/crop/crop.component
 import { MenuComponent} from '../user/components/menu/menu.component';
 import { RouterModule } from '@angular/router';
 
-import { ImageCropperComponent } from 'ng2-img-cropper';
+import { ImageCropperComponent } from 'ngx-img-cropper';
 
 @NgModule({
   imports: [

@@ -8,17 +8,12 @@ import {
   Renderer2,
   OnInit
 } from '@angular/core';
-import {
-  MatSnackBar
-} from '@angular/material';
-import {
-  ImageCropperComponent,
-  CropperSettings
-} from 'ng2-img-cropper';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   UserDataService
 } from '../../../../core/services/userdata.service';
 import { of } from 'rxjs';
+import { ImageCropperComponent, CropperSettings } from 'ngx-img-cropper';
 
 @Component({
   selector: 'app-crop',

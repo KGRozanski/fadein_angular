@@ -10,6 +10,15 @@
     .user-info{
         padding: 20px;
         grid-column: 1/3;
+        .photos{
+            .photo-thumbs{
+                display: flex;
+                
+            }
+            #newPhoto{
+                display: none;
+            }
+        }
         .professions{
             display: flex;;
             flex-direction: column;
@@ -27,7 +36,6 @@
                 li{
                     margin-bottom: 10px;
                     padding-bottom: 4px;
-                    border-bottom: 1px solid $gray-3;
                 }
                 button{ 
                     position: relative;
