@@ -115,7 +115,7 @@
 				<br>
 				<br>
 				<br>
-				<div class="photo-thumbs">
+				<div class="photo-thumbs" *ngIf="this.user.photos">
 					<div class="image-item" *ngFor="let photo of this.user.photos" (click)="selectPhoto(photo)">
 						<img src='{{this.us.APIurl}}photo/{{this.user.username}}/{{photo}}' alt="">
 					</div>
