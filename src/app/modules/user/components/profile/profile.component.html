@@ -110,19 +110,20 @@
 
 			<div class="photos">
 				<h2>Zdjęcia:</h2>
-				<button mat-flat-button color="primary" (click)="addPhoto()">+ Dodaj</button>
 				<mat-divider></mat-divider>
+				<button mat-flat-button color="primary" (click)="addPhoto()">+ Dodaj</button>
+				<br>
+				<br>
 				<br>
 				<div class="photo-thumbs">
-					<div class="image-item">
-						<div class="color-cap"></div>
-						<img src="http://127.0.0.1:3000/api/avatar" alt="">
+					<div class="image-item" *ngFor="let photo of this.user.photos" (click)="selectPhoto(photo)">
+						<img src='{{this.us.APIurl}}photo/{{this.user.username}}/{{photo}}' alt="">
 					</div>
 				</div>
 				<input #newPhoto id="newPhoto" type="file" (change)="handleNewPhoto($event)">
 			</div>
 
-
+			<app-photo-view *ngIf="this.galleryFlag" [photoPath]="this.selectedPhoto" (click)="photoGalleryClose(false)" ></app-photo-view>
 		</div>
 	</div>
 </div>

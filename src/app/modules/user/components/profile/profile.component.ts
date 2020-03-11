@@ -221,12 +221,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	}
 
 	//Photos
+	private selectedPhoto: string;
+	private galleryFlag: boolean = false;
 	addPhoto() {
 		this.newPhoto.nativeElement.click()
 	}
 	handleNewPhoto(files) {
-		console.log(files['target']['files'])
-	
 		  const fd = new FormData();
 		  fd.append('image', files['target']['files'][0]);
 	  
@@ -235,15 +235,23 @@ export class ProfileComponent implements OnInit, OnDestroy {
 		  this.us.putPhoto(fd).subscribe({
 			next: data => response = data,
 			error: err => {
-			  this.snackBar.open('Error uploading an image!', 'Close', {
-				duration: 3000
+				this.snackBar.open('Error uploading an image!', 'Close', {
+					duration: 3000
 			  });
 			},
 			complete: () => {
-			  this.snackBar.open(response.body['msg'], 'Close', {
-				duration: 3000
-			  });
+				this.user.photos.push(response.body['imgUrl'])
+				this.snackBar.open(response.body['msg'], 'Close', {
+					duration: 3000
+				});
 			}
-		  })
+		})
+	}
+	selectPhoto(url) {
+		this.selectedPhoto = this.us.APIurl + 'photo/' + this.user.username + '/' + url;
+		this.galleryFlag = true;
+	}
+	photoGalleryClose($event) {
+		this.galleryFlag = $event;
 	}
 }

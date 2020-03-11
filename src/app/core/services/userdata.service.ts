@@ -23,7 +23,7 @@ export class UserDataService {
     public USER_STATE = this.userSubject.asObservable();
 
 
-    private APIurl = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/`;
+    public APIurl = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/`;
     private httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',

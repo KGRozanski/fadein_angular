@@ -54,7 +54,6 @@ export class CropComponent implements OnInit {
     this.renderer.listen(this.imgInput, 'change', ($event) => {
       this.fileChangeListener($event);
     })
-    this.renderer.insertBefore(this.cropWraper.nativeElement, this.imgInput, this.cropWraper.nativeElement.firstChild);
   }
 
   fileChangeListener($event) {
