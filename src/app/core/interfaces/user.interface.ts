@@ -4,4 +4,5 @@ export interface User {
     isAvatarSet: Boolean;
     avatar: String;
     filmography: Array<Object>;
+    photos: Array<String>;
 }

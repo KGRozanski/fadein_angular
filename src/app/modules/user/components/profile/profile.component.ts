@@ -5,8 +5,10 @@ import { CropComponent } from '../../../../shared/tools/components/crop/crop.com
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { COMMA,ENTER } from '@angular/cdk/keycodes';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete } from '@angular/material';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable, Subject } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { map,startWith } from 'rxjs/operators';
 
 @Component({
@@ -56,6 +58,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	@ViewChild('auto') matAutocomplete: MatAutocomplete;
 	@ViewChild(CropComponent) crop;
 	@ViewChild('filmAdder') filmAdder: ElementRef;
+	@ViewChild('newPhoto') newPhoto: ElementRef;
 
 	ngOnInit() {
 		//Profession stuff
@@ -77,6 +80,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 		this.selectedProfessions$.subscribe(data => {
 			this.us.updateProfessions(data).subscribe();
 		});
+		
 
 	}
 	
@@ -84,15 +88,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
 		this.selectedProfessions.unsubscribe();
 	}
 
-	constructor(private us: UserDataService, private fb: FormBuilder, private renderer: Renderer2,) {
+	constructor(private us: UserDataService, private fb: FormBuilder, private renderer: Renderer2, public snackBar: MatSnackBar) {
 		this.us.USER_STATE.subscribe((data) => {
 			this.user = data;
 			this.imgData.image = data.avatar;
 			this.professions = this.user['professions'];
-			if(this.professions != undefined) {
-				this.clearUsedProfs()
-			}
 		});
+
+		//Productions
 		this.filteredprofessions = this.professionCtrl.valueChanges.pipe(
 			startWith(null),
 			map((profession: string | null) => profession ? this._filter(profession) : this.allProfessions.slice()));
@@ -137,12 +140,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 		this.isCropperShown = !this.isCropperShown;
 	}
 	//Mat chips for professions
-	clearUsedProfs() {
-		this.professions.forEach((el) => {
-			let indexOfProf = this.allProfestionsForRemoving.indexOf("aktor");
-			this.allProfessions.splice(indexOfProf, 1);
-		});
-	}
 	addProfession(event: MatChipInputEvent): void {
 		// Add profession only when MatAutocomplete is not open
 		// To make sure this does not conflict with OptionSelected Event
@@ -221,5 +218,40 @@ export class ProfileComponent implements OnInit, OnDestroy {
 			this.renderer.setStyle(filmWrapper, 'height', '0');
 			this.filmAdderFlag = false;
 		}
+	}
+
+	//Photos
+	private selectedPhoto: string;
+	private galleryFlag: boolean = false;
+	addPhoto() {
+		this.newPhoto.nativeElement.click()
+	}
+	handleNewPhoto(files) {
+		  const fd = new FormData();
+		  fd.append('image', files['target']['files'][0]);
+	  
+		  let response: any;
+	  
+		  this.us.putPhoto(fd).subscribe({
+			next: data => response = data,
+			error: err => {
+				this.snackBar.open('Error uploading an image!', 'Close', {
+					duration: 3000
+			  });
+			},
+			complete: () => {
+				this.user.photos.push(response.body['imgUrl'])
+				this.snackBar.open(response.body['msg'], 'Close', {
+					duration: 3000
+				});
+			}
+		})
+	}
+	selectPhoto(url) {
+		this.selectedPhoto = this.us.APIurl + 'photo/' + this.user.username + '/' + url;
+		this.galleryFlag = true;
+	}
+	photoGalleryClose($event) {
+		this.galleryFlag = $event;
 	}
 }

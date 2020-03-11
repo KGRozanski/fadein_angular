@@ -8,17 +8,12 @@ import {
   Renderer2,
   OnInit
 } from '@angular/core';
-import {
-  MatSnackBar
-} from '@angular/material';
-import {
-  ImageCropperComponent,
-  CropperSettings
-} from 'ng2-img-cropper';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   UserDataService
 } from '../../../../core/services/userdata.service';
 import { of } from 'rxjs';
+import { ImageCropperComponent, CropperSettings } from 'ngx-img-cropper';
 
 @Component({
   selector: 'app-crop',
@@ -59,7 +54,6 @@ export class CropComponent implements OnInit {
     this.renderer.listen(this.imgInput, 'change', ($event) => {
       this.fileChangeListener($event);
     })
-    this.renderer.insertBefore(this.cropWraper.nativeElement, this.imgInput, this.cropWraper.nativeElement.firstChild);
   }
 
   fileChangeListener($event) {

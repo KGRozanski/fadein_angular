@@ -7,9 +7,10 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CropComponent } from '../../shared/tools/components/crop/crop.component';
 import { MenuComponent} from '../user/components/menu/menu.component';
+import { PhotoViewComponent } from '../../shared/tools/components/photo-view/photo-view.component';
 import { RouterModule } from '@angular/router';
 
-import { ImageCropperComponent } from 'ng2-img-cropper';
+import { ImageCropperComponent } from 'ngx-img-cropper';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { ImageCropperComponent } from 'ng2-img-cropper';
     MenuComponent,
     ProfileComponent,
     CropComponent,
-    ImageCropperComponent
+    ImageCropperComponent,
+    PhotoViewComponent
   ],
   exports: [
     RegisterComponent,
