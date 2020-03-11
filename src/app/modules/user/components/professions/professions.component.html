@@ -1,0 +1,25 @@
+<mat-card>
+  <h2>Profesje:</h2>
+  <mat-divider></mat-divider>
+  <br>
+
+  <mat-form-field>
+    <mat-chip-list #chipList>
+      <mat-chip *ngFor="let profession of professions" [selectable]="selectable"
+        [removable]="removable" (removed)="removeProfession(profession)">
+        {{profession}}
+        <mat-icon matChipRemove *ngIf="removable">close</mat-icon>
+      </mat-chip>
+      <input placeholder="Dodaj swoje profesje..." #professionInput [formControl]="professionCtrl"
+        [matAutocomplete]="auto" [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+        (matChipInputTokenEnd)="addProfession($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addSelectedProfession($event)">
+      <mat-option *ngFor="let profession of filteredprofessions | async" [value]="profession">
+        {{profession}}
+      </mat-option>
+    </mat-autocomplete>
+
+  </mat-form-field>
+</mat-card>

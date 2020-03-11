@@ -11,6 +11,8 @@ import { PhotoViewComponent } from '../../shared/tools/components/photo-view/pho
 import { RouterModule } from '@angular/router';
 
 import { ImageCropperComponent } from 'ngx-img-cropper';
+import { ProfessionsComponent } from './components/professions/professions.component';
+import { FilmographyComponent } from './components/filmography/filmography.component';
 
 @NgModule({
   imports: [
@@ -26,7 +28,9 @@ import { ImageCropperComponent } from 'ngx-img-cropper';
     ProfileComponent,
     CropComponent,
     ImageCropperComponent,
-    PhotoViewComponent
+    PhotoViewComponent,
+    ProfessionsComponent,
+    FilmographyComponent
   ],
   exports: [
     RegisterComponent,
