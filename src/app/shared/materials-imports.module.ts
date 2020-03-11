@@ -9,29 +9,28 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
+import {MatCardModule} from '@angular/material/card';
+
+let modules = [
+  MatButtonModule,
+  MatInputModule,
+  MatCheckboxModule,
+  MatSidenavModule,
+  MatSnackBarModule,
+  MatChipsModule,
+  MatIconModule,
+  MatAutocompleteModule,
+  MatDividerModule,
+  MatCardModule
+]
+
 
 @NgModule({
   imports: [
-    MatButtonModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatSidenavModule,
-    MatSnackBarModule,
-    MatChipsModule,
-    MatIconModule,
-    MatAutocompleteModule,
-    MatDividerModule
+    modules
   ],
   exports: [
-    MatButtonModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatSidenavModule,
-    MatSnackBarModule,
-    MatChipsModule,
-    MatIconModule,
-    MatAutocompleteModule,
-    MatDividerModule
+    modules
   ]
 })
 
