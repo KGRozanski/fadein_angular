@@ -3,8 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
 
 const ORIGIN = 'http://127.0.0.1:4200';
 const HOSTNAME = '127.0.0.1';

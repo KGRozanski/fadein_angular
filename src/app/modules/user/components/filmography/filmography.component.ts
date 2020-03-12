@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserDataService } from 'src/app/core/services/userdata.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-filmography',
@@ -14,7 +15,7 @@ export class FilmographyComponent implements OnInit {
   @ViewChild('filmAdder') filmAdder: ElementRef;
   @Input('filmography') productions = [];
   
-  constructor(private fb: FormBuilder, private us: UserDataService, private renderer: Renderer2) {
+  constructor(private fb: FormBuilder, public snackBar: MatSnackBar, private us: UserDataService, private renderer: Renderer2) {
     //Productions
 
 				//Production form
@@ -24,7 +25,7 @@ export class FilmographyComponent implements OnInit {
 					Validators.required,
 					Validators.minLength(3),
 					Validators.maxLength(64),
-					Validators.pattern('^[a-zA-Z0-9ąęśćłóźżń @.]+$')
+					Validators.pattern('^[a-zA-Z0-9ąęśćłóźżń @.\']+$')
 				]            
 
 			],
@@ -40,7 +41,7 @@ export class FilmographyComponent implements OnInit {
 				[
 					Validators.minLength(0),
 					Validators.maxLength(1024),
-					Validators.pattern('^[a-zA-Z0-9ąęśćłóźżń ,@.]+$')
+					Validators.pattern('^[a-zA-Z0-9ąęśćłóźżń ,@.\'\(\)]+$')
 				]
 			]
 		})
@@ -66,9 +67,15 @@ export class FilmographyComponent implements OnInit {
 				description: this.productionForm.get('description').value
 			};
 			this._productionsReq(newProduction).then((data) => {
-				console.log(data)
+				this.productions.push(newProduction);
+				this.snackBar.open(data.body['msg'], 'Close', {
+					duration: 3000
+				});
+			}).catch((err) => {
+				this.snackBar.open('Error uploading film!', 'Close', {
+					duration: 3000
+				  });
 			})
-			this.productions.push(newProduction);
 		}
 	}
 
