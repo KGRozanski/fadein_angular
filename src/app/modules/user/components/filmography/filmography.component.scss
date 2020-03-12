@@ -25,7 +25,7 @@ ul {
             .film-adder-title-section{
                 display: grid;
                 grid-template-columns: repeat(5, 1fr);
-                grid-template-rows: 1fr 1fr;
+                grid-template-rows: 1fr auto;
 
                 .film-adder-title { 
                     grid-area: 1 / 1 / 2 / 5; 

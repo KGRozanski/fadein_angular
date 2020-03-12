@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { ImageCropperComponent } from 'ngx-img-cropper';
 import { ProfessionsComponent } from './components/professions/professions.component';
 import { FilmographyComponent } from './components/filmography/filmography.component';
+import { PhotosComponent } from './components/photos/photos.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { FilmographyComponent } from './components/filmography/filmography.compo
     ImageCropperComponent,
     PhotoViewComponent,
     ProfessionsComponent,
-    FilmographyComponent
+    FilmographyComponent,
+    PhotosComponent
   ],
   exports: [
     RegisterComponent,

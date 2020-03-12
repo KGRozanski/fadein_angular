@@ -3,38 +3,37 @@
     <mat-divider></mat-divider>
     <br>
     <ul>
+        <li *ngIf="!this.productions"><i>Nie dodano żadnych filmów</i></li>
         <li *ngFor="let production of this.productions">
             <h3>{{production.title}} <i style="font-weight: 500;">({{production.date}})</i></h3>
             <p>{{production.description}}</p>
         </li>
-
-        <!-- Film adder -->
-        <div class="film-adder">
-            <mat-divider></mat-divider>
-            <br>
-
-            <form action="" [formGroup]="productionForm" (ngSubmit)="addProduction()">
-                <div class="film-adder-title-section">
-
-                    <mat-form-field class="film-adder-title">
-                        <input matInput formControlName="title" placeholder="Tytuł produkcji" [errorStateMatcher]="matcher" value="">
-					</mat-form-field>
-
-                    <mat-form-field class="film-adder-year">
-                        <input matInput formControlName="date" placeholder="Data premiery" value="" [errorStateMatcher]="matcher">
-					</mat-form-field>
-
-					<mat-form-field class="film-adder-description">
-						<textarea matInput formControlName="description" placeholder="Opis" [errorStateMatcher]="matcher"></textarea>
-					</mat-form-field>
-				</div>
-				
-				<button class="film-adder-btn" type="submit" mat-flat-button color="primary" >
-					<i class="fas fa-plus"></i>&nbsp;Dodaj
-				</button>
-
-            </form>
-        </div>
-
     </ul>
+            <!-- Film adder -->
+    <div class="film-adder">
+        <mat-divider></mat-divider>
+        <br>
+
+        <form action="" [formGroup]="productionForm" (ngSubmit)="addProduction()">
+            <div class="film-adder-title-section">
+
+                <mat-form-field class="film-adder-title">
+                    <input matInput formControlName="title" placeholder="Tytuł produkcji" [errorStateMatcher]="matcher" value="">
+                </mat-form-field>
+
+                <mat-form-field class="film-adder-year">
+                    <input matInput formControlName="date" placeholder="Data premiery" value="" [errorStateMatcher]="matcher">
+                </mat-form-field>
+
+                <mat-form-field class="film-adder-description">
+                    <textarea matInput formControlName="description" placeholder="Opis" [errorStateMatcher]="matcher"></textarea>
+                </mat-form-field>
+            </div>
+            
+            <button class="film-adder-btn" type="submit" mat-flat-button color="primary" >
+                <i class="fas fa-plus"></i>&nbsp;Dodaj
+            </button>
+
+        </form>
+    </div>
 </mat-card>
