@@ -9,6 +9,7 @@ import { ProfileComponent } from '../app/modules/user/components/profile/profile
 
 import { AuthGuard } from './core/guards/auth.guard';
 import { RegGuard } from './core/guards/reg.guard';
+import { SearchComponent } from './components/search/search.component';
 // import { UserResolver } from './shared/resolvers/user.resolver';
 
 const routes: Routes = [
@@ -23,9 +24,14 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
+    path: 'search',
+    canActivate: [AuthGuard],
+    component: SearchComponent
+  },
+  {
     path: '',
-    // component: HomeComponent
-    redirectTo: '/profile',
+    // component: HomeComponent,
+    redirectTo: '/search',
     canActivate: [AuthGuard],
     pathMatch: 'prefix'
   }

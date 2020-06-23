@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Router } from '@angular/router';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
 @Injectable({
   providedIn: 'root'

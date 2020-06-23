@@ -1,19 +1,10 @@
 
-@import '../../../../../assets/scss/palette.scss';
-@import url('https://fonts.googleapis.com/css?family=Inconsolata&display=swap');
+@import '../../../assets/scss/palette.scss';
+@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
 .menu-container{
     position: relative;
 }
-.logotype{
-    font-family: 'Inconsolata', monospace;
-    color: #fff;
-    text-shadow: 1px 1px 3px #000;
-    text-align: right;
-    font-size: 2rem;
-    display: block;
-    width: 150px;
-    margin: 14px;
-}
+
 
 .top-bar{
     position: relative;
@@ -63,6 +54,30 @@
                 left: 0;
                 width: 100%;
             }
+        }
+    }
+    .search{
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: 50%;
+        right: 26px;
+        transform: translateY(-50%);
+        background-color: rgba(255,255,255,.8);
+        border-radius: 20px;
+        &:hover{
+            background-color: rgba(255, 255, 255, 0.521);
+            border: 1px solid rgb(0, 98, 122);
+            cursor: pointer;
+        }
+
+        i{
+            color: $color1;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
         }
     }
 }

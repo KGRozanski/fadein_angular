@@ -73,8 +73,8 @@ export class FilmographyComponent implements OnInit {
 				});
 			}).catch((err) => {
 				this.snackBar.open('Error uploading film!', 'Close', {
-					duration: 3000
-				  });
+                    duration: 3000
+                });
 			})
 		}
 	}

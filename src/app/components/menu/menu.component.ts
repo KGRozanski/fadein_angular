@@ -1,10 +1,10 @@
-import { environment } from '../../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Component } from '@angular/core';
-import { User } from '../../../../core/interfaces/user.interface';
-import { UserDataService } from '../../../../core/services/userdata.service';
+import { User } from '../../core/interfaces/user.interface';
+import { UserDataService } from '../../core/services/userdata.service';
 
 import { Router } from '@angular/router';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-menu',
@@ -17,13 +17,13 @@ export class MenuComponent {
   private loginFormVisible = false;
   private user: User;
 
-  constructor(private us: UserDataService, private router: Router) {
-    this.us.USER_STATE.subscribe((data: User) => this.user = data);
+  constructor(private UDS: UserDataService, private router: Router) {
+    this.UDS.USER_STATE.subscribe((data: User) => this.user = data);
   }
 
   logOut() {
     Cookies.remove('token');
-    this.us.userSubject.next(<User> {});
+    this.UDS.userSubject.next(<User> {});
     this.router.navigate(['/welcome']);
   }
 

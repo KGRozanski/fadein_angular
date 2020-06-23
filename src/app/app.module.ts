@@ -17,6 +17,8 @@ import { UserModule } from './modules/user/user.module';
 import { UserDataService } from './core/services/userdata.service';
 import { RegGuard } from './core/guards/reg.guard';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SearchComponent } from './components/search/search.component';
+import { SafePipe } from './core/pipes/safepipe/safepipe.component';
 
 // import { UserResolver } from './shared/resolvers/user.resolver';
 
@@ -25,7 +27,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     HomeComponent,
     WelcomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    SearchComponent,
+    SafePipe
   ],
   imports: [
     ReactiveFormsModule,
@@ -49,4 +53,4 @@ import { ReactiveFormsModule } from '@angular/forms';
   bootstrap: [AppComponent]
 })
 export class AppModule {}
- 
+
