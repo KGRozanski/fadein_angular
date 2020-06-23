@@ -42,5 +42,9 @@
 			</div>
 		<app-login *ngIf="this.loginFormVisible" class="shadow" (visibilityState)="loginVisibilityState($event)"></app-login>
 		<div class="logotype">Fade In:</div>
+		<div class="search" [routerLink]="['/search']">
+			<i class="fas fa-search"></i>
+		</div>
+		
 	</div>
 </div>

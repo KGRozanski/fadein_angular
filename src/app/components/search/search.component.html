@@ -1,0 +1,23 @@
+<div class="main-column">
+	<div class="container shadow">
+    <h1>Szukaj</h1>
+    <div>
+      <form class="searchForm" [formGroup]="searchForm">
+        <mat-form-field>
+          <input matInput placeholder="Wyszukiwanie użytkowników" formControlName="phrase" [errorStateMatcher]="matcher">
+          <!-- <mat-error *ngIf="logForm.controls['login'].errors?.required">
+            Login lub email jest <strong>wymagany</strong>
+          </mat-error> -->
+        </mat-form-field>
+      </form>
+      <ul>
+        <li *ngFor="let line of searchResponse">
+          
+          <img [src]="photoUrl(line) | safe" />
+          {{line}}
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+</div>

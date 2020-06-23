@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 const ORIGIN = 'http://127.0.0.1:4200';
-const HOSTNAME = '127.0.0.1';
 const PROTOCOL = 'http';
 const PORT = 3000;
 
@@ -20,8 +19,7 @@ export class UserDataService {
     public userSubject = new BehaviorSubject<User>(this.user);
     public USER_STATE = this.userSubject.asObservable();
 
-
-    public APIurl = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/`;
+    public APIurl = `${PROTOCOL}://${window.location.hostname}:${PORT}/api/`;
     private httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
@@ -35,13 +33,13 @@ export class UserDataService {
         }),
         withCredentials: true
     };
-   
+
 
     makeLogin() {
         this.getUserProfile().subscribe((data) => {
             if(data.body) {
                 this.user = data.body;
-                this.user.avatar = `${PROTOCOL}://${HOSTNAME}:${PORT}/api/avatar`;
+                this.user.avatar = `${PROTOCOL}://${window.location.hostname}:${PORT}/api/avatar`;
                 this.userSubject.next(this.user);
                 this.router.navigate(['/']);
                 console.log(this.user)
@@ -78,5 +76,8 @@ export class UserDataService {
     }
     addProduction(data): Promise<any> {
         return this._sendRequest('POST', this.APIurl + 'addProduction', data, this.httpOptions).toPromise();
+    }
+    search(type, phrase): Observable<any> {
+        return this._sendRequest('GET', this.APIurl + 'search/' + type + '/' + phrase, null, this.httpOptions);
     }
 }
