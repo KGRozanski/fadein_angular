@@ -1,12 +1,14 @@
 @import '../../../../../assets/scss/palette.scss';
-.img-croper-wrapper{
+
+.img-croper-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: rgb(211, 211, 211);
     padding-bottom: 20px;
 }
-.custom-input{
+
+.custom-input {
     padding: 10px;
 }
 
@@ -14,6 +16,6 @@ canvas {
     border: 2px solid $color1;
 }
 
-input{
+input {
     margin: 20px 0;
 }

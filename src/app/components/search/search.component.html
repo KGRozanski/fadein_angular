@@ -1,23 +1,35 @@
 <div class="main-column">
 	<div class="container shadow">
-    <h1>Szukaj</h1>
-    <div>
+    <h1 class="title">Szukaj</h1>
+    <div class="form">
       <form class="searchForm" [formGroup]="searchForm">
-        <mat-form-field>
-          <input matInput placeholder="Wyszukiwanie użytkowników" formControlName="phrase" [errorStateMatcher]="matcher">
+        <mat-form-field style="width: 100%;">
+          <input (input)="onChange($event)" matInput placeholder="Wyszukiwanie użytkowników" formControlName="phrase" [errorStateMatcher]="matcher">
           <!-- <mat-error *ngIf="logForm.controls['login'].errors?.required">
             Login lub email jest <strong>wymagany</strong>
           </mat-error> -->
         </mat-form-field>
       </form>
+    </div>
+
+    <div class="results">
+      <mat-progress-spinner
+          *ngIf="spinner"
+          class="spinner"
+          [color]="color"
+          [mode]="mode"
+          [value]="value">
+      </mat-progress-spinner>
       <ul>
-        <li *ngFor="let line of searchResponse">
-          
-          <img [src]="photoUrl(line) | safe" />
-          {{line}}
+        <li *ngFor="let line of searchResponse | filterPipe: phrase" >
+          <div (click)="navigate(line)" style="display: block; width: 100%;height: 100%;">
+            <img [src]="photoUrl(line)"  />
+            <div class="username" >
+              {{line}}
+            </div>
+          </div>
         </li>
       </ul>
-      
     </div>
   </div>
 </div>

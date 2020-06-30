@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialsImportsModule } from '../../shared/materials-imports.module';
+import { MaterialsImportsModule } from '../../shared/modules/materials-imports.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from '../../components/login/login.component';
@@ -14,13 +14,15 @@ import { ImageCropperComponent } from 'ngx-img-cropper';
 import { ProfessionsComponent } from './components/professions/professions.component';
 import { FilmographyComponent } from './components/filmography/filmography.component';
 import { PhotosComponent } from './components/photos/photos.component';
+import { SetImageDirective } from 'src/app/core/directives/set-image.directive';
+
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialsImportsModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
     RegisterComponent,
@@ -32,7 +34,8 @@ import { PhotosComponent } from './components/photos/photos.component';
     PhotoViewComponent,
     ProfessionsComponent,
     FilmographyComponent,
-    PhotosComponent
+    PhotosComponent,
+    SetImageDirective
   ],
   exports: [
     RegisterComponent,

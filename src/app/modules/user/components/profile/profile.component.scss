@@ -21,6 +21,7 @@ app-crop{
 }
 .major-user-info{
     padding: 10px;
+    position: relative;
 }
 .avatar{
     position: relative;
@@ -64,4 +65,7 @@ app-crop{
         font-weight: bold;
         font-size: 2em;
     }
+}
+#submitPhoto{
+    display: none;
 }

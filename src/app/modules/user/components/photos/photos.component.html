@@ -18,7 +18,7 @@
     <i class="fas fa-plus"></i> Dodaj
   </button>
 
-  <input #newPhoto id="newPhoto" type="file" (change)="handleNewPhoto($event)">
+  <input #newPhoto id="newPhoto" type="file" (change)="handleNewPhoto($event, 'normal')">
 
   <app-photo-view *ngIf="this.galleryFlag" [photoPath]="this.selectedPhoto" (click)="photoGalleryClose(false)">
   </app-photo-view>
