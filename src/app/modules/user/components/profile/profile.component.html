@@ -1,43 +1,44 @@
 <div class="main-column">
-	<div class="container shadow">
+    <div class="container shadow">
+        <div class="avatar" (click)="toggleCrop(false)">
+            <div class="hover-layer">
+                <span>
+                    <i class="fas fa-edit fa-2x"></i>
+                </span>
+            </div>
 
-		<div class="avatar" (click)="toggleCrop(false)">
+            <i id="avatarPlaceholder" *ngIf="!this.user.isAvatarSet" class="fas fa-user fa-2x"></i>
+            <img class="profile-img" *ngIf="this.user.isAvatarSet" [src]="this.user.avatar" alt="" />
+        </div>
 
-			<div class="hover-layer">
-				<span>
-					<i class="fas fa-edit fa-2x"></i>
-				</span>
-			</div>
+        <div class="major-user-info"  appSetImg >
+            <h1>{{ user.username }}</h1>
+            <i class="fas fa-envelope"></i>&nbsp;{{ user.mail }}<br />
+            <i class="fas fa-calendar"></i>&nbsp;Data dołączenia:
+            {{ user.dateOfRegistration }}
 
-			<i id="avatarPlaceholder" *ngIf="!this.user.isAvatarSet" class="fas fa-user fa-2x"></i>
-			<img class="profile-img" *ngIf="this.user.isAvatarSet" [src]="this.user.avatar" alt="">
-			
-		</div>
+            <button mat-flat-button color="primary" (click)="submitPhoto()"
+                style="position: absolute; right: 0; top: 0; min-width: 35px; padding:0;">
 
-		<div class="major-user-info">
+                <i class="far fa-edit"></i>
+            </button>
 
-			<h1>{{user.username}}</h1>
-			<i class="fas fa-envelope"></i>&nbsp;{{user.mail}}<br>
-			<i class="fas fa-calendar"></i>&nbsp;Data dołączenia: {{user.dateOfRegistration}}
+            <input #backgroundPhoto id="submitPhoto" type="file" (change)="this.upload.addNewPhoto($event, 'background')" />
+        </div>
 
-		</div>
+        <app-crop [@toggle]="isCropperShown" style="grid-column-start: 1; overflow: hidden; grid-column-end: 3;"
+            (imageUploaded)="reciveImage($event)" (cancel)="toggleCrop($event)"></app-crop>
 
-		<app-crop [@toggle]="isCropperShown" style="grid-column-start: 1; overflow: hidden; grid-column-end: 3;"
-			(imageUploaded)="reciveImage($event)" (cancel)="toggleCrop($event)"></app-crop>
-			
-		<div class="user-info">
+        <div class="user-info">
+            <app-professions [professions]="this.professions"></app-professions>
 
-			<app-professions [professions]="this.professions"></app-professions>
+            <br />
 
-			<br>
+            <app-filmography [filmography]="this.user['filmography']"></app-filmography>
 
-			<app-filmography [filmography]="this.user['filmography']"></app-filmography>
+            <br />
 
-			<br>
-
-			<app-photos [user]="this.user" (photoAddEvent)="addPhoto($event)"></app-photos>
-
-			
-		</div>
-	</div>
+            <app-photos [user]="this.user" (photoAddEvent)="addPhoto($event)"></app-photos>
+        </div>
+    </div>
 </div>

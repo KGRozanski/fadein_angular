@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 let modules = [
   MatButtonModule,
@@ -21,8 +22,9 @@ let modules = [
   MatIconModule,
   MatAutocompleteModule,
   MatDividerModule,
-  MatCardModule
-]
+  MatCardModule,
+  MatProgressSpinnerModule
+];
 
 
 @NgModule({

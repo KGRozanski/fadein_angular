@@ -1,3 +1,21 @@
 .wrapper{
     padding-top: 60px;
 }
+.spinner-wrapper{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.2);
+    z-index: 1000000;
+}
+.spinner{
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

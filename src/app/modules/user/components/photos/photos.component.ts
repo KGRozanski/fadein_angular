@@ -1,67 +1,68 @@
 import {
-	Component,
-	OnInit,
-	ViewChild,
-	ElementRef,
-	Input,
-	Output,
-	EventEmitter
+    Component,
+    OnInit,
+    ViewChild,
+    ElementRef,
+    Input,
+    Output,
+    EventEmitter,
 } from '@angular/core';
 import { UserDataService } from 'src/app/core/services/userdata.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/core/interfaces/user.interface';
-
+import { UploadPhotoService } from 'src/app/core/services/upload-photo.service';
+import { LogService } from 'src/app/core/services/log.service';
+import { UrlService } from 'src/app/core/services/url.service';
+import { first } from 'rxjs/operators';
 
 @Component({
-	selector: 'app-photos',
-	templateUrl: './photos.component.html',
-	styleUrls: ['./photos.component.scss']
+    selector: 'app-photos',
+    templateUrl: './photos.component.html',
+    styleUrls: ['./photos.component.scss'],
 })
 export class PhotosComponent implements OnInit {
-	private selectedPhoto: string;
-	private galleryFlag: boolean = false;
+    private selectedPhoto: string;
+    private galleryFlag: boolean = false;
 
-	@ViewChild('newPhoto') newPhoto: ElementRef;
-	@Input('user') user: User;
-	@Output() photoAddEvent = new EventEmitter<string>();
+    @ViewChild('newPhoto') newPhoto: ElementRef;
+    @Input('user') user: User;
+    @Output() photoAddEvent = new EventEmitter<string>();
 
-	constructor(private us: UserDataService, public snackBar: MatSnackBar) {}
+    constructor(
+        private us: UserDataService,
+        private upload: UploadPhotoService,
+        private log: LogService,
+        private url: UrlService
+    ) {}
 
-	ngOnInit() {}
+    ngOnInit() {}
 
+    addPhoto() {
+        this.newPhoto.nativeElement.click();
+    }
+    /*
+     *
+     *	New photo
+     *
+     */
+    handleNewPhoto($event) {
+        this.upload.addNewPhoto($event, 'normal');
 
-	addPhoto() {
-		this.newPhoto.nativeElement.click()
-	}
-	handleNewPhoto(files) {
-		const fd = new FormData();
-		fd.append('image', files['target']['files'][0]);
+        this.upload.imgAddedEventCallback$.pipe(first()).subscribe((data) => {
+            this.emit(data);
+        });
+    }
 
-		let response: any;
+    emit(event) {
+        this.photoAddEvent.emit(event);
+    }
 
-		this.us.putPhoto(fd).subscribe({
-			next: data => response = data,
-			error: err => {
-				this.snackBar.open('Error uploading an image!', 'Close', {
-					duration: 3000
-				});
-			},
-			complete: () => {
-				this.photoAddEvent.emit(response.body['imgUrl']);
-				this.snackBar.open(response.body['msg'], 'Close', {
-					duration: 3000
-				});
-			}
-		})
-	}
-	selectPhoto(url) {
-		this.selectedPhoto = this.us.APIurl + 'photo/' + this.user.username + '/' + url;
-		this.galleryFlag = true;
-	}
+    selectPhoto(url) {
+        this.selectedPhoto =
+            this.us.APIurl + 'photo/' + this.user.username + '/' + url;
+        this.galleryFlag = true;
+    }
 
-	photoGalleryClose($event) {
-		this.galleryFlag = $event;
-	}
-
-
+    photoGalleryClose($event) {
+        this.galleryFlag = $event;
+    }
 }

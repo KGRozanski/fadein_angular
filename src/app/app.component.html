@@ -1,4 +1,13 @@
 <app-header></app-header>
+<div class="spinner-wrapper" *ngIf="loading">
+    <mat-progress-spinner
+    [color]="color"
+    [mode]="mode"
+    [value]="value"
+    class="spinner">
+    </mat-progress-spinner>
+</div>
+
 <div class="wrapper">
     <router-outlet></router-outlet>
 </div>

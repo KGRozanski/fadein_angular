@@ -10,9 +10,18 @@ import { ProfileComponent } from '../app/modules/user/components/profile/profile
 import { AuthGuard } from './core/guards/auth.guard';
 import { RegGuard } from './core/guards/reg.guard';
 import { SearchComponent } from './components/search/search.component';
+import { UserComponent } from './components/user/user.component';
+import { ProfileResolver } from './core/resolvers/profile.resolver';
 // import { UserResolver } from './shared/resolvers/user.resolver';
 
 const routes: Routes = [
+  {
+    path: 'user/:id',
+    component: UserComponent,
+    canActivate: [AuthGuard],
+    resolve: {profileData: ProfileResolver},
+    pathMatch: 'prefix'
+  },
   {
     path: 'welcome',
     component: WelcomeComponent,
@@ -20,25 +29,25 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    canActivate: [AuthGuard],
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'search',
-    canActivate: [AuthGuard],
-    component: SearchComponent
+    component: SearchComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '',
     // component: HomeComponent,
-    redirectTo: '/search',
+    redirectTo: 'profile',
     canActivate: [AuthGuard],
     pathMatch: 'prefix'
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { enableTracing: false})],
+  imports: [RouterModule.forRoot(routes, { enableTracing: false, useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
