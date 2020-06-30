@@ -6,6 +6,7 @@
 }
 
 
+
 .top-bar{
     position: relative;
     display: flex;
@@ -56,30 +57,7 @@
             }
         }
     }
-    .search{
-        width: 40px;
-        height: 40px;
-        position: absolute;
-        top: 50%;
-        right: 16px;
-        transform: translateY(-50%);
-        background-color: rgba(255,255,255,.8);
-        border-radius: 20px;
-        &:hover{
-            background-color: rgba(255, 255, 255, 0.521);
-            border: 1px solid rgb(0, 98, 122);
-            cursor: pointer;
-        }
 
-        i{
-            color: $color1;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.5rem;
-        }
-    }
 }
 
 .container{

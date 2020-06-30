@@ -1,44 +1,60 @@
 <div class="main-column">
-    <div class="container shadow">
-        <div class="avatar" (click)="toggleCrop(false)">
-            <div class="hover-layer">
-                <span>
-                    <i class="fas fa-edit fa-2x"></i>
-                </span>
+
+    <div class="container">
+        <div class="profile-card">
+            <div class="background-photo" appSetImg>
+
+                <button mat-flat-button color="primary" (click)="submitPhoto()"
+                    style="position: absolute; right: 0; top: 0; min-width: 35px; padding:0; margin: 5px;">
+    
+                    <i class="far fa-edit"></i>
+                </button>
+    
+                <input #backgroundPhoto id="submitPhoto" type="file"
+                
+                    (change)="this.upload.addNewPhoto($event, 'background')" />
             </div>
 
-            <i id="avatarPlaceholder" *ngIf="!this.user.isAvatarSet" class="fas fa-user fa-2x"></i>
-            <img class="profile-img" *ngIf="this.user.isAvatarSet" [src]="this.user.avatar" alt="" />
+            <div class="user-info">
+                <div class="avatar" (click)="toggleCrop(false)">
+                    <div class="hover-layer">
+                        <span>
+                            <i class="fas fa-edit fa-2x"></i>
+                        </span>
+                    </div>
+    
+                    <i id="avatarPlaceholder" *ngIf="!this.user.isAvatarSet" class="fas fa-user fa-2x"></i>
+                    <img class="profile-img" *ngIf="this.user.isAvatarSet" [src]="this.user.avatar" alt="" />
+                </div>
+                <h1>{{ user.username }}</h1>
+            </div>
+            <div class="user-about">
+                <i class="fas fa-envelope"></i>&nbsp;{{ user.mail }}<br />
+                <i class="fas fa-calendar"></i>&nbsp;Data dołączenia:
+                {{ user.dateOfRegistration }}
+            </div>
+            
         </div>
+        
 
-        <div class="major-user-info"  appSetImg >
-            <h1>{{ user.username }}</h1>
-            <i class="fas fa-envelope"></i>&nbsp;{{ user.mail }}<br />
-            <i class="fas fa-calendar"></i>&nbsp;Data dołączenia:
-            {{ user.dateOfRegistration }}
 
-            <button mat-flat-button color="primary" (click)="submitPhoto()"
-                style="position: absolute; right: 0; top: 0; min-width: 35px; padding:0;">
+    <app-crop [@toggle]="isCropperShown" style="grid-column-start: 1; overflow: hidden; grid-column-end: 3;"
+        (imageUploaded)="reciveImage($event)" (cancel)="toggleCrop($event)"></app-crop>
 
-                <i class="far fa-edit"></i>
-            </button>
 
-            <input #backgroundPhoto id="submitPhoto" type="file" (change)="this.upload.addNewPhoto($event, 'background')" />
-        </div>
+        <app-professions [professions]="this.professions"></app-professions>
 
-        <app-crop [@toggle]="isCropperShown" style="grid-column-start: 1; overflow: hidden; grid-column-end: 3;"
-            (imageUploaded)="reciveImage($event)" (cancel)="toggleCrop($event)"></app-crop>
-
-        <div class="user-info">
-            <app-professions [professions]="this.professions"></app-professions>
-
-            <br />
-
-            <app-filmography [filmography]="this.user['filmography']"></app-filmography>
-
-            <br />
-
-            <app-photos [user]="this.user" (photoAddEvent)="addPhoto($event)"></app-photos>
-        </div>
+        <br />
+    
+        <app-filmography [filmography]="this.user['filmography']"></app-filmography>
+    
+        <br />
+    
+        <app-photos [user]="this.user" (photoAddEvent)="addPhoto($event)"></app-photos>
     </div>
+
+
+
+
+
 </div>
