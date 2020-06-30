@@ -2,11 +2,8 @@
 	<mat-drawer-container class="container" autosize>
 		<mat-drawer #snav class="sidenav shadow-lg" mode="side">
 			<ul class="side-list">
-				<li><button
-					mat-flat-button color="primary"
-					(click)="snav.toggle()"
-					[routerLink]="['']"
-					routerLinkActive="router-link-active">🏡&nbsp;Główna</button>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()" [routerLink]="['']"
+						routerLinkActive="router-link-active">🏡&nbsp;Główna</button>
 				</li>
 				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📫&nbsp;Wiadomości</button></li>
 				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📅&nbsp;Kalendarz</button></li>
@@ -16,35 +13,42 @@
 				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📜&nbsp;Edytor</button></li>
 				<li><button mat-flat-button color="primary" (click)="snav.toggle()">🛒&nbsp;Targowisko</button></li>
 				<li><button mat-flat-button color="primary" (click)="snav.toggle()">📉&nbsp;Statystyki</button></li>
-				<li><button
-					mat-flat-button color="primary"
-					(click)="snav.toggle()"
-					[routerLink]="['/profile']"
-					routerLinkActive="router-link-active" >🙂&nbsp;Mój profil</button>
+				<li><button mat-flat-button color="primary" (click)="snav.toggle()" [routerLink]="['/profile']"
+						routerLinkActive="router-link-active">🙂&nbsp;Mój profil</button>
 				</li>
 			</ul>
 			<span class="version">v. {{version}}∝</span>
 		</mat-drawer>
 	</mat-drawer-container>
 	<div class="top-bar shadow">
-			<div class="right-section">
-				<div class="userPhoto">
-					<button mat-flat-button color="primary" class="profile-btn" (click)="snav.toggle()">
-						<i *ngIf="!this.user.isAvatarSet" class="fas fa-user fa-2x"></i>
-						<img *ngIf="this.user.isAvatarSet" [src]="this.user.avatar" alt="">
-					</button>
-				</div>
-				<div class="userInfo">
-					<span class="username"><strong>{{this.user.username}}</strong></span><br>
-					<button mat-flat-button color="warn" class="sign-in-btn" (click)="loginFormVisible = !loginFormVisible" *ngIf="this.user.username == null">Zaloguj</button>
-					<button mat-flat-button color="warn" class="sign-in-btn" (click)="logOut()" *ngIf="this.user.username != ' ' && this.user.username != null">Wyloguj</button>
-				</div>
+
+		<div class="right-section">
+
+			<div class="userPhoto">
+				<button mat-flat-button color="primary" class="profile-btn" (click)="snav.toggle()">
+					<i *ngIf="!this.user.isAvatarSet" class="fas fa-user fa-2x"></i>
+					<img *ngIf="this.user.isAvatarSet" [src]="this.user.avatar" alt="">
+				</button>
 			</div>
-		<app-login *ngIf="this.loginFormVisible" class="shadow" (visibilityState)="loginVisibilityState($event)"></app-login>
-		<div class="logotype">Fade In:</div>
-		<div class="search" [routerLink]="['/search']">
-			<i class="fas fa-search"></i>
+
+			<div class="userInfo">
+				<span class="username"><strong>{{this.user.username}}</strong></span><br>
+				<button mat-flat-button color="warn" class="sign-in-btn" (click)="loginFormVisible = !loginFormVisible"
+					*ngIf="this.user.username == null">Zaloguj</button>
+				<button mat-flat-button color="warn" class="sign-in-btn" (click)="logOut()"
+					*ngIf="this.user.username != ' ' && this.user.username != null">Wyloguj</button>
+			</div>
+
 		</div>
-		
+
+		<app-login *ngIf="this.loginFormVisible" class="shadow" (visibilityState)="loginVisibilityState($event)">
+		</app-login>
+
+		<div class="logotype">Fade In:</div>
+
+		<button [routerLink]="['/search']" mat-flat-button color="accent" style="margin: 6px 23px 6px 0; border: 1px solid #fff;">
+			<i class="fas fa-search fa-2x"></i>
+		</button>
+
 	</div>
 </div>

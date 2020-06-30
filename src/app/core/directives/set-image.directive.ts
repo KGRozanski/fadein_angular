@@ -1,13 +1,17 @@
-import { Directive, ElementRef, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Renderer2, OnDestroy } from '@angular/core';
 import { UrlService } from '../services/url.service';
 import { UserDataService } from '../services/userdata.service';
 import { UploadPhotoService } from '../services/upload-photo.service';
 import { LogService } from '../services/log.service';
+import { Subscription } from 'rxjs';
 
 @Directive({
     selector: '[appSetImg]',
 })
-export class SetImageDirective {
+export class SetImageDirective implements OnDestroy {
+  private stateSubscription: Subscription;
+
+
     constructor(
         private elRef: ElementRef,
         private log: LogService,
@@ -16,7 +20,7 @@ export class SetImageDirective {
         private url: UrlService,
         private us: UserDataService
     ) {
-        this.us.USER_STATE.subscribe((data) => {
+        this.stateSubscription = this.us.USER_STATE.subscribe((data) => {
             let URL = this.url.getUrl('getBackground');
             let path = 'url(http://' + URL['url'];
 
@@ -57,5 +61,9 @@ export class SetImageDirective {
                 url
             );
         });
+    }
+
+    ngOnDestroy() {
+      this.stateSubscription.unsubscribe();
     }
 }
