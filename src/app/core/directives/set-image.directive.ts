@@ -24,6 +24,8 @@ export class SetImageDirective implements OnDestroy {
             let URL = this.url.getUrl('getBackground');
             let path = 'url(http://' + URL['url'];
 
+            console.log(data)
+
             this.elRef.nativeElement.setAttribute(
                 'style',
                 'background-image: ' +
@@ -64,6 +66,6 @@ export class SetImageDirective implements OnDestroy {
     }
 
     ngOnDestroy() {
-      this.stateSubscription.unsubscribe();
+        this.stateSubscription.unsubscribe();
     }
 }
