@@ -24,6 +24,7 @@ import { Subscription } from 'rxjs';
 import { UploadPhotoService } from 'src/app/core/services/upload-photo.service';
 import { UrlService } from 'src/app/core/services/url.service';
 import { LogService } from 'src/app/core/services/log.service';
+import { SocketsService } from 'src/app/core/services/sockets.service';
 
 @Component({
     selector: 'app-profile',
@@ -77,6 +78,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         private upload: UploadPhotoService,
         private url: UrlService,
         private log: LogService,
+        private ss: SocketsService
     ) {
         this.userSubscription = this.us.USER_STATE.subscribe((data) => {
             this.user = data;
