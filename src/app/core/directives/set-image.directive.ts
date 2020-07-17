@@ -26,15 +26,19 @@ export class SetImageDirective implements OnDestroy {
 
             console.log(data)
 
-            this.elRef.nativeElement.setAttribute(
-                'style',
-                'background-image: ' +
-                    path +
-                    data['username'] +
-                    '/' +
-                    data['backgroundName'] +
-                    ')'
-            );
+            if(data['backgroundName'] != undefined) {
+                this.elRef.nativeElement.setAttribute(
+                    'style',
+                    'background-image: ' +
+                        path +
+                        data['username'] +
+                        '/' +
+                        data['backgroundName'] +
+                        ')'
+                );
+            }
+
+
         });
 
         this.listen();

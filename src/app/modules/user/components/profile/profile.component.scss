@@ -44,6 +44,8 @@
         grid-column: 1/3;
         margin: 10px;
         min-height: 276px;
+        background-clip: border-box;
+        background-position: center;
 
         .user-info {
             position: relative;
