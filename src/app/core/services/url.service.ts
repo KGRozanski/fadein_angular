@@ -6,10 +6,10 @@ import { environment } from './../../../environments/environment';
 })
 export class UrlService {
 
-    table: Array<object>;
+    private URLList: Array<object>;
 
     constructor() {
-        this.table = [
+        this.URLList = [
             {
                 "id": 1,
                 "name": 'getBackground',
@@ -20,6 +20,6 @@ export class UrlService {
     }
 
     getUrl(url: string) {
-        return this.table.find(el => el['name'] === url);
+        return this.URLList.find(el => el['name'] === url);
     }
 }
