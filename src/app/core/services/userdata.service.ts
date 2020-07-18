@@ -2,7 +2,7 @@ import { User } from '../interfaces/user.interface';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, empty } from 'rxjs';
 import { LogService } from './log.service';
 import { UrlService } from './url.service';
 

@@ -1,28 +1,65 @@
-import { Injectable } from '@angular/core';
+import {
+    Injectable
+} from '@angular/core';
 import io from 'socket.io-client';
-// let ws = new WebSocket('ws://localhost:3001');
+import {
+    UserDataService
+} from './userdata.service';
+import {
+    first
+} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
 })
 export class SocketsService {
-    private socket = io.connect('http://127.0.0.1:3000');
-            
+    private socket = io.connect('http://127.0.0.1:3001');
+    private user = null;
+    private socketConnectionFlag = false;
 
-    constructor() {
 
-        this.socket.emit('joinRoom', { username: 'kgroza', room: '1' });
-        
+    constructor(
+        private us: UserDataService
+    ) {
 
-        console.log(this.socket);
-
-        this.socket.on('roomUsers', ({ room, users }) => {
-            console.log('siemanko');
+        this.us.USER_STATE.subscribe((user) => {
+            if(user.username != undefined && !this.socketConnectionFlag) {
+                this.user = user;
+                this.socketConnectionFlag = true;
+                this.connectSocket();
+            }
         });
 
-        // Message from server
-        this.socket.on('message', (message) => {
-            console.log(message);
+        
+
+    }
+
+    connectSocket() {
+        this.socket.on('connect', () => {
+            // either with send()
+            // this.socket.send('Hello!');
+
+            // or with emit() and custom event names
+            // this.socket.emit('salutations', 'Hello!', {
+            //     'mr': 'john'
+            // }, Uint8Array.from([1, 2, 3, 4]));
+        });
+
+        // handle the event sent with this.socket.send()
+        this.socket.on('message', data => {
+            console.log(data);
+        });
+        this.socket.emit('joinRoom', {
+            username: this.user.username,
+            room: '1'
+        });
+
+
+        this.socket.on('roomUsers', ({
+            room,
+            users
+        }) => {
+            console.log(room, users);
         });
     }
 }

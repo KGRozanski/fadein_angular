@@ -24,8 +24,6 @@ export class SetImageDirective implements OnDestroy {
             let URL = this.url.getUrl('getBackground');
             let path = 'url(http://' + URL['url'];
 
-            console.log(data)
-
             if(data['backgroundName'] != undefined) {
                 this.elRef.nativeElement.setAttribute(
                     'style',
