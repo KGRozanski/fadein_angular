@@ -85,6 +85,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
             this.imgData.image = data.avatar;
             this.professions = this.user['professions'];
         });
+
     }
 
 
