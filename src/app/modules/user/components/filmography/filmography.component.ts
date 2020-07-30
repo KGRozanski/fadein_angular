@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, Input } from '@angular/core';
+import { Component, ViewChild, ElementRef, Renderer2, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserDataService } from 'src/app/core/services/userdata.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -8,26 +8,23 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './filmography.component.html',
   styleUrls: ['./filmography.component.scss']
 })
-export class FilmographyComponent implements OnInit {
+export class FilmographyComponent {
 
-  private productionForm: FormGroup;
-
-  @ViewChild('filmAdder') filmAdder: ElementRef;
-  @Input('filmography') productions = [];
-  
-  constructor(private fb: FormBuilder, public snackBar: MatSnackBar, private us: UserDataService, private renderer: Renderer2) {
-    //Productions
-
-				//Production form
-	 	this.productionForm = fb.group({
+	constructor(
+		private fb: FormBuilder,
+		public snackBar: MatSnackBar,
+		private us: UserDataService,
+		private renderer: Renderer2
+	) {
+		// Production form
+		this.productionForm = fb.group({
 			'title': [null,
 				[
 					Validators.required,
 					Validators.minLength(3),
 					Validators.maxLength(64),
 					Validators.pattern('^[a-zA-Z0-9ąęśćłóźżń @.\']+$')
-				]            
-
+				]
 			],
 			'date': [null,
 				[
@@ -44,21 +41,23 @@ export class FilmographyComponent implements OnInit {
 					Validators.pattern('^[a-zA-Z0-9ąęśćłóźżń ,@.\'\(\)]+$')
 				]
 			]
-		})
-   }
+		});
+	}
 
-  ngOnInit() {
-  }
+	public productionForm: FormGroup;
 
-  
-	//Adding production to filmography
+	@ViewChild('filmAdder') filmAdder: ElementRef;
+	@Input('filmography') productions = [];
+
+
+	// Adding production to filmography
 	private _productionsReq(newProduction): Promise<any> {
 		return this.us.addProduction(newProduction);
-  }
-  
+	}
+
 	addProduction() {
-		if(this.productionForm.controls['title'].errors == null 
-		&& this.productionForm.controls['date'].errors == null 
+		if (this.productionForm.controls['title'].errors == null
+		&& this.productionForm.controls['date'].errors == null
 		&& this.productionForm.controls['description'].errors == null
 		) {
 			const newProduction = {
@@ -66,6 +65,7 @@ export class FilmographyComponent implements OnInit {
 				date: this.productionForm.get('date').value,
 				description: this.productionForm.get('description').value
 			};
+
 			this._productionsReq(newProduction).then((data) => {
 				this.productions.push(newProduction);
 				this.snackBar.open(data.body['msg'], 'Close', {
@@ -73,10 +73,9 @@ export class FilmographyComponent implements OnInit {
 				});
 			}).catch((err) => {
 				this.snackBar.open('Error uploading film!', 'Close', {
-                    duration: 3000
-                });
-			})
+					duration: 3000
+				});
+			});
 		}
 	}
-
 }

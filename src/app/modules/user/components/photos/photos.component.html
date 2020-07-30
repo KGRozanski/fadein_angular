@@ -7,14 +7,13 @@
 
   <div class="photo-thumbs" *ngIf="this.user.photos">
     <div class="image-item" *ngFor="let photo of this.user.photos" (click)="selectPhoto(photo)">
-      <img src='{{this.us.APIurl}}photo/{{this.user.username}}/{{photo}}' alt="">
+      <img src='{{ this.us.APIurl}}photo/{{this.user.username}}/{{photo}}' alt="">
     </div>
   </div>
 
   <br>
 
   <button mat-flat-button color="primary" (click)="addPhoto()" style="display: block; margin: 0 auto;">
-
     <i class="fas fa-plus"></i> Dodaj
   </button>
 

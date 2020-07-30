@@ -2,7 +2,7 @@ import { User } from '../interfaces/user.interface';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, empty } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { LogService } from './log.service';
 import { UrlService } from './url.service';
 
@@ -39,15 +39,15 @@ export class UserDataService {
 
     makeLogin() {
         this.getUserProfile().subscribe((data) => {
-            if(data.body) {
+            if (data.body) {
                 this.user = data.body;
                 this.user.avatar = `${PROTOCOL}://${window.location.hostname}:${PORT}/api/avatar`;
                 this.user.bgImage = `${PROTOCOL}://${window.location.hostname}:${PORT}/api/background/` + this.user.username ;
                 this.userSubject.next(this.user);
                 this.router.navigate(['/']);
-                this.log.log(this.user, 'table')
+                this.log.log(this.user, 'table');
             }
-        })
+        });
     }
 
     private _sendRequest(method: any, url: string, body: any, headers: object) {

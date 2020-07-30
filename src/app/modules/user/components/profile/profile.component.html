@@ -29,15 +29,13 @@
                 <h1>{{ user.username }}</h1>
             </div>
             <div class="user-about">
-                <i class="fas fa-envelope"></i>&nbsp;{{ user.mail }}<br />
+                <i class="fas fa-envelope"></i>&nbsp;{{ user.mail }}<br/>
                 <i class="fas fa-calendar"></i>&nbsp;Data dołączenia:
                 {{ user.dateOfRegistration }}
             </div>
             
         </div>
         
-
-
     <app-crop [@toggle]="isCropperShown" style="grid-column-start: 1; overflow: hidden; grid-column-end: 2;"
         (imageUploaded)="reciveImage($event)" (cancel)="toggleCrop($event)"></app-crop>
 
@@ -52,9 +50,5 @@
     
         <app-photos [user]="this.user" (photoAddEvent)="addPhoto($event)"></app-photos>
     </div>
-
-
-
-
 
 </div>

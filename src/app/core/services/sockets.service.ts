@@ -1,38 +1,25 @@
-import {
-    Injectable
-} from '@angular/core';
+import { Injectable } from '@angular/core';
 import io from 'socket.io-client';
-import {
-    UserDataService
-} from './userdata.service';
-import {
-    first
-} from 'rxjs/operators';
+import { UserDataService } from './userdata.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class SocketsService {
-    private socket = io.connect('http://127.0.0.1:3001');
-    private user = null;
-    private socketConnectionFlag = false;
 
-
-    constructor(
-        private us: UserDataService
-    ) {
-
+    constructor(private us: UserDataService) {
         this.us.USER_STATE.subscribe((user) => {
-            if(user.username != undefined && !this.socketConnectionFlag) {
+            if (user.username !== undefined && !this.socketConnectionFlag) {
                 this.user = user;
                 this.socketConnectionFlag = true;
                 this.connectSocket();
             }
         });
-
-        
-
     }
+
+    private socket = io.connect('http://127.0.0.1:3001');
+    private user = null;
+    private socketConnectionFlag = false;
 
     connectSocket() {
         this.socket.on('connect', () => {
@@ -53,7 +40,6 @@ export class SocketsService {
             username: this.user.username,
             room: '1'
         });
-
 
         this.socket.on('roomUsers', ({
             room,
