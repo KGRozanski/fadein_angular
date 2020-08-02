@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, empty } from 'rxjs';
 import { LogService } from './log.service';
 import { UrlService } from './url.service';
+import { environment } from './../../../environments/environment';
 
 const ORIGIN = 'http://127.0.0.1:4200';
 const PROTOCOL = 'http';
@@ -21,7 +22,7 @@ export class UserDataService {
     public userSubject = new BehaviorSubject<User>(this.user);
     public USER_STATE = this.userSubject.asObservable();
 
-    public APIurl = `${PROTOCOL}://${window.location.hostname}:${PORT}/api/`;
+    public APIurl = `${environment.PROTOCOL}://${environment.host}:${environment.API_PORT}/api/`;
     private httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
