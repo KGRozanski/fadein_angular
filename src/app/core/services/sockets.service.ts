@@ -8,34 +8,58 @@ import {
 import {
     first
 } from 'rxjs/operators';
+import {
+    environment
+} from './../../../environments/environment';
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class SocketsService {
-    private socket = io.connect('http://127.0.0.1:3001');
+
+    public SOCKETurl = `http://${environment.host}:${environment.SOCKET_PORT}/`;
+    private socket = null;
     private user = null;
     private socketConnectionFlag = false;
+
+    private joinRoom;
 
 
     constructor(
         private us: UserDataService
     ) {
-
         this.us.USER_STATE.subscribe((user) => {
-            if(user.username != undefined && !this.socketConnectionFlag) {
+            if (user.username != undefined && !this.socketConnectionFlag) {
                 this.user = user;
+                this.joinRoom = {
+                    username: this.user.username,
+                    room: 1
+                };
                 this.socketConnectionFlag = true;
+                this.SOCKETurl += this.user.username;
+                this.joinRoom.room = 1
+
+                console.log(this.SOCKETurl)
+                this.socket = io.connect(this.SOCKETurl);
                 this.connectSocket();
+
+
+
             }
         });
 
+        setTimeout(() => {
+            this.socket.emit('chatMessage', {addressee: this.user.username, recipient: 'wox', msg: 'dzień dobry :)'});
+        }, 3000);
         
+
+
 
     }
 
     connectSocket() {
-        this.socket.on('connect', () => {
+        this.socket.on('connect', data => {
+            console.log(this.socket)
             // either with send()
             // this.socket.send('Hello!');
 
@@ -46,20 +70,17 @@ export class SocketsService {
         });
 
         // handle the event sent with this.socket.send()
-        this.socket.on('message', data => {
+        this.socket.on('chatMessage', data => {
             console.log(data);
         });
-        this.socket.emit('joinRoom', {
-            username: this.user.username,
-            room: '1'
-        });
+        // this.socket.emit('joinRoom', this.joinRoom);
 
 
-        this.socket.on('roomUsers', ({
-            room,
-            users
-        }) => {
-            console.log(room, users);
-        });
+        // this.socket.on('roomUsers', ({
+        //     room,
+        //     users
+        // }) => {
+        //     console.log(room, users);
+        // });
     }
 }

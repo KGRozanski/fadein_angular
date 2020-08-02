@@ -6,7 +6,9 @@ export const environment = {
   production: false,
   VERSION: require('../../package.json').version,
   host: window.location.hostname,
-  API_PORT: 3000
+  API_PORT: 3000,
+  SOCKET_PORT: 3001,
+  PROTOCOL: 'http'
 };
 
 /*

@@ -36,10 +36,10 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.errorMsg = null;
-        const validatedData = [{
+        const validatedData = {
             login: this.logForm.get('login').value,
             pass: this.logForm.get('pass').value
-        }];
+        };
 
         this.us.authenticate(validatedData)
         .subscribe({
