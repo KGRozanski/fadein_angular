@@ -30,9 +30,6 @@ export class SocketsService {
                 console.log(this.SOCKETurl);
                 this.socket = io.connect(this.SOCKETurl);
                 this.connectSocket();
-
-
-
             }
         });
 
