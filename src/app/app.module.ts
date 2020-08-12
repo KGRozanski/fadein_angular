@@ -35,7 +35,6 @@ import { UrlService } from './core/services/url.service';
         SearchComponent,
         FilterPipe,
         UserComponent
-        
     ],
     imports: [
         ReactiveFormsModule,
@@ -46,7 +45,6 @@ import { UrlService } from './core/services/url.service';
         HttpClientModule,
         UserModule,
         CommonModule
-        
     ],
     exports: [ReactiveFormsModule],
     providers: [

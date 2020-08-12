@@ -9,8 +9,6 @@ import { Subscription } from 'rxjs';
     selector: '[appSetImg]',
 })
 export class SetImageDirective implements OnDestroy {
-  private stateSubscription: Subscription;
-
 
     constructor(
         private elRef: ElementRef,
@@ -19,28 +17,27 @@ export class SetImageDirective implements OnDestroy {
         private renderer2: Renderer2,
         private url: UrlService,
         private us: UserDataService
-    ) {
-        this.stateSubscription = this.us.USER_STATE.subscribe((data) => {
-            let URL = this.url.getUrl('getBackground');
-            let path = 'url(http://' + URL['url'];
+        ) {
+            this.stateSubscription = this.us.USER_STATE.subscribe((data) => {
+                const URL = this.url.getUrl('getBackground');
+                const path = 'url(http://' + URL['url'];
 
-            if(data['backgroundName'] != undefined) {
-                this.elRef.nativeElement.setAttribute(
-                    'style',
-                    'background-image: ' +
+                if (data['backgroundName'] !== undefined) {
+                    this.elRef.nativeElement.setAttribute(
+                        'style',
+                        'background-image: ' +
                         path +
                         data['username'] +
                         '/' +
                         data['backgroundName'] +
                         ')'
-                );
-            }
-
-
-        });
-
-        this.listen();
+                        );
+                    }
+            });
+            this.listen();
     }
+
+    private stateSubscription: Subscription;
 
     listen() {
         this.upload.backgroundImgAddedEventCallback$.subscribe(

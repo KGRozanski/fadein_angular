@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PasswordValidation } from '../../../../core/validators/validators';
 import { UserDataService } from '../../../../core/services/userdata.service';
@@ -8,15 +8,11 @@ import { UserDataService } from '../../../../core/services/userdata.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
-
-  regForm: FormGroup;
-  successMsg: string = null;
-  errorMsg: string = null;
+export class RegisterComponent {
 
   constructor(private fb: FormBuilder, private us: UserDataService) {
 
-    this.regForm = fb.group({
+    this.regForm = this.fb.group({
       'mail': [null,
         [
           Validators.required,
@@ -56,8 +52,9 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-  }
+  regForm: FormGroup;
+  successMsg: string = null;
+  errorMsg: string = null;
 
   register() {
     const validatedData = [{
