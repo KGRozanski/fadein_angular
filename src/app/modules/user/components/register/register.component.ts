@@ -8,7 +8,12 @@ import { UserDataService } from '../../../../core/services/userdata.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent {
+
+export class RegisterComponent  {
+
+  regForm: FormGroup;
+  successMsg: string = null;
+  errorMsg: string = null;
 
   constructor(private fb: FormBuilder, private us: UserDataService) {
 
@@ -51,10 +56,6 @@ export class RegisterComponent {
     );
 
   }
-
-  regForm: FormGroup;
-  successMsg: string = null;
-  errorMsg: string = null;
 
   register() {
     const validatedData = [{

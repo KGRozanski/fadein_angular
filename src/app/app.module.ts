@@ -23,6 +23,7 @@ import { ProfileResolver } from './core/resolvers/profile.resolver';
 import { LogService } from './core/services/log.service';
 import { UploadPhotoService } from './core/services/upload-photo.service';
 import { UrlService } from './core/services/url.service';
+import { HelperService } from './core/services/helper.service';
 
 // import { UserResolver } from './shared/resolvers/user.resolver';
 
@@ -54,7 +55,8 @@ import { UrlService } from './core/services/url.service';
         ProfileResolver,
         LogService,
         UploadPhotoService,
-        UrlService
+        UrlService,
+        HelperService
         // UserResolver
     ],
     bootstrap: [AppComponent],

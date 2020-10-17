@@ -15,6 +15,7 @@ import { ProfessionsComponent } from './components/professions/professions.compo
 import { FilmographyComponent } from './components/filmography/filmography.component';
 import { PhotosComponent } from './components/photos/photos.component';
 import { SetImageDirective } from 'src/app/core/directives/set-image.directive';
+import { ResetFileInputDirective } from 'src/app/core/directives/resetFileInput.directive';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { SetImageDirective } from 'src/app/core/directives/set-image.directive';
     ProfessionsComponent,
     FilmographyComponent,
     PhotosComponent,
-    SetImageDirective
+    SetImageDirective,
+    ResetFileInputDirective
   ],
   exports: [
     RegisterComponent,

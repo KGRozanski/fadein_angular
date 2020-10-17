@@ -4,9 +4,6 @@ import {
     UserDataService
 } from './userdata.service';
 import {
-    first
-} from 'rxjs/operators';
-import {
     environment
 } from './../../../environments/environment';
 
@@ -34,41 +31,10 @@ export class SocketsService {
         });
 
         setTimeout(() => {
-            this.socket.emit('chatMessage', {addressee: this.user.username, recipient: 'wox', msg: 'dzień dobry :)'});
+            this.socket.emit('chatMessage', {
+                addressee: this.user.username,
+                recipient: 'wox',
+                msg: 'dzień dobry :)'
+            });
         }, 3000);
     }
-
-    public SOCKETurl = `http://${environment.host}:${environment.SOCKET_PORT}/`;
-    private socket = null;
-    private user = null;
-    private socketConnectionFlag = false;
-
-    private joinRoom;
-
-    connectSocket() {
-        this.socket.on('connect', data => {
-            console.log(this.socket);
-            // either with send()
-            // this.socket.send('Hello!');
-
-            // or with emit() and custom event names
-            // this.socket.emit('salutations', 'Hello!', {
-            //     'mr': 'john'
-            // }, Uint8Array.from([1, 2, 3, 4]));
-        });
-
-        // handle the event sent with this.socket.send()
-        this.socket.on('chatMessage', data => {
-            console.log(data);
-        });
-        // this.socket.emit('joinRoom', this.joinRoom);
-
-
-        // this.socket.on('roomUsers', ({
-        //     room,
-        //     users
-        // }) => {
-        //     console.log(room, users);
-        // });
-    }
-}
