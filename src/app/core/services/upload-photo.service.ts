@@ -8,14 +8,6 @@ import { Subject, Subscription } from 'rxjs';
     providedIn: 'root',
 })
 export class UploadPhotoService {
-    private subscription: Subscription;
-
-    //Image events subjects
-    private imgAddedEvent = new Subject<any>(); // Source
-            imgAddedEventCallback$ = this.imgAddedEvent.asObservable(); // Stream
-
-    private backgroundImgAddedEvent = new Subject<any>(); // Source
-            backgroundImgAddedEventCallback$ = this.backgroundImgAddedEvent.asObservable(); // Stream
 
     constructor(
         private snackBar: MatSnackBar,
@@ -23,14 +15,25 @@ export class UploadPhotoService {
         private log: LogService
     ) {}
 
+    private subscription: Subscription;
+
+    // Image events subjects
+    private imgAddedEvent = new Subject<any>(); // Source
+            imgAddedEventCallback$ = this.imgAddedEvent.asObservable(); // Stream
+
+    private backgroundImgAddedEvent = new Subject<any>(); // Source
+            backgroundImgAddedEventCallback$ = this.backgroundImgAddedEvent.asObservable(); // Stream
+
+
     addNewPhoto(files, type) {
         const fd = new FormData();
-
         fd.append('image', files['target']['files'][0]);
+
         let response: any;
+
         if (type === 'normal') {
             this.subscription = this.us.putPhoto(fd).subscribe({
-                next: (data) => (response = data),
+                next: (data) => response = data,
                 error: (err) => {
                     this.snackBar.open('Error uploading an image!', 'Close', {
                         duration: 3000,

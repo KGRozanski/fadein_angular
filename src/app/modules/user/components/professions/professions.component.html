@@ -17,7 +17,7 @@
     </mat-chip-list>
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addSelectedProfession($event)">
       <mat-option *ngFor="let profession of filteredprofessions | async" [value]="profession">
-        {{profession}}
+        {{ profession }}
       </mat-option>
     </mat-autocomplete>
 

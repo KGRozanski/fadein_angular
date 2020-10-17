@@ -10,17 +10,16 @@ export class RegGuard implements CanActivate {
 
   constructor(private router: Router) {}
 
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): boolean {
 
-      canActivate(
-        next: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): boolean {
-
-        // check if token is set
-        if ( Cookies.get('token') == undefined) {
-          return true;
-        } else {
-          this.router.navigate(['/']);
-          return false;
-        }
+    // check if token is set
+    if ( Cookies.get('token') === undefined) {
+      return true;
+    } else {
+      this.router.navigate(['/']);
+      return false;
     }
+  }
 }

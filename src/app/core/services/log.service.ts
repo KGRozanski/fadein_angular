@@ -5,11 +5,6 @@ import { environment } from './../../../environments/environment';
     providedIn: 'root',
 })
 export class LogService {
-    private cssForModeLog = [
-        'background: #222; color: orange;  font-size: 20px;',
-        'background: #222; color: red;  font-size: 20px; font-weight: 900;',
-        'background: #222; color: green;  font-size: 20px; font-weight: 900;',
-    ];
 
     constructor() {
         if (environment.production) {
@@ -28,6 +23,13 @@ export class LogService {
             );
         }
     }
+
+    private cssForModeLog = [
+        'background: #222; color: orange;  font-size: 20px;',
+        'background: #222; color: red;  font-size: 20px; font-weight: 900;',
+        'background: #222; color: green;  font-size: 20px; font-weight: 900;',
+    ];
+
 
     log(data: any, type) {
         if (!environment.production) {

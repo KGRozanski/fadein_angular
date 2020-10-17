@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { UserDataService } from './core/services/userdata.service';
-import Cookies from 'js-cookie'
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { LogService } from './core/services/log.service';
+import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-root',
@@ -11,32 +11,30 @@ import { LogService } from './core/services/log.service';
 })
 
 export class AppComponent {
-  title = 'Fade In:';
-  public loading = false;
-  public color = 'primary';
-  public mode = 'indeterminate';
 
-  constructor(private us: UserDataService, private router: Router, private log: LogService) {
+  constructor(private us: UserDataService, private router: Router) {
     if (Cookies.get('token') !== undefined) {
       this.us.makeLogin();
     }
 
-    router.events.subscribe((routerEvent) => {
+    this.router.events.subscribe((routerEvent) => {
       this.checkRouterEvent(routerEvent);
     });
   }
+
+  public loading = false;
+  public color = 'primary';
+  public mode = 'indeterminate';
 
   checkRouterEvent(routerEvent): void {
     if (routerEvent instanceof NavigationStart) {
       this.loading = true;
     }
 
-    if (routerEvent instanceof NavigationEnd || 
-      routerEvent instanceof NavigationCancel ||
-      routerEvent instanceof NavigationError) {
+    if (routerEvent instanceof NavigationEnd
+      || routerEvent instanceof NavigationCancel
+      || routerEvent instanceof NavigationError) {
         this.loading = false;
       }
   }
-
-
 }

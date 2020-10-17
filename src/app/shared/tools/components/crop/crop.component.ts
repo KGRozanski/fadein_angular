@@ -13,6 +13,7 @@ import { UserDataService } from '../../../../core/services/userdata.service';
 import { of } from 'rxjs';
 import { ImageCropperComponent, CropperSettings } from 'ngx-img-cropper';
 import { HelperService } from 'src/app/core/services/helper.service';
+import { User } from 'src/app/core/interfaces/user.interface';
 
 @Component({
     selector: 'app-crop',
@@ -60,9 +61,9 @@ export class CropComponent implements OnInit {
     }
 
     fileChangeListener($event) {
-        var image: any = new Image();
-        var file: File = $event.target.files[0];
-        var myReader: FileReader = new FileReader();
+        const image: any = new Image();
+        const file: File = $event.target.files[0];
+        const myReader: FileReader = new FileReader();
 
         myReader.onloadend = (loadEvent: any) => {
             image.src = loadEvent.target.result;
@@ -73,7 +74,7 @@ export class CropComponent implements OnInit {
 
         of(this.cropper.image)
             .subscribe((val) => {
-                if (val.image != undefined) {
+                if (val.image !== undefined) {
                     this.emit();
                 }
             })
@@ -92,31 +93,34 @@ export class CropComponent implements OnInit {
     }
 
     saveImg() {
-        let user;
-        //Fetch user data with userService
-        this.us.USER_STATE.subscribe((data) => (user = data));
-        //Update value
+        let user: User;
+        // Fetch user data with userService
+        this.us.USER_STATE.subscribe((data) => user = data);
+
+        // Update value
         user.avatar = this.data.image;
         user.isAvatarSet = true;
-        //Return object to userService
+
+        // Return object to userService
         this.us.userSubject.next(user);
-        //Construct file from blob & send it to db
+
+        // Construct file from blob & send it to db
         const imgBlob = new Blob([this.data.image], {
             type: 'image/jpeg',
         });
-        let file: File = new File([imgBlob], 'avatar.jpg', {
+
+        const file: File = new File([imgBlob], 'avatar.jpg', {
             type: 'image/jpeg',
             lastModified: Date.now(),
         });
 
-        console.log(file);
         const fd = new FormData();
         fd.append('image', file, 'avatar.jpg');
 
         let response: any;
 
         this.us.putUserAvatar(fd).subscribe({
-            next: (data) => (response = data),
+            next: (data) => response = data,
             error: (err) => {
                 this.snackBar.open('Error uploading an image!', 'Close', {
                     duration: 3000,

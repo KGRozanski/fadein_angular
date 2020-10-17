@@ -1,6 +1,5 @@
 import {
     Component,
-    OnInit,
     ViewChild,
     ElementRef,
     Input,
@@ -19,22 +18,21 @@ import { first } from 'rxjs/operators';
     templateUrl: './photos.component.html',
     styleUrls: ['./photos.component.scss'],
 })
-export class PhotosComponent implements OnInit {
-    private selectedPhoto: string;
-    private galleryFlag: boolean = false;
-
-    @ViewChild('newPhoto') newPhoto: ElementRef;
-    @Input('user') user: User;
-    @Output() photoAddEvent = new EventEmitter<string>();
+export class PhotosComponent {
 
     constructor(
-        private us: UserDataService,
+        public us: UserDataService,
         private upload: UploadPhotoService,
         private log: LogService,
         private url: UrlService
     ) {}
 
-    ngOnInit() {}
+    public selectedPhoto: string;
+    public galleryFlag = false;
+
+    @ViewChild('newPhoto') newPhoto: ElementRef;
+    @Input() user: User;
+    @Output() photoAddEvent = new EventEmitter<string>();
 
     addPhoto() {
         this.newPhoto.nativeElement.click();

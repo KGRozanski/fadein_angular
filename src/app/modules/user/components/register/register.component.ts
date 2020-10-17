@@ -8,6 +8,7 @@ import { UserDataService } from '../../../../core/services/userdata.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
+
 export class RegisterComponent  {
 
   regForm: FormGroup;
@@ -16,7 +17,7 @@ export class RegisterComponent  {
 
   constructor(private fb: FormBuilder, private us: UserDataService) {
 
-    this.regForm = fb.group({
+    this.regForm = this.fb.group({
       'mail': [null,
         [
           Validators.required,

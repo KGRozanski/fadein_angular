@@ -12,7 +12,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
-let modules = [
+const modules = [
   MatButtonModule,
   MatInputModule,
   MatCheckboxModule,
