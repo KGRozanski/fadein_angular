@@ -4,7 +4,6 @@ import { HttpHeaders, HttpClient, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LogService } from './log.service';
-import { UrlService } from './url.service';
 import { environment } from './../../../environments/environment';
 
 const ORIGIN = 'http://127.0.0.1:4200';
@@ -16,7 +15,7 @@ const PORT = 3000;
 })
 export class UserDataService {
 
-    constructor(private http: HttpClient, private router: Router, private log: LogService, private url: UrlService) {}
+    constructor(private http: HttpClient, private router: Router, private log: LogService) {}
 
     private user: User = <User> {};
     public userSubject = new BehaviorSubject<User>(this.user);
@@ -46,7 +45,7 @@ export class UserDataService {
                 this.user.bgImage = `${PROTOCOL}://${window.location.hostname}:${PORT}/api/background/` + this.user.username ;
                 this.userSubject.next(this.user);
                 this.router.navigate(['/']);
-                this.log.log(this.user, 'table');
+                this.log.log(this.user);
             }
         });
     }

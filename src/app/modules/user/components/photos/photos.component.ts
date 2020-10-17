@@ -10,7 +10,6 @@ import { UserDataService } from 'src/app/core/services/userdata.service';
 import { User } from 'src/app/core/interfaces/user.interface';
 import { UploadPhotoService } from 'src/app/core/services/upload-photo.service';
 import { LogService } from 'src/app/core/services/log.service';
-import { UrlService } from 'src/app/core/services/url.service';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -23,8 +22,7 @@ export class PhotosComponent {
     constructor(
         public us: UserDataService,
         private upload: UploadPhotoService,
-        private log: LogService,
-        private url: UrlService
+        private log: LogService
     ) {}
 
     public selectedPhoto: string;

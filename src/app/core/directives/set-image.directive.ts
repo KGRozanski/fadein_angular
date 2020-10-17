@@ -1,9 +1,10 @@
 import { Directive, ElementRef, Renderer2, OnDestroy } from '@angular/core';
-import { UrlService } from '../services/url.service';
 import { UserDataService } from '../services/userdata.service';
 import { UploadPhotoService } from '../services/upload-photo.service';
 import { LogService } from '../services/log.service';
 import { Subscription } from 'rxjs';
+import { ApiLinksService } from '../services/api-links.service';
+import { Req } from '../interfaces/request.interface';
 
 @Directive({
     selector: '[appSetImg]',
@@ -15,22 +16,21 @@ export class SetImageDirective implements OnDestroy {
         private log: LogService,
         private upload: UploadPhotoService,
         private renderer2: Renderer2,
-        private url: UrlService,
-        private us: UserDataService
+        private us: UserDataService,
+        private apiLinks: ApiLinksService
         ) {
             this.stateSubscription = this.us.USER_STATE.subscribe((data) => {
-                const URL = this.url.getUrl('getBackground');
-                const path = 'url(http://' + URL['url'];
 
                 if (data['backgroundName'] !== undefined) {
                     this.elRef.nativeElement.setAttribute(
                         'style',
-                        'background-image: ' +
-                        path +
-                        data['username'] +
-                        '/' +
-                        data['backgroundName'] +
-                        ')'
+                        'background-image: url(' +
+                        this.apiLinks.getPath({
+                            method: 'get',
+                            action: 'getBackground',
+                            credentials: true,
+                            requestData: null
+                        } as Req) + '/' + data['username'] + '/' + data['backgroundName']  + ')'
                         );
                     }
             });
@@ -42,7 +42,7 @@ export class SetImageDirective implements OnDestroy {
     listen() {
         this.upload.backgroundImgAddedEventCallback$.subscribe(
             (data) => {
-                this.log.log(data, 'object');
+                this.log.log(data);
                 this.changeBg(data);
             }
         );
@@ -50,12 +50,16 @@ export class SetImageDirective implements OnDestroy {
 
     changeBg(photoUrl: string) {
         const username = this.us.USER_STATE.subscribe((data) => {
-            const url =
-                'url(http://' +
-                this.url.getUrl('getBackground')['url'] +
-                photoUrl[0] +
-                '/' +
-                photoUrl[1];
+            const url = ' url(' +
+            this.apiLinks.getPath({
+                method: 'get',
+                action: 'getBackground',
+                credentials: true,
+                requestData: null
+            } as Req) + '/' +
+            photoUrl[0] +
+            '/' +
+            photoUrl[1];
             this.renderer2.setStyle(
                 this.elRef.nativeElement,
                 'background-image',

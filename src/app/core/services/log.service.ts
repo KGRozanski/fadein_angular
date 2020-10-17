@@ -31,7 +31,7 @@ export class LogService {
     ];
 
 
-    log(data: any, type) {
+    log(data: any) {
         if (!environment.production) {
             if (typeof data === 'string') {
                 console.log(

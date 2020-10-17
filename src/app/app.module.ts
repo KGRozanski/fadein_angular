@@ -24,6 +24,8 @@ import { LogService } from './core/services/log.service';
 import { UploadPhotoService } from './core/services/upload-photo.service';
 import { UrlService } from './core/services/url.service';
 import { HelperService } from './core/services/helper.service';
+import { PathService } from './core/services/path.service';
+import { ApiLinksService } from './core/services/api-links.service';
 
 // import { UserResolver } from './shared/resolvers/user.resolver';
 
@@ -56,7 +58,9 @@ import { HelperService } from './core/services/helper.service';
         LogService,
         UploadPhotoService,
         UrlService,
-        HelperService
+        HelperService,
+        ApiLinksService,
+        PathService
         // UserResolver
     ],
     bootstrap: [AppComponent],

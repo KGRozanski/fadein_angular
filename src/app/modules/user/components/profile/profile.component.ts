@@ -19,7 +19,6 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { UploadPhotoService } from 'src/app/core/services/upload-photo.service';
-import { UrlService } from 'src/app/core/services/url.service';
 import { LogService } from 'src/app/core/services/log.service';
 import { SocketsService } from 'src/app/core/services/sockets.service';
 
@@ -52,7 +51,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         private us: UserDataService,
         public snackBar: MatSnackBar,
         public upload: UploadPhotoService,
-        private url: UrlService,
         private log: LogService,
         private ss: SocketsService
     ) {
@@ -78,7 +76,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     @ViewChild('backgroundPhoto') backgroundPhoto: ElementRef;
 
     ngOnInit() {
-        this.log.log(this.user, 'object');
+        this.log.log(this.user);
     }
 
     ngOnDestroy() {
