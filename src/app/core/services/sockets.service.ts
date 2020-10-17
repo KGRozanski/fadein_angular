@@ -6,9 +6,6 @@ import {
     UserDataService
 } from './userdata.service';
 import {
-    first
-} from 'rxjs/operators';
-import {
     environment
 } from './../../../environments/environment';
 
@@ -49,9 +46,13 @@ export class SocketsService {
         });
 
         setTimeout(() => {
-            this.socket.emit('chatMessage', {addressee: this.user.username, recipient: 'wox', msg: 'dzień dobry :)'});
+            this.socket.emit('chatMessage', {
+                addressee: this.user.username,
+                recipient: 'wox',
+                msg: 'dzień dobry :)'
+            });
         }, 3000);
-        
+
 
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PasswordValidation } from '../../../../core/validators/validators';
 import { UserDataService } from '../../../../core/services/userdata.service';
@@ -8,7 +8,7 @@ import { UserDataService } from '../../../../core/services/userdata.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent  {
 
   regForm: FormGroup;
   successMsg: string = null;
@@ -54,9 +54,6 @@ export class RegisterComponent implements OnInit {
     }
     );
 
-  }
-
-  ngOnInit() {
   }
 
   register() {

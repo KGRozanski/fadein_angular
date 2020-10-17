@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserDataService } from '../../../../core/services/userdata.service';
 import { of } from 'rxjs';
 import { ImageCropperComponent, CropperSettings } from 'ngx-img-cropper';
+import { HelperService } from 'src/app/core/services/helper.service';
 
 @Component({
     selector: 'app-crop',
@@ -30,12 +31,13 @@ export class CropComponent implements OnInit {
     data: any;
     cropperSettings: CropperSettings;
     private crop = this;
+    public isAvatarChosen = false;
 
     constructor(
         private us: UserDataService,
         public snackBar: MatSnackBar,
         private renderer: Renderer2,
-        elRef: ElementRef
+        private helperService: HelperService
     ) {
         this.cropperSettings = new CropperSettings();
         this.cropperSettings.noFileInput = true;
@@ -65,6 +67,7 @@ export class CropComponent implements OnInit {
         myReader.onloadend = (loadEvent: any) => {
             image.src = loadEvent.target.result;
             this.cropper.setImage(image);
+            this.isAvatarChosen = true;
         };
         myReader.readAsDataURL(file);
 
@@ -83,6 +86,7 @@ export class CropComponent implements OnInit {
 
     closeCropper() {
         this.cropper.reset();
+        this.helperService.clearFileInputEvent.emit(true);
         this.renderer.setProperty(this.imgInput, 'value', '');
         this.cancel.emit(true);
     }
@@ -104,6 +108,8 @@ export class CropComponent implements OnInit {
             type: 'image/jpeg',
             lastModified: Date.now(),
         });
+
+        console.log(file);
         const fd = new FormData();
         fd.append('image', file, 'avatar.jpg');
 

@@ -12,7 +12,7 @@ const PROTOCOL = 'http';
 const PORT = 3000;
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UserDataService {
 
