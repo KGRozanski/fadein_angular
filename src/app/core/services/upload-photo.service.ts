@@ -43,8 +43,7 @@ export class UploadPhotoService {
                     this.log.log(
                         response.body['msg'] +
                             ' - - ' +
-                            response.body['imgUrl'],
-                        'string'
+                            response.body['imgUrl']
                     );
 
                     this.snackBar.open(response.body['msg'], 'Close', {
@@ -63,7 +62,7 @@ export class UploadPhotoService {
                     });
                 },
                 complete: () => {
-                    this.log.log(response, 'string');
+                    this.log.log(response);
 
                     this.snackBar.open(response.body['msg'], 'Close', {
                         duration: 3000,
