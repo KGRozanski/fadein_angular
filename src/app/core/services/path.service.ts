@@ -1,24 +1,64 @@
 import { Injectable } from '@angular/core';
-import { API_CONFIG } from '../../../configs/api_config';
-import { environment } from '../../../environments/environment';
-
+import { Req } from '../interfaces/request.interface';
+import { LogService } from './log.service';
+import { HostService } from './host.service';
 @Injectable({
     providedIn: 'root'
 })
 
 export class PathService {
 
-    constructor() {}
+    private get = {};
+    private post = {};
+    private put = {};
+    private delete = {};
+    private websocket = {};
 
-    getApiURL(type?: string): string {
-        switch (type) {
-            default:
-                switch (environment.production) {
-                    case true:
-                        return API_CONFIG.protocol + '://' + API_CONFIG.production_host + ':' + API_CONFIG.production_port + '/api';
-                    default:
-                        return API_CONFIG.protocol + '://' + API_CONFIG.test_host + ':' + API_CONFIG.test_port + '/api';
-                }
+    private methods = [
+        'get',
+        'post',
+        'delete',
+        'put',
+        'websocket'
+    ];
+
+    constructor(private hs: HostService, private log: LogService) {
+
+        this.get = {
+            getUserProfile:         { endpoint: '/profile' },
+            getProfessions:         { endpoint: '/professions' },
+            getBackground:          { endpoint: '/background' },
+            search:                 { endpoint: '/search' }
+        };
+
+        this.post = {
+            authenticate:           { endpoint: '/login' },
+            registerNewUser:        { endpoint: '/register' },
+            updateProfessions:      { endpoint: '/updateProfessions' },
+            addProduction:          { endpoint: '/addProduction' }
+        };
+
+        this.put = {
+            putUserAvatar:          { endpoint: '/uploadAvatar' },
+            putPhoto:               { endpoint: '/putPhoto' },
+            putBackgroundPhoto:     { endpoint: '/uploadBackground' },
+        };
+    }
+
+    getPath(req: Req): string {
+        let matchedEndPoint: string;
+
+        try {
+            matchedEndPoint = this[req.method][req.action];
+        } catch (err) {
+            this.log.log('There is no matching endpoint : ' + err);
+        }
+
+        if (matchedEndPoint === undefined) {
+            console.error('ERROR: NO_MATCHING_ENDPOINT in api_links - returned: ' + matchedEndPoint);
+            return 'NO_MATCHING_ENDPOINT';
+        } else {
+            return this.hs.getApiURL() + matchedEndPoint['endpoint'];
         }
     }
 

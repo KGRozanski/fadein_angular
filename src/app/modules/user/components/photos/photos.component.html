@@ -1,24 +1,24 @@
 <mat-card>
-  <h2>Zdjęcia:</h2>
+    <h2>Zdjęcia:</h2>
 
-  <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
 
-  <br>
+    <br>
 
-  <div class="photo-thumbs" *ngIf="this.user.photos">
-    <div class="image-item" *ngFor="let photo of this.user.photos" (click)="selectPhoto(photo)">
-      <img src='{{ this.us.APIurl}}photo/{{this.user.username}}/{{photo}}' alt="">
+    <div class="photo-thumbs" *ngIf="this.user.photos">
+        <div class="image-item" *ngFor="let photo of this.user.photos" (click)="selectPhoto(photo)">
+            <img src='{{ this.us.APIurl}}photo/{{this.user.username}}/{{photo}}' alt="">
+        </div>
     </div>
-  </div>
 
-  <br>
+    <br>
 
-  <button mat-flat-button color="primary" (click)="addPhoto()" style="display: block; margin: 0 auto;">
-    <i class="fas fa-plus"></i> Dodaj
-  </button>
+    <button mat-flat-button color="primary" (click)="addPhoto()" style="display: block; margin: 0 auto;">
+        <i class="fas fa-plus"></i> Dodaj
+    </button>
 
-  <input #newPhoto id="newPhoto" type="file" (change)="handleNewPhoto($event, 'normal')">
+    <input #newPhoto id="newPhoto" type="file" (change)="handleNewPhoto($event, 'normal')">
 
-  <app-photo-view *ngIf="this.galleryFlag" [photoPath]="this.selectedPhoto" (click)="photoGalleryClose(false)">
-  </app-photo-view>
+    <app-photo-view *ngIf="this.galleryFlag" [photoPath]="this.selectedPhoto" (click)="photoGalleryClose(false)">
+    </app-photo-view>
 </mat-card>

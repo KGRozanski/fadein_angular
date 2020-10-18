@@ -3,7 +3,7 @@ import { UserDataService } from '../services/userdata.service';
 import { UploadPhotoService } from '../services/upload-photo.service';
 import { LogService } from '../services/log.service';
 import { Subscription } from 'rxjs';
-import { ApiLinksService } from '../services/api-links.service';
+import { PathService } from '../services/path.service';
 import { Req } from '../interfaces/request.interface';
 
 @Directive({
@@ -17,7 +17,7 @@ export class SetImageDirective implements OnDestroy {
         private upload: UploadPhotoService,
         private renderer2: Renderer2,
         private us: UserDataService,
-        private apiLinks: ApiLinksService
+        private ps: PathService
         ) {
             this.stateSubscription = this.us.USER_STATE.subscribe((data) => {
 
@@ -25,11 +25,11 @@ export class SetImageDirective implements OnDestroy {
                     this.elRef.nativeElement.setAttribute(
                         'style',
                         'background-image: url(' +
-                        this.apiLinks.getPath({
+                        this.ps.getPath({
                             method: 'get',
                             action: 'getBackground',
                             credentials: true,
-                            requestData: null
+                            data: null
                         } as Req) + '/' + data['username'] + '/' + data['backgroundName']  + ')'
                         );
                     }
@@ -51,11 +51,11 @@ export class SetImageDirective implements OnDestroy {
     changeBg(photoUrl: string) {
         const username = this.us.USER_STATE.subscribe((data) => {
             const url = ' url(' +
-            this.apiLinks.getPath({
+            this.ps.getPath({
                 method: 'get',
                 action: 'getBackground',
                 credentials: true,
-                requestData: null
+                data: null
             } as Req) + '/' +
             photoUrl[0] +
             '/' +

@@ -9,7 +9,7 @@ import {
     OnInit,
 } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserDataService } from '../../../../core/services/userdata.service';
+import { UserDataService } from '../../../core/services/userdata.service';
 import { of } from 'rxjs';
 import { ImageCropperComponent, CropperSettings } from 'ngx-img-cropper';
 import { HelperService } from 'src/app/core/services/helper.service';

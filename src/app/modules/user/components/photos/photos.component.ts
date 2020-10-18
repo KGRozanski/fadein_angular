@@ -1,11 +1,4 @@
-import {
-    Component,
-    ViewChild,
-    ElementRef,
-    Input,
-    Output,
-    EventEmitter,
-} from '@angular/core';
+import { Component, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { UserDataService } from 'src/app/core/services/userdata.service';
 import { User } from 'src/app/core/interfaces/user.interface';
 import { UploadPhotoService } from 'src/app/core/services/upload-photo.service';
@@ -19,12 +12,6 @@ import { first } from 'rxjs/operators';
 })
 export class PhotosComponent {
 
-    constructor(
-        public us: UserDataService,
-        private upload: UploadPhotoService,
-        private log: LogService
-    ) {}
-
     public selectedPhoto: string;
     public galleryFlag = false;
 
@@ -32,13 +19,17 @@ export class PhotosComponent {
     @Input() user: User;
     @Output() photoAddEvent = new EventEmitter<string>();
 
+    constructor(
+        public us: UserDataService,
+        private upload: UploadPhotoService,
+        private log: LogService
+    ) {}
+
     addPhoto() {
         this.newPhoto.nativeElement.click();
     }
     /*
-     *
      *	New photo
-     *
      */
     handleNewPhoto($event) {
         this.upload.addNewPhoto($event, 'normal');

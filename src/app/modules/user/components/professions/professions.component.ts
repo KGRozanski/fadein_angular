@@ -40,13 +40,6 @@ import {
 })
 export class ProfessionsComponent implements OnInit, OnDestroy {
 
-    constructor(private us: UserDataService, public snackBar: MatSnackBar) {
-        this.filteredprofessions = this.professionCtrl.valueChanges.pipe(
-            startWith(null),
-            map((profession: string | null) => profession ? this._filter(profession) : this.allProfessions.slice())
-        );
-    }
-
     @ViewChild('professionInput') professionInput: ElementRef < HTMLInputElement > ;
     @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
@@ -66,6 +59,13 @@ export class ProfessionsComponent implements OnInit, OnDestroy {
     private allProfestionsForRemoving: string[] = [];
     public selectedProfessions = new Subject < any > ();
     public selectedProfessions$ = this.selectedProfessions.asObservable();
+
+    constructor(private us: UserDataService, public snackBar: MatSnackBar) {
+        this.filteredprofessions = this.professionCtrl.valueChanges.pipe(
+            startWith(null),
+            map((profession: string | null) => profession ? this._filter(profession) : this.allProfessions.slice())
+        );
+    }
 
     ngOnDestroy() {
         this.selectedProfessions.unsubscribe();
