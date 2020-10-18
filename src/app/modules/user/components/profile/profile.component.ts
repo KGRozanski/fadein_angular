@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { User } from '../../../../core/interfaces/user.interface';
 import { UserDataService } from '../../../../core/services/userdata.service';
-import { CropComponent } from '../../../../shared/tools/components/crop/crop.component';
+import { CropComponent } from '../../../../shared/components/crop/crop.component';
 import {
     trigger,
     state,

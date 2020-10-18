@@ -1,55 +1,55 @@
-
 <form class="registerForm" [formGroup]="regForm" (ngSubmit)="register()">
-	<h1>Rejestracja</h1>
-	<mat-form-field>
-		<input matInput placeholder="Email" formControlName="mail" [errorStateMatcher]="matcher">
-		<mat-error *ngIf="regForm.controls['mail'].errors?.email">
-			Proszę podać poprawny adres email
-		</mat-error>
-		<mat-error *ngIf="regForm.controls['mail'].errors?.required">
-			Email jest <strong>wymagany</strong>
-		</mat-error>
-	</mat-form-field>
-	<br>
-	<mat-form-field>
-		<input matInput placeholder="Login" formControlName="username" [errorStateMatcher]="matcher">
-		<mat-error *ngIf="regForm.controls['username'].errors?.pattern">
-			Login musi zawierać co najmniej 3 znaki, liczby, małe bądź duże litery, i znaki specjalne.
-		</mat-error>
-		<mat-error *ngIf="regForm.controls['username'].errors?.required">
-			Login jest <strong>wymagany</strong>
-		</mat-error>
-	</mat-form-field>
-	<br>
-	<mat-form-field style="position: relative; z-index: 1000;">
-		<input type="password" matInput placeholder="Hasło" formControlName="pass" [errorStateMatcher]="matcher">
-		<mat-error class="hintErr" *ngIf="regForm.controls['pass'].errors?.pattern">
-			Hasło musi zawierać minimum 8 znaków w tym liczby czy znaki specjalne
-		</mat-error>
-		<mat-error *ngIf="regForm.controls['pass'].errors?.required">
-			Hasło jest <strong>wymagane</strong>
-		</mat-error>
-	</mat-form-field>
-	<br>
-	<mat-form-field>
-		<input type="password" matInput placeholder="Powtórz hasło" formControlName="passconfirm" [errorStateMatcher]="matcher">
-		<mat-error *ngIf="regForm.controls['passconfirm'].errors?.MatchPassword">
-			Hasła nie zgadzają się
-		</mat-error>
-		<mat-error *ngIf="regForm.controls['passconfirm'].errors?.required">
-			Powtórz <strong>hasło</strong>
-		</mat-error>
-	</mat-form-field>
-	<br>
-	<mat-checkbox class="example-margin" formControlName="checkbox" color="primary">
+    <h1>Rejestracja</h1>
+    <mat-form-field>
+        <input matInput placeholder="Email" formControlName="mail" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="regForm.controls['mail'].errors?.email">
+            Proszę podać poprawny adres email
+        </mat-error>
+        <mat-error *ngIf="regForm.controls['mail'].errors?.required">
+            Email jest <strong>wymagany</strong>
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <input matInput placeholder="Login" formControlName="username" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="regForm.controls['username'].errors?.pattern">
+            Login musi zawierać co najmniej 3 znaki, liczby, małe bądź duże litery, i znaki specjalne.
+        </mat-error>
+        <mat-error *ngIf="regForm.controls['username'].errors?.required">
+            Login jest <strong>wymagany</strong>
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field style="position: relative; z-index: 1000;">
+        <input type="password" matInput placeholder="Hasło" formControlName="pass" [errorStateMatcher]="matcher">
+        <mat-error class="hintErr" *ngIf="regForm.controls['pass'].errors?.pattern">
+            Hasło musi zawierać minimum 8 znaków w tym liczby czy znaki specjalne
+        </mat-error>
+        <mat-error *ngIf="regForm.controls['pass'].errors?.required">
+            Hasło jest <strong>wymagane</strong>
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <input type="password" matInput placeholder="Powtórz hasło" formControlName="passconfirm"
+            [errorStateMatcher]="matcher">
+        <mat-error *ngIf="regForm.controls['passconfirm'].errors?.MatchPassword">
+            Hasła nie zgadzają się
+        </mat-error>
+        <mat-error *ngIf="regForm.controls['passconfirm'].errors?.required">
+            Powtórz <strong>hasło</strong>
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-checkbox class="example-margin" formControlName="checkbox" color="primary">
         <a href="#">Akceptuję regulamin witryny</a>
-	</mat-checkbox>
-	<mat-error [hidden]="!errorMsg">
-		{{errorMsg}}
-	</mat-error>
-	<span style="color: green;" [hidden]="!successMsg">
-		{{successMsg}}
-	</span>
-	<br>
-	<button mat-flat-button color="primary" [disabled]="!regForm.valid == true">Rejestruj</button>
+    </mat-checkbox>
+    <mat-error [hidden]="!errorMsg">
+        {{errorMsg}}
+    </mat-error>
+    <span style="color: green;" [hidden]="!successMsg">
+        {{successMsg}}
+    </span>
+    <br>
+    <button mat-flat-button color="primary" [disabled]="!regForm.valid == true">Rejestruj</button>
 </form>
