@@ -1,21 +1,8 @@
-import {
-    Component,
-    ViewChild,
-    ElementRef,
-    OnInit,
-    OnDestroy
-} from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../../../../core/interfaces/user.interface';
 import { UserDataService } from '../../../../core/services/userdata.service';
-import { CropComponent } from '../../../../shared/components/crop/crop.component';
-import {
-    trigger,
-    state,
-    style,
-    animate,
-    transition,
-} from '@angular/animations';
-
+import { CropComponent } from '../../../../shared/components/crop/crop.component'
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { UploadPhotoService } from 'src/app/core/services/upload-photo.service';

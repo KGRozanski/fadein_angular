@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MaterialsImportsModule } from '../../shared/modules/materials-imports.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
-import { LoginComponent } from '../../components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CropComponent } from '../../shared/components/crop/crop.component';
-import { MenuComponent } from '../../components/menu/menu.component';
 import { PhotoViewComponent } from '../../shared/components/photo-view/photo-view.component';
 import { RouterModule } from '@angular/router';
 
@@ -27,8 +25,6 @@ import { ResetFileInputDirective } from 'src/app/core/directives/resetFileInput.
     ],
     declarations: [
         RegisterComponent,
-        LoginComponent,
-        MenuComponent,
         ProfileComponent,
         CropComponent,
         ImageCropperComponent,
@@ -41,9 +37,7 @@ import { ResetFileInputDirective } from 'src/app/core/directives/resetFileInput.
     ],
     exports: [
         RegisterComponent,
-        LoginComponent,
-        ProfileComponent,
-        MenuComponent
+        ProfileComponent
     ]
 })
 
