@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { AppRoutingModule } from '../../app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -12,6 +14,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const modules = [
+    AppRoutingModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,

@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserDataService } from '../../core/services/userdata.service';
+import { UserDataService } from '../../../../core/services/userdata.service';
 
 @Component({
     selector: 'app-login',

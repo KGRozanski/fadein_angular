@@ -3,7 +3,6 @@ import { UserDataService } from './core/services/userdata.service';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { LogService } from './core/services/log.service';
 import Cookies from 'js-cookie';
-
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
