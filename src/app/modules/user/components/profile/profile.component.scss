@@ -1,14 +1,7 @@
 @import '../../../../../assets/scss/palette.scss';
 
-.container {
-    background-color: #f1f1f100;
-    display: grid;
-    grid:  auto / auto;
-    gap: 10px;
-    margin: 10px;
-}
 .profile-card{
-    grid: 300px 60px 100px auto / auto;
+    grid: 300px 60px auto 100px / auto;
     background-color: #fff;
 
     .user-info {

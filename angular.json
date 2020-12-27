@@ -125,5 +125,9 @@
       }
     }
   },
-  "defaultProject": "fadein"
+  "defaultProject": "fadein",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics",
+    "analytics": "5e316e49-3c5a-40fd-83b5-df57e5210433"
+  }
 }

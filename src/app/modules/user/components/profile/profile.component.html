@@ -6,12 +6,11 @@
 
                 <button mat-flat-button color="primary" (click)="submitPhoto()"
                     style="position: absolute; right: 0; top: 0; min-width: 35px; padding:0; margin: 5px;">
-    
+
                     <i class="far fa-edit"></i>
                 </button>
-    
+
                 <input #backgroundPhoto id="submitPhoto" type="file"
-                
                     (change)="this.upload.addNewPhoto($event, 'background')" />
             </div>
 
@@ -22,32 +21,28 @@
                             <i class="fas fa-edit fa-2x"></i>
                         </span>
                     </div>
-    
+
                     <i id="avatarPlaceholder" *ngIf="!this.user.isAvatarSet" class="fas fa-user fa-2x"></i>
                     <img class="profile-img" *ngIf="this.user.isAvatarSet" [src]="this.user.avatar" alt="" />
                 </div>
                 <h1>{{ user.username }}</h1>
             </div>
+
+            <app-crop style="display: block;" [@toggle]="isCropperShown" (imageUploaded)="reciveImage($event)"
+                (cancel)="toggleCrop($event)"></app-crop>
+
             <div class="user-about">
-                <i class="fas fa-envelope"></i>&nbsp;{{ user.mail }}<br/>
+                <i class="fas fa-envelope"></i>&nbsp;{{ user.mail }}<br />
                 <i class="fas fa-calendar"></i>&nbsp;Data dołączenia:
                 {{ user.dateOfRegistration }}
             </div>
-            
-        </div>
-        
-    <app-crop [@toggle]="isCropperShown" style="grid-column-start: 1; overflow: hidden; grid-column-end: 2;"
-        (imageUploaded)="reciveImage($event)" (cancel)="toggleCrop($event)"></app-crop>
 
+        </div>
 
         <app-professions [professions]="this.professions"></app-professions>
 
-        <br />
-    
         <app-filmography [filmography]="this.user['filmography']"></app-filmography>
-    
-        <br />
-    
+
         <app-photos [user]="this.user" (photoAddEvent)="addPhoto($event)"></app-photos>
     </div>
 
