@@ -1,14 +1,9 @@
 @import '../../../../../assets/scss/palette.scss';
 
-:host{
-    padding: 20px;
-    display: flex;
-    background: $gray-1;
-}
+
 .registerForm{
     display: flex;
     flex-direction: column;
-    width: 300px;
     h1{
         font-size: 2rem;
         margin-bottom: 26px;

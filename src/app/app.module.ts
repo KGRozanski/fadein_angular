@@ -25,6 +25,10 @@ import { UploadPhotoService } from './core/services/upload-photo.service';
 import { HelperService } from './core/services/helper.service';
 import { HostService } from './core/services/host.service';
 import { PathService } from './core/services/path.service';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './core/reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -36,6 +40,10 @@ import { PathService } from './core/services/path.service';
     imports: [
         BrowserModule,
         AppRoutingModule,
+        StoreModule.forRoot(reducers, {
+            metaReducers
+        }),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
         BrowserAnimationsModule,
         SharedImportsModule,
         MaterialsImportsModule,

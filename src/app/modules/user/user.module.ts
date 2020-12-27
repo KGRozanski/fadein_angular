@@ -14,6 +14,8 @@ import { FilmographyComponent } from './components/filmography/filmography.compo
 import { PhotosComponent } from './components/photos/photos.component';
 import { SetImageDirective } from 'src/app/core/directives/set-image.directive';
 import { ResetFileInputDirective } from 'src/app/core/directives/resetFileInput.directive';
+import { StoreModule } from '@ngrx/store';
+import * as fromUserState from './store';
 
 
 @NgModule({
@@ -22,6 +24,7 @@ import { ResetFileInputDirective } from 'src/app/core/directives/resetFileInput.
         MaterialsImportsModule,
         RouterModule,
         ReactiveFormsModule,
+        StoreModule.forFeature(fromUserState.userStateFeatureKey, fromUserState.reducers, { metaReducers: fromUserState.metaReducers }),
     ],
     declarations: [
         RegisterComponent,

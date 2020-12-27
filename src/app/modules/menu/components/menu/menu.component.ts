@@ -13,6 +13,9 @@ import Cookies from 'js-cookie';
 })
 export class MenuComponent {
 
+
+  public opened: boolean;
+
   public version: string = environment.VERSION;
   private loginFormVisible = false;
   private user: User;

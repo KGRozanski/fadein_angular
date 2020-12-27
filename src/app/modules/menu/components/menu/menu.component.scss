@@ -1,92 +1,123 @@
 
 @import '../../../../../assets/scss/palette.scss';
 @import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
+
+:host{
+    position: fixed;
+    z-index: 1000;
+}
+
 .menu-container{
     position: relative;
-}
 
-
-
-.top-bar{
-    position: relative;
-    display: flex;
-    z-index: 10000;
-    justify-content: space-between;
-    width: 100vw;
-    height: 60px;
-    background: $color1;
-    .right-section{
-        display: flex;
-        .username{
-            color: #fff;
-            width: 100%;
-            display: block;
-            text-align: right;
-            padding: 6px 0;
-        }
-        .profile-btn{
-            color: #fff;
-            border: 1px solid #fff;
-            min-height: 50px;
-            min-width: 50px;
-            max-height: 65px;
-            max-width: 50px;
-            margin: 5px;
-            padding: 0;
-
-            img{
-                top: 0;
-                width: 100%;
-            }
-        }
-        .sign-in-btn{
-            line-height: 22px;
-            border: 1px solid #fff;
-            height: 25px;
-            top: 30px;
-            position: absolute;
-            bottom: 5px;
-            left: 60px;
-            > span{
-                line-height: 22px;
-                text-align: center;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-            }
-        }
-    }
-
-}
-
-.container{
-    display: block;
-    overflow: visible;
     .sidenav{
+        overflow: visible;
         position: absolute;
-        margin-top: 60px;
-        overflow: hidden;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        height: 100vh;
+
+        .sidenav__content{
+            width: 155px;
+            background: $color1;
+            padding-top: 65px;
+
+            .sidenav__menu{
+                display: flex;
+                flex-direction: column;
+                li{
+                    display: inline-grid;
+                    border: 1px solid rgb(65, 172, 218);
+                    margin: 3px;
+                    border-radius: 2px;
+                    background: rgb(27, 100, 131);
+                    padding: 2px;
+
+                    > button{
+                        text-align: left;
+                        padding: 0 10px;
+                    }
+                }
+            }
+    
+            .sidenav__version{
+                display: inline-block;
+                width: 100%;
+                margin: 5px 0;
+                text-align: center;
+                color: #fff;
+            }
+        }
+    }
+
+    .top-bar{
+        position: relative;
+        display: flex;
+        z-index: 10000;
+        justify-content: space-between;
+        width: 100vw;
+        height: 60px;
         background: $color1;
-        visibility: visible;
-        height: calc(100vh - 60px);
+
+        .left-section{
+            display: flex;
+
+            .username{
+                color: #fff;
+                width: 100%;
+                display: block;
+                text-align: right;
+                padding: 6px 0;
+            }
+
+            .profile-btn{
+                color: #fff;
+                border: 1px solid #fff;
+                min-height: 50px;
+                min-width: 50px;
+                max-height: 65px;
+                max-width: 50px;
+                margin: 5px;
+                padding: 0;
+    
+                img{
+                    top: 0;
+                    width: 100%;
+                }
+            }
+
+            .sign-in-btn{
+                line-height: 22px;
+                border: 1px solid #fff;
+                height: 25px;
+                top: 30px;
+                position: absolute;
+                bottom: 5px;
+                left: 60px;
+
+                > span{
+                    line-height: 22px;
+                    text-align: center;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                }
+
+            }
+
+        }
+
+        .logo{
+            filter: invert(1);
+        }
+
+        .top-bar__search-btn{
+            border-radius: 50%;
+            max-width: 50px;
+            height: calc(100% - 10px);
+            margin: 5px;
+        }
     }
-}
-.side-list{
-    display: flex;
-    flex-direction: column;
-    li{
-        display: inline-grid;
-        border: 1px solid rgb(65, 172, 218);
-        margin: 3px;
-        border-radius: 2px;
-        background: rgb(27, 100, 131);
-        padding: 2px;
-    }
-}
-.version{
-    display: block;
-    width: 100%;
-    text-align:center;
-    color: #fff;
 }

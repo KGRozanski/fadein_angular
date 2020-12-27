@@ -18,13 +18,13 @@ import { SocketsService } from 'src/app/core/services/sockets.service';
             state(
                 'true',
                 style({
-                    height: '430px',
+                    height: '430px'
                 })
             ),
             state(
                 'false',
                 style({
-                    height: '0',
+                    height: '0'
                 })
             ),
             transition('*=>true', animate('200ms')),

@@ -1,7 +1,11 @@
 <div class="menu-container">
-	<mat-drawer-container class="container" autosize>
-		<mat-drawer #snav class="sidenav shadow-lg" mode="side">
-			<ul class="side-list">
+
+	<mat-sidenav-container class="sidenav">
+
+		<mat-sidenav class="sidenav__content" #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"(closed)="events.push('close!')">
+
+			<ul class="sidenav__menu">
+
 				<li><button mat-flat-button color="primary" (click)="snav.toggle()" [routerLink]="['']"
 						routerLinkActive="router-link-active">🏡&nbsp;Główna</button>
 				</li>
@@ -16,39 +20,48 @@
 				<li><button mat-flat-button color="primary" (click)="snav.toggle()" [routerLink]="['/profile']"
 						routerLinkActive="router-link-active">🙂&nbsp;Mój profil</button>
 				</li>
+
 			</ul>
-			<span class="version">v. {{version}}∝</span>
-		</mat-drawer>
-	</mat-drawer-container>
+
+			<span class="sidenav__version">v. {{version}} alpha</span>
+
+		</mat-sidenav>
+
+	</mat-sidenav-container>
+
+
 	<div class="top-bar shadow">
 
-		<div class="right-section">
+		<div class="left-section">
 
-			<div class="userPhoto">
-				<button mat-flat-button color="primary" class="profile-btn" (click)="snav.toggle()">
-					<i *ngIf="!this.user.isAvatarSet" class="fas fa-user fa-2x"></i>
-					<img *ngIf="this.user.isAvatarSet" [src]="this.user.avatar" alt="">
-				</button>
-			</div>
+			<button mat-flat-button color="primary" class="profile-btn" (click)="opened = !opened" >
+				<i *ngIf="!this.user.isAvatarSet" class="fas fa-user fa-2x"></i>
+				<img *ngIf="this.user.isAvatarSet" [src]="this.user.avatar" alt="">
+			</button>
 
-			<div class="userInfo">
-				<span class="username"><strong>{{this.user.username}}</strong></span><br>
-				<button mat-flat-button color="warn" class="sign-in-btn" (click)="loginFormVisible = !loginFormVisible"
-					*ngIf="this.user.username == null">Zaloguj</button>
-				<button mat-flat-button color="warn" class="sign-in-btn" (click)="logOut()"
-					*ngIf="this.user.username != ' ' && this.user.username != null">Wyloguj</button>
-			</div>
+			<span class="username">
+				<strong>{{this.user.username}}</strong>
+			</span>
+
+			<!-- THIS SECTION IS TO CHANGE -- WHY TWO BTN'S???  -->
+			<button mat-flat-button color="warn" class="sign-in-btn" (click)="loginFormVisible = !loginFormVisible"
+				*ngIf="this.user.username == null">Zaloguj</button>
+
+			<button mat-flat-button color="warn" class="sign-in-btn" (click)="logOut()"
+				*ngIf="this.user.username != ' ' && this.user.username != null">Wyloguj</button>
+			<!-- THIS SECTION IS TO CHANGE -- WHY TWO BTN'S??? END -->
 
 		</div>
 
 		<app-login *ngIf="this.loginFormVisible" class="shadow" (visibilityState)="loginVisibilityState($event)">
 		</app-login>
 
-		<div class="logotype">Fade In:</div>
+		<img class="logo" width="60px" height="60px" src="../../../../../assets/img/logo.png" alt="Fade-in logo">
 
-		<button [routerLink]="['/search']" mat-flat-button color="accent" style="margin: 6px 23px 6px 0; border: 1px solid #fff;">
+		<button class="top-bar__search-btn" [routerLink]="['/search']" mat-flat-button color="accent">
 			<i class="fas fa-search fa-2x"></i>
 		</button>
 
 	</div>
+
 </div>
